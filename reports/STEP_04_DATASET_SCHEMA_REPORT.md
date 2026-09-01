@@ -280,4 +280,4 @@ Do not execute Step 5 preprocessing yet. The single recommended next major step 
 
 ## 30. Git Status / Diff Summary
 
-Substantive Step 4 commit: `39a5bf2369bb8b159740c26802376af09207759b` (`research: audit PSG dataset schemas`). A separate report-recording commit follows this report update. Final status after that commit is expected to be clean on `main`; push status is `NOT_PUSHED`. The commit contains only code, documentation, safe manifests, and audit results; no raw signal files, restricted annotations, credentials, cookies, archives, or paper PDFs.
+Substantive Step 4 commit: `39a5bf2369bb8b159740c26802376af09207759b` (`research: audit PSG dataset schemas`). Report-recording commit: `655e5db38770ecf77edf0f1db49e14ef78adf185` (`docs: record Step 4 dataset schema report`). Final verified status is clean on `main`; push status is `NOT_PUSHED`. The commits contain only code, documentation, safe manifests, and audit results; no raw signal files, restricted annotations, credentials, cookies, archives, or paper PDFs.

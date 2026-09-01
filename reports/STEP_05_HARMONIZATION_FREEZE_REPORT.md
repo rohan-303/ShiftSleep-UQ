@@ -17,7 +17,7 @@ CONTRACT_PARTIAL
 * Step 4 commit: `39a5bf2369bb8b159740c26802376af09207759b`
 * Step 4 report commit: `655e5db38770ecf77edf0f1db49e14ef78adf185`
 * pre-Step-5 HEAD: `1fece4ea2e8bb4d95c8783dc380e336e0928187e`
-* Step 5 commit: recorded after validation below
+* Step 5 commit: `47e800495721cd5d1f70866ea5ef4f9137ac0ce9` (`research: resolve PSG harmonization blockers`)
 * push status: not pushed
 
 ## 4. Blockers Resolved
@@ -198,11 +198,11 @@ Added `tests/test_contracts.py`: contract loads; labels/mappings/exclusions vali
 
 ## 29. Validation
 
-* `pytest -q`: actual result recorded below after final edits
-* `python -m compileall -q src tests scripts`: required and recorded below
-* `git diff --check`: required and recorded below
-* CSV/YAML validation: contract validator and generated-manifest checks
-* forbidden artifact scan: no credentials/tokens/passwords/raw signal bodies/restricted annotations committed; representative NEMAR range bytes are metadata-audit artifacts and are ignored by data policy
+* `pytest -q`: `10 passed in 0.22s`
+* `python -m compileall -q src tests scripts`: exit `0`
+* `git diff --check`: exit `0` (only a line-ending warning on the generated CSV)
+* CSV/YAML validation: `PYTHONPATH=src python` contract validator returned `validated 1.0.0 CONTRACT_PARTIAL 5`
+* forbidden artifact scan: no credential/token/password pattern found in tracked files; raw PSG and restricted data remain untracked/ignored
 
 ## 30. Files Created
 
@@ -250,6 +250,11 @@ Because the gate is `CONTRACT_PARTIAL`, do not execute Step 6. Perform exactly o
 
 ## 35. Git Status / Diff Summary
 
-Final status, diff summary, validation outputs, and Step 5 commit hash are recorded here after the final validation/commit. No push is performed.
+Final repository state before this documentation-recording commit: clean after `47e800495721cd5d1f70866ea5ef4f9137ac0ce9`; this report update is the only subsequent change. Final HEAD after recording is shown by the final verification below. No push is performed.
+
+* substantive Step 5 commit: `47e800495721cd5d1f70866ea5ef4f9137ac0ce9`
+* report-recording commit: recorded after this report update
+* expected final status: clean
+* diff summary: Step 5 contract/configuration, validation tooling/tests, protocol amendments, source-role documentation, and manifest treatment update; no model/preprocessing artifacts
 
 Exact full report path: `C:\Users\rohan\ShiftSleep-UQ\reports\STEP_05_HARMONIZATION_FREEZE_REPORT.md`

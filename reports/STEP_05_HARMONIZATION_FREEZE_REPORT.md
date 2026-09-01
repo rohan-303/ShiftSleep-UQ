@@ -250,7 +250,7 @@ Because the gate is `CONTRACT_PARTIAL`, do not execute Step 6. Perform exactly o
 
 ## 35. Git Status / Diff Summary
 
-Final repository state before this documentation-recording commit: clean after `47e800495721cd5d1f70866ea5ef4f9137ac0ce9`; this report update is the only subsequent change. Final HEAD after recording is shown by the final verification below. No push is performed.
+Final repository state after the report-recording commit was verified clean; final HEAD is `28990c4590a622df43309f5c150776cdace2b3d4`. No push is performed.
 
 * substantive Step 5 commit: `47e800495721cd5d1f70866ea5ef4f9137ac0ce9`
 * report-recording commit: `cbf332d994e541e463617a3604a31e4ff32e8458` (`docs: record Step 5 harmonization report`)

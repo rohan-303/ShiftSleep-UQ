@@ -29,3 +29,25 @@ Dataset downloads, preprocessing, channel harmonization implementation, model ar
 
 ## Claim boundary
 This milestone establishes a protocol and software foundation only. It supports no empirical claim, clinical claim, novelty claim, or state-of-the-art claim.
+
+## Post-Step-2 Novelty Positioning
+
+### Established areas
+
+Based on the literature identified in this audit, cross-dataset/domain-generalized sleep staging, multimodal sleep staging, domain/subject-invariant representation learning, and sleep-staging uncertainty quantification are already established areas. Missing/incomplete multimodal physiological signals are also directly represented by CIMSleepNet. These areas are therefore benchmark context or baselines, not standalone novelty claims.
+
+### Remaining apparent gap
+
+The remaining apparent gap is a rigorously leakage-safe reliability evaluation crossing held-out dataset/domain with synthetic or structural modality loss, while separating source-only calibration from oracle target calibration and measuring calibration, error detection, selective risk-coverage, and empirical conformal coverage. This is provisional because the full methods of RMSSC and the 2026 Direct Quantification paper, and source-free sleep-staging work, were not fully accessible in this audit.
+
+### Claims we must avoid
+
+We must not claim to be the first domain-generalized sleep-staging model, first missing-modality sleep-staging model, first sleep-staging uncertainty model, or first multimodal sleep-staging method. We must not call confidence/entropy alone calibration, call deferral alone formal selective prediction, or claim conformal guarantees on unseen domains without exchangeability evidence.
+
+## Post-Step-2 thesis
+
+Subject to the unresolved full-text and data-access gates, the provisional thesis is: existing sleep-staging work has separately studied cross-dataset generalization, incomplete multimodal signals, and predictive uncertainty, but the reliability of source-calibrated predictions under their compound interaction remains insufficiently characterized. ShiftSleep-UQ will therefore evaluate calibration, uncertainty-based error detection, selective prediction, and empirical conformal coverage when an unseen PSG domain is combined with modality loss, without interpreting empirical coverage as an unconditional guarantee.
+
+## Step-2 decision
+
+**MODIFY.** Continue the project, but narrow the primary contribution to a benchmark and reliability analysis rather than a new architecture. Treat Sleep-EDF SC/ST as separate candidate domains, defer CAP to an external pathology/device stress test, and do not freeze the primary dataset/channel configuration until the remaining official-source audit is complete.

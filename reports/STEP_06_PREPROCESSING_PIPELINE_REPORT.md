@@ -23,7 +23,8 @@ The final benchmark remains unfrozen. SHHS1 raw/XML access and per-record valida
 * path: `C:\Users\rohan\ShiftSleep-UQ`
 * branch: `main`
 * Step 5.1 commit: `31966e93f65f82027cae297893f721e35dc500e0`
-* Step 6 commit: `6e6ba947d74be5e5766798bffc0c3883cb691787`
+* Step 6 implementation commit: `0737d527967b482e69daf3c5abbdb6838f2880d7`
+* Step 6 report-finalization commit: recorded by the final HEAD verification below
 * push status: not pushed; no GitHub push was performed
 * repository preflight: clean before Step 6 implementation
 
@@ -364,6 +365,6 @@ Because the pipeline gate is `PIPELINE_PARTIAL`, exactly one repair step is reco
 
 ## 35. Git Status / Diff Summary
 
-The Step 6 commit was created locally as `6e6ba947d74be5e5766798bffc0c3883cb691787`; raw and processed data remain ignored and uncommitted. Push status is `NOT PUSHED`.
+The Step 6 implementation commit is `0737d527967b482e69daf3c5abbdb6838f2880d7`; this report is finalized in the subsequent local commit shown by final HEAD verification. Raw and processed data remain ignored and uncommitted. Push status is `NOT PUSHED`.
 
 The final verification must confirm that only preprocessing code, configuration, tests, safe manifests/reports, and documentation are committed, with no EDF, TSV signal source, NPZ, archive, credential, or restricted file staged.

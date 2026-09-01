@@ -39,7 +39,25 @@ def read_sc_events(path: Path):
 def read_isruc_events(path: Path):
     with path.open(encoding="utf-8-sig", newline="") as f:
         rows=csv.DictReader(f, delimiter="\t")
+        required={"onset", "duration", "trial_type", "value", "sample", "scorer2_label", "scorer2_label_value"}
+        if not rows.fieldnames or not required.issubset(rows.fieldnames):
+            raise PreprocessingError("ANNOTATION_SCHEMA_ERROR")
         return [(float(r["onset"]),float(r["duration"]),r["trial_type"]) for r in rows]
+
+def summarize_epoch_accounting(expanded):
+    counts = {label.lower(): 0 for label in LABELS}
+    exclusions = {"movement": 0, "unknown": 0, "unscored": 0, "artifact": 0,
+                  "incomplete": 0, "alignment_error": 0, "missing_signal_samples": 0, "other": 0}
+    for item in expanded:
+        if item.canonical is not None and item.exclusion is None:
+            counts[item.canonical.lower()] += 1
+        else:
+            exclusions[item.exclusion or "other"] = exclusions.get(item.exclusion or "other", 0) + 1
+    valid = sum(counts.values())
+    excluded = sum(exclusions.values())
+    if valid + excluded != len(expanded):
+        raise PreprocessingError("ACCOUNTING_INVARIANT_D_FAILED")
+    return counts, exclusions, valid, excluded
 
 def recording_spec(dataset: str, subject: str, raw_root: Path, annotation_root: Path):
     if dataset == "sleep_edf_sc":
@@ -67,10 +85,13 @@ def process_one(dataset: str, subject: str, raw_root: Path, output_root: Path, a
         eeg=unit_to_uv(eeg,units[0]); eog=unit_to_uv(eog,units[1])
         events=read_sc_events(a) if dataset=="sleep_edf_sc" else read_isruc_events(a)
         expanded=expand_annotations(events)
+        counts, exclusions, valid_count, excluded_count = summarize_epoch_accounting(expanded)
         valid=[x for x in expanded if x.canonical is not None and x.exclusion is None]
-        row["total_source_stage_epochs"]=len(expanded); row["excluded_epochs"]=len(expanded)-len(valid)
+        row.update({"total_source_stage_epochs":len(expanded), "excluded_epochs":excluded_count,
+                    "valid_canonical_epochs":valid_count, **counts,
+                    **{"excluded_" + k: v for k, v in exclusions.items()}})
         if dry_run:
-            row.update(status="DRY_RUN",valid_canonical_epochs=len(valid),output_path="")
+            row.update(status="DRY_RUN",output_path="")
             return row
         eeg=resample_continuous(eeg,rates[0],100); eog=resample_continuous(eog,rates[1],50)
         ee,erows=slice_epochs(eeg,[x.onset for x in valid],100,3000); eo,orows=slice_epochs(eog,[x.onset for x in valid],50,1500)

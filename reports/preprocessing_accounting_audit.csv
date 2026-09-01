@@ -1,0 +1,8 @@
+dataset,subject,recording,source_stage_epochs,wake,n1,n2,n3,rem,valid_canonical_epochs,excluded_unknown,excluded_movement,excluded_unscored,excluded_artifact,excluded_incomplete,excluded_alignment,excluded_missing_samples,excluded_other,total_excluded,accounted_epochs,accounting_delta,status
+sleep_edf_sc,SC4001E0,SC4001E0,2880,1997,58,250,220,125,2650,0,0,0,0,0,0,0,230,230,2880,0,PASS
+sleep_edf_sc,SC4002E0,SC4002E0,2880,1885,59,373,297,215,2829,0,0,0,0,0,0,0,51,51,2880,0,PASS
+sleep_edf_sc,SC4011E0,SC4011E0,2880,1856,109,562,105,170,2802,0,0,0,0,0,0,0,78,78,2880,0,PASS
+sleep_edf_sc,SC4021E0,SC4021E0,2880,1907,94,545,95,163,2804,0,0,0,0,0,0,0,76,76,2880,0,PASS
+isruc_s1,I003,I003,943,132,165,246,173,227,943,0,0,0,0,0,0,0,0,0,943,0,PASS
+isruc_s1,I004,I004,963,28,63,426,214,230,961,2,0,0,0,0,0,0,0,2,963,0,PASS
+isruc_s1,I005,I005,875,296,108,265,164,42,875,0,0,0,0,0,0,0,0,0,875,0,PASS

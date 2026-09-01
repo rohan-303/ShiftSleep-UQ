@@ -1,0 +1,3 @@
+dataset,subject_id,source_url,local_bytes,provider_content_length,edf_declared_bytes,byte_delta,provider_etag,range_resume_evidence,status,disposition
+isruc_s1,I001,https://data.nemar.org/nm000111/v1.0.1/sub-I001/eeg/sub-I001_task-sleep_eeg.edf,91778304,91778304,143885120,-52106816,"sha256:900755de373ff9045c9ad758236c6f304dd3bb8f39dbbade55b56b6be454968f",not_advertised_in_HEAD,INVALID_PROVIDER_OBJECT,quarantined_not_smoke_cohort
+isruc_s1,I002,https://data.nemar.org/nm000111/v1.0.1/sub-I002/eeg/sub-I002_task-sleep_eeg.edf,58458112,58458112,157619120,-99161008,"sha256:114113de6519253f3099c356d19ca674f3c1be19af14bda1a9e16759f99fa35c",not_advertised_in_HEAD,INVALID_PROVIDER_OBJECT,quarantined_not_smoke_cohort

@@ -2,11 +2,26 @@ import hashlib
 import numpy as np
 import pytest
 from shiftsleep_uq.data.preprocessing import *
+from shiftsleep_uq.data.preprocess import summarize_epoch_accounting
 
 def test_label_mapping_and_rk():
     assert canonicalize_label('Sleep stage W')=='Wake'
     assert canonicalize_label('Sleep stage 1')=='N1'
     assert canonicalize_label('Sleep stage 4')=='N3'
+
+def test_exact_nemar_labels():
+    assert canonicalize_label('Sleep stage W') == 'Wake'
+    assert canonicalize_label('Sleep stage N1') == 'N1'
+    assert canonicalize_label('Sleep stage N2') == 'N2'
+    assert canonicalize_label('Sleep stage N3') == 'N3'
+    assert canonicalize_label('Sleep stage R') == 'REM'
+    with pytest.raises(PreprocessingError, match='ANNOTATION_UNKNOWN_LABEL'):
+        canonicalize_label('Sleep stage U')
+
+def test_nemar_unknown_and_fuzzy_labels_never_map_to_wake():
+    for label in ['Sleep stage X', 'sleep stage n1x', 'Sleep Stage N2']:
+        with pytest.raises(PreprocessingError, match='ANNOTATION_UNKNOWN_LABEL'):
+            canonicalize_label(label)
 
 def test_unknown_never_wake():
     with pytest.raises(PreprocessingError,match='ANNOTATION_UNKNOWN_LABEL'): canonicalize_label('Sleep stage ?')
@@ -38,6 +53,17 @@ def test_duration_expansion():
 
 def test_ambiguous_duration_excluded():
     assert expand_annotations([(0,31,'Wake')])[0].exclusion=='alignment_error'
+
+def test_zero_duration_event_is_not_a_sleep_epoch():
+    assert expand_annotations([(0,0,'Sleep stage U')]) == []
+
+def test_accounting_invariant_a_and_d():
+    expanded = expand_annotations([(0,30,'Sleep stage W'), (30,30,'Sleep stage N1'),
+                                    (60,30,'Sleep stage U')])
+    counts, exclusions, valid, excluded = summarize_epoch_accounting(expanded)
+    assert counts == {'wake': 1, 'n1': 1, 'n2': 0, 'n3': 0, 'rem': 0}
+    assert exclusions['unknown'] == 1
+    assert valid == 2 and excluded == 1 and valid + excluded == len(expanded)
 
 def test_scorer2_does_not_change_primary():
     # Scorer-2 is deliberately not an input to canonicalization.

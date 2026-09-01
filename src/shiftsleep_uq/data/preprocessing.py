@@ -8,7 +8,7 @@ from scipy.signal import resample_poly
 
 LABELS = ("Wake", "N1", "N2", "N3", "REM")
 LABEL_TO_INT = {x: i for i, x in enumerate(LABELS)}
-EXCLUSIONS = {"movement", "movement time", "sleep stage ?", "?", "unknown", "unscored", "artifact", "corrupt_annotation"}
+EXCLUSIONS = {"movement", "movement time", "sleep stage ?", "sleep stage u", "?", "unknown", "unscored", "artifact", "corrupt_annotation"}
 
 class PreprocessingError(ValueError): pass
 
@@ -23,19 +23,20 @@ class EpochLabel:
 
 def canonicalize_label(value: str) -> str:
     s = " ".join(str(value).strip().split())
-    low = s.lower()
-    if low in EXCLUSIONS or "movement" in low:
+    if s in EXCLUSIONS or "movement" in s.lower():
         raise PreprocessingError(f"ANNOTATION_UNKNOWN_LABEL:{s}")
     mapping = {
-        "sleep stage w":"Wake", "w":"Wake", "wake":"Wake",
-        "sleep stage 1":"N1", "stage 1":"N1", "n1":"N1",
-        "sleep stage 2":"N2", "stage 2":"N2", "n2":"N2",
-        "sleep stage 3":"N3", "sleep stage 4":"N3", "stage 3":"N3", "stage 4":"N3", "n3":"N3",
-        "sleep stage r":"REM", "stage r":"REM", "rem":"REM",
+        "Sleep stage W":"Wake", "W":"Wake", "Wake":"Wake",
+        # Sleep-EDF SC uses numbered stage labels; NEMAR ISRUC uses the
+        # explicit AASM/R&K strings below. Keep source spellings exact.
+        "Sleep stage 1":"N1", "Sleep stage N1":"N1", "Stage 1":"N1", "N1":"N1",
+        "Sleep stage 2":"N2", "Sleep stage N2":"N2", "Stage 2":"N2", "N2":"N2",
+        "Sleep stage 3":"N3", "Sleep stage 4":"N3", "Sleep stage N3":"N3", "Stage 3":"N3", "Stage 4":"N3", "N3":"N3",
+        "Sleep stage R":"REM", "Stage R":"REM", "REM":"REM",
     }
-    if low not in mapping:
+    if s not in mapping:
         raise PreprocessingError(f"ANNOTATION_UNKNOWN_LABEL:{s}")
-    return mapping[low]
+    return mapping[s]
 
 def unit_to_uv(values: np.ndarray, unit: str) -> np.ndarray:
     u = "".join(str(unit).strip().lower().replace("µ", "u").split())
@@ -54,7 +55,12 @@ def expand_annotations(events: Iterable[tuple[float,float,str]], tolerance: floa
     out=[]
     for i,(onset,duration,label) in enumerate(events):
         onset=float(onset); duration=float(duration)
-        if duration <= 0 or abs(duration/30-round(duration/30)) > tolerance/30:
+        # Zero-duration events are BIDS impulse/non-stage events, not sleep
+        # epochs. They remain visible in the raw event audit but do not enter
+        # the source-stage accounting denominator.
+        if duration <= 0:
+            continue
+        if abs(duration/30-round(duration/30)) > tolerance/30:
             out.append(EpochLabel(onset,duration,str(label),None,i,"alignment_error")); continue
         try: canon=canonicalize_label(label); exc=None
         except PreprocessingError as e:

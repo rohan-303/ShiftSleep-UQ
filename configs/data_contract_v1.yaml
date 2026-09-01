@@ -9,12 +9,13 @@ freeze_levels:
 canonical_labels: [Wake, N1, N2, N3, REM]
 label_mappings:
   Wake: ["Sleep stage W", "W", "Wake"]
-  N1: ["Sleep stage 1", "Stage 1", "N1"]
-  N2: ["Sleep stage 2", "Stage 2", "N2"]
-  N3: ["Sleep stage 3", "Sleep stage 4", "Stage 3", "Stage 4", "N3"]
+  N1: ["Sleep stage 1", "Sleep stage N1", "Stage 1", "N1"]
+  N2: ["Sleep stage 2", "Sleep stage N2", "Stage 2", "N2"]
+  N3: ["Sleep stage 3", "Sleep stage 4", "Sleep stage N3", "Stage 3", "Stage 4", "N3"]
   REM: ["Sleep stage R", "REM", "Stage R"]
 excluded_annotations:
   - "Movement time"
+  - "Sleep stage U"
   - "Sleep stage ?"
   - "unknown"
   - "unscored"

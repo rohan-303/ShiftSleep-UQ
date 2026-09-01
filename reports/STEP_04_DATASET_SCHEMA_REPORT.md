@@ -16,7 +16,7 @@ SCHEMA_PARTIAL
 * branch: `main`
 * Step 3 commit: `1cc17ddc3824194380bca746fb107d677bdc4041` (substantive thesis-freeze commit)
 * Step 3 report commit if separate: `659d864afe1acfa005375370c99763f9ca020c5d` (`docs: record Step 3 novelty gate report`)
-* Step 4 commit: to be recorded after this report is finalized and committed
+* Step 4 commit: `39a5bf2369bb8b159740c26802376af09207759b` (`research: audit PSG dataset schemas`)
 * push status: NOT_PUSHED; no GitHub push performed
 
 ## 4. Acquisition Summary
@@ -205,15 +205,15 @@ Not frozen. Candidate Step 5 proposal: canonical modality families EEG and EOG f
 
 ## 24. Validation Results
 
-Final validation must be rerun after report generation. Required commands and expected recorded outputs are:
+Final validation completed after artifact generation and before the substantive commit:
 
-* `pytest -q` — must pass.
-* `python -m compileall -q src tests scripts` — must exit 0.
-* `git diff --check` — must exit 0.
-* CSV validation — all generated CSV rows must have consistent widths and required columns; no blank subject IDs are accepted as real subjects.
-* forbidden-artifact scan — no tracked EDF/EDF+, restricted annotation, archive, credentials, cookies, or paper PDF.
+* `pytest -q` — `4 passed`.
+* `python -m compileall -q src tests scripts` — exit `0`.
+* `git diff --check` — exit `0`.
+* CSV validation — `PASS`; all seven generated CSVs had consistent widths and expected columns; duplicate keys, enum values, and nonblank subject-ID fields passed.
+* forbidden-artifact scan — `PASS`; no tracked EDF/EDF+, archive, restricted annotation, credentials, cookies, or paper PDF.
+* HTTP Range validation — Sleep-EDF `196/197` headers parsed; CAP final run `13/108` parsed, with failures preserved.
 
-The successful parser/manifest run before final document generation was `4 passed` with `197` Sleep-EDF recordings, `153` SC, `44` ST, `78` SC subjects, and `22` ST subjects.
 
 ## 25. Files Created
 
@@ -239,9 +239,11 @@ The successful parser/manifest run before final document generation was `4 passe
 
 ## 26. Files Modified
 
-* `docs/dataset_registry.md` — to be updated with Step 4 provenance and unresolved statuses.
-* `docs/dataset_harmonization_audit.md` — to be updated with raw-schema findings.
-* `docs/leakage_policy.md` — to be updated only with source-supported Sleep-EDF and proposed unresolved-dataset rules.
+* `docs/dataset_registry.md`
+* `docs/dataset_harmonization_audit.md`
+* `docs/leakage_policy.md`
+
+These three existing protocol files were modified with Step 4 provenance and source-supported rules only.
 
 ## 27. Explicitly Not Done
 
@@ -278,4 +280,4 @@ Do not execute Step 5 preprocessing yet. The single recommended next major step 
 
 ## 30. Git Status / Diff Summary
 
-Final commit and exact clean/dirty status must be recorded after validation. The Step 4 commit must contain only code, documentation, safe manifests, and audit results; it must not contain raw signal files, restricted annotations, credentials, cookies, archives, or paper PDFs. Push status remains NOT_PUSHED.
+Substantive Step 4 commit: `39a5bf2369bb8b159740c26802376af09207759b` (`research: audit PSG dataset schemas`). A separate report-recording commit follows this report update. Final status after that commit is expected to be clean on `main`; push status is `NOT_PUSHED`. The commit contains only code, documentation, safe manifests, and audit results; no raw signal files, restricted annotations, credentials, cookies, archives, or paper PDFs.

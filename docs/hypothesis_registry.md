@@ -2,6 +2,10 @@
 
 Step 1 hypotheses H1–H7 are preserved in the history section below. The following hypotheses are the frozen pre-experimental set. All remain UNTESTED.
 
+## Step 5 protocol amendment
+
+The original S0–S4 and three-family modality formulation is superseded for the primary benchmark by C0–C5 over EEG+EOG. F1–F5 are interpreted over domain × primary-modality availability; EMG is secondary and structural mismatches are separate. F6 remains conditional and unauthorized.
+
 ## F1 — Interaction-related reliability degradation
 - **Hypothesis:** The effect of unseen-domain evaluation on calibration and uncertainty reliability depends on modality availability; the domain × modality interaction is non-zero and may be super-additive, but direction is not assumed.
 - **Independent variables:** domain condition (known/unseen), modality condition (full/single missing/multiple missing), dataset, mask type.

@@ -13,7 +13,7 @@ ShiftSleep-UQ studies whether multimodal sleep-staging systems know when they ar
 
 ## Scope
 
-The planned benchmark evaluates five provisional conditions S0–S4, separates synthetic masking from structural channel absence, preserves subject identity, and compares source-only, cross-source, and explicitly labeled oracle calibration regimes. EEG/EOG/EMG remain candidate modality families pending schema verification. Five-class labels remain provisional until annotation mapping is audited.
+The Step 5 amendment replaces S0–S4 with C0–C5 for an EEG+EOG primary benchmark. EMG is secondary compatible-subset only. Synthetic masking never removes both primary families; structural channel absence remains separate. Five-class labels are frozen in the contract, while ISRUC/SHHS source-specific annotation streams remain blockers to preprocessing.
 
 ## Out of scope for the thesis freeze
 

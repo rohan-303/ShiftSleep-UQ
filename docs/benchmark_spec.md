@@ -1,6 +1,6 @@
 # Benchmark specification (post-Step-2 draft)
 
-**Status: PROVISIONAL and not yet frozen.** This document incorporates the source audit but still requires the Step 3 data acquisition/schema gate.
+**Status: STEP 5 AMENDED / CONTRACT_PARTIAL.** The machine-readable contract is explicit but cannot authorize preprocessing until the listed primary-data blockers are closed.
 
 ## Benchmark axes
 
@@ -14,11 +14,12 @@
 
 ## Deployment levels
 
-- **S0:** source/known domain + full modalities.
-- **S1:** source/known domain + synthetic modality missingness.
-- **S2:** unseen dataset/domain + full modalities.
-- **S3:** unseen dataset/domain + one missing modality.
-- **S4:** unseen dataset/domain + multiple missing modalities.
+- **C0:** known domain + EEG + EOG.
+- **C1:** known domain + EEG only (synthetic EOG loss).
+- **C2:** known domain + EOG only (synthetic EEG loss).
+- **C3:** unseen domain + EEG + EOG.
+- **C4:** unseen domain + EEG only (compound dataset + synthetic EOG loss).
+- **C5:** unseen domain + EOG only (compound dataset + synthetic EEG loss).
 
 S1/S3/S4 must distinguish synthetic masking from structural/natural channel mismatch. Structural mismatch is not a controlled modality ablation and must be analyzed as part of acquisition/domain shift.
 
@@ -28,7 +29,7 @@ A dataset is a candidate domain, but Sleep-EDF SC and ST should initially be tre
 
 ## Modality families and masks
 
-EEG, EOG, and EMG remain candidate shared families. Exact channel definitions are not frozen. A provisional mask vocabulary is `{all_present, no_EEG, no_EOG, no_EMG, no_EEG_EOG, no_EEG_EMG, no_EOG_EMG}` only for protocol planning; a mask becomes admissible only when the underlying signals are verified. Natural absence and synthetic masking must use distinct condition identifiers.
+EEG and EOG are the primary families. EMG is secondary compatible-subset only because Sleep-EDF SC supplies a 1-Hz RMS envelope while ST supplies 100-Hz EMG. The primary mask vocabulary is `{all_present, no_EEG, no_EOG}`; removing both primary families is forbidden. Natural absence and synthetic masking have distinct identifiers.
 
 ## Label space
 

@@ -1,0 +1,4 @@
+# Contract SHA256 hashes
+# Generated 2026-09-01 using sha256sum; do not alter contract files without regenerating.
+ae3f9f77fcca92df49e364c5dc659d0b6e2ba2373492d54614990d230051db9f  configs/data_contract_v1.yaml
+0a69c32ed2e8149df7d4a46570cfc733bec4dba87ba9c521c0aa52d7d7b2f2bb  docs/harmonization_contract_v1.md

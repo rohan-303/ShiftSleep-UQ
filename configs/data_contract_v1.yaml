@@ -1,0 +1,149 @@
+contract_version: "1.0.0"
+freeze_date: "2026-09-01"
+research_commit: "PENDING_STEP5_COMMIT"
+status: CONTRACT_PARTIAL
+canonical_labels: [Wake, N1, N2, N3, REM]
+label_mappings:
+  Wake: ["Sleep stage W", "W", "Wake"]
+  N1: ["Sleep stage 1", "Stage 1", "N1"]
+  N2: ["Sleep stage 2", "Stage 2", "N2"]
+  N3: ["Sleep stage 3", "Sleep stage 4", "Stage 3", "Stage 4", "N3"]
+  REM: ["Sleep stage R", "REM", "Stage R"]
+excluded_annotations:
+  - "Movement time"
+  - "Sleep stage ?"
+  - "unknown"
+  - "unscored"
+  - "artifact"
+  - "corrupt_annotation"
+  - "incomplete_epoch"
+  - "epoch_without_matching_signal_samples"
+  - "scorer_disagreement"
+epoch_duration_seconds: 30
+wake_policy:
+  primary: preserve_all_valid_scored_epochs_including_wake
+  label_derived_trimming: secondary_only
+
+datasets:
+  - dataset_id: sleep_edf_sc
+    version: "1.0.0"
+    role: PRIMARY_DOMAIN_PROVISIONAL
+    cohorts: [SC]
+    subject_key_rule: "SC filename subject token SC4<ss>; all available nights grouped by subject"
+    repeat_group_rule: "subject_id; nights cannot cross partitions"
+    selected_modalities: [EEG, EOG]
+    selected_channels:
+      EEG: {channel: "EEG Fpz-Cz", reference: "Cz", native_rate_hz: 100}
+      EOG: {channel: "EOG horizontal", reference: "documented source label", native_rate_hz: 100}
+    channel_fallbacks: none
+    native_rates: {EEG: 100, EOG: 100}
+    access_state: RAW_ACCESS_APPROVED
+    annotation_source: "official Sleep-EDF hypnogram EDF+ annotations; direct audit sample completed"
+    scorer_policy: single_official_annotation_stream
+  - dataset_id: sleep_edf_st
+    version: "1.0.0"
+    role: SECONDARY_STRESS_DOMAIN
+    cohorts: [ST]
+    subject_key_rule: "ST filename subject token ST7<ss>; both nights grouped by participant"
+    repeat_group_rule: "subject_id; placebo and temazepam nights cannot cross partitions"
+    selected_modalities: [EEG, EOG]
+    selected_channels:
+      EEG: {channel: "EEG Fpz-Cz", reference: "Cz", native_rate_hz: 100}
+      EOG: {channel: "EOG horizontal", reference: "documented source label", native_rate_hz: 100}
+    channel_fallbacks: none
+    native_rates: {EEG: 100, EOG: 100}
+    access_state: RAW_ACCESS_APPROVED
+    annotation_source: "official Sleep-EDF hypnogram EDF+ annotations"
+    scorer_policy: single_official_annotation_stream
+  - dataset_id: isruc_sleep
+    version: "1.0.1"
+    role: DEFERRED_PRIMARY_CANDIDATE
+    cohorts: [ISRUC-S1, ISRUC-S2, ISRUC-S3]
+    subject_key_rule: "NEMAR BIDS participant_id preserves cohort prefix and subject number"
+    repeat_group_rule: "participant_id; all ISRUC-S2 sessions remain together"
+    selected_modalities: [EEG, EOG]
+    selected_channels: {EEG: null, EOG: null}
+    channel_fallbacks: none
+    native_rates: {documented: 200, verified_representative: 200}
+    access_state: PUBLIC_METADATA_VERIFIED
+    annotation_source: "original ISRUC two-expert annotations; NEMAR scorer-1 derivative inspected"
+    scorer_policy: "primary scorer not frozen until original annotation representation is verified"
+  - dataset_id: shhs
+    version: "SHHS1/SHHS2 public schema"
+    role: CONDITIONAL_PRIMARY_CANDIDATE
+    cohorts: [SHHS1, SHHS2]
+    subject_key_rule: "NSRR participant identifier; exact visit linkage required"
+    repeat_group_rule: "all visits for participant remain together"
+    selected_modalities: [EEG, EOG]
+    selected_channels:
+      EEG: {candidates: ["C3-A2", "C4-A1"], reference: A2/A1, native_rate_hz: "SHHS1 125; SHHS2 v3 125/v4 128"}
+      EOG: {candidates: ["EOG(L)", "EOG(R)"], reference: PG1, native_rate_hz: "SHHS1 50; SHHS2 v3 50/v4 64"}
+    channel_fallbacks: "none until per-record EDF validation; exclude record if selected family unavailable"
+    native_rates: {SHHS1: {EEG: 125, EOG: 50}, SHHS2_v3: {EEG: 125, EOG: 50}, SHHS2_v4: {EEG: 128, EOG: 64}}
+    access_state: RAW_ACCESS_PENDING
+    annotation_source: "official NSRR XML Profusion/NSRR annotations; exact primary stream pending access audit"
+    scorer_policy: "not frozen for model use until raw/XML audit"
+  - dataset_id: capslpdb
+    version: "1.0.0"
+    role: EXTERNAL_STRESS_DOMAIN
+    cohorts: [CAP]
+    subject_key_rule: "unresolved; no subject-level inferential use"
+    repeat_group_rule: unresolved
+    selected_modalities: [EEG, EOG]
+    selected_channels: unresolved
+    channel_fallbacks: none
+    native_rates: unresolved
+    access_state: PUBLIC_METADATA_PARTIAL
+    annotation_source: unresolved
+    scorer_policy: unresolved
+
+modalities:
+  EEG: {status: PRIMARY}
+  EOG: {status: PRIMARY}
+  EMG: {status: SECONDARY_COMPATIBLE_SUBSET_ONLY, rationale: "SC is 1-Hz RMS envelope while ST/SHHS nominal EMG is 125/128-Hz; no primary equivalence"}
+resampling_policy:
+  step5: none_performed
+  step6_target: "EEG 100 Hz; EOG 50 Hz only after per-record validation; modality-specific lengths permitted"
+  unresolved: "ISRUC/SHHS per-record deviations and filter design"
+synthetic_missingness_conditions:
+  semantics: "raw modality exists but is intentionally unavailable at condition time"
+  representation: "explicit modality-availability mask; missing signal representation must be non-confusable with physiological zero"
+  allowed_primary: [all_present, no_EEG, no_EOG]
+  forbidden: [no_EEG_EOG]
+structural_mismatch_policy:
+  separate_from_synthetic_masking: true
+  cases: [required_modality_not_acquired, required_channel_unavailable, incompatible_EMG_representation, corrupt_required_channel]
+  disposition: "exclude record or report as separate structural stress condition; never relabel as synthetic mask"
+shift_taxonomy:
+  C0: known_domain_EEG_EOG
+  C1: known_domain_EEG_only_synthetic_no_EOG
+  C2: known_domain_EOG_only_synthetic_no_EEG
+  C3: unseen_domain_EEG_EOG
+  C4: unseen_domain_EEG_only_synthetic_no_EOG
+  C5: unseen_domain_EOG_only_synthetic_no_EEG
+  structural: separate_structural_channel_mismatch_conditions
+
+target_free_rules:
+  source_calibration_subjects_disjoint_from: [source_train, source_dev, model_selection]
+  held_out_target_allowed_before_evaluation: false
+  forbidden_target_uses: [normalization_fit, temperature_fit, calibrator_fit, abstention_threshold, conformal_calibration, checkpoint_selection, hyperparameters, channel_selection]
+  oracle_target_calibration: separate_upper_bound_only
+split_rules:
+  unit: subject
+  sleep_edf_sc: all_nights_together
+  sleep_edf_st: both_treatment_nights_together
+  isruc_s2: all_sessions_together
+  shhs: all_visits_together
+  cap: no_subject_level_inference_until_identity_resolved
+schema_acceptance_rules:
+  raw_immutable: true
+  per_record_header_validation_required: true
+  required_primary_modalities: [EEG, EOG]
+  required_annotation_epoch_seconds: 30
+  reject_on: [ambiguous_subject_identity, unresolved_required_channel, unexplained_annotation_semantics, signal_annotation_duration_mismatch, unsupported_fallback]
+unresolved_optional_items:
+  - ISRUC original annotation/channel semantics and scorer representation
+  - SHHS raw approval and per-record deviations
+  - CAP identity and full schema
+  - exact secondary EMG compatible subset
+  - final split membership and deterministic subset size

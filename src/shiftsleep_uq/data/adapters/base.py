@@ -1,0 +1,23 @@
+"""Dataset adapter interfaces for source-specific file and annotation semantics."""
+from __future__ import annotations
+from abc import ABC, abstractmethod
+from pathlib import Path
+from typing import Any
+
+class PSGAdapter(ABC):
+    dataset_id: str
+    def __init__(self, raw_root: Path): self.raw_root=Path(raw_root)
+    @abstractmethod
+    def enumerate_recordings(self) -> list[str]: ...
+    @abstractmethod
+    def resolve_subject_id(self, recording_id: str) -> str: ...
+    @abstractmethod
+    def load_required_signals(self, recording_id: str) -> Any: ...
+    @abstractmethod
+    def load_annotations(self, recording_id: str) -> Any: ...
+    @abstractmethod
+    def get_native_schema(self, recording_id: str) -> dict[str, Any]: ...
+    @abstractmethod
+    def get_annotation_source(self, recording_id: str) -> str: ...
+    @abstractmethod
+    def validate_recording(self, recording_id: str) -> list[str]: ...

@@ -1,0 +1,35 @@
+preprocessing_version: "0.1.0"
+data_contract_version: "1.1.0"
+canonical_unit: uV
+output_dtype: float32
+output_format: compressed_npz
+compression: savez_compressed
+resampling:
+  method: scipy.signal.resample_poly
+  eeg:
+    100_to_100: {up: 1, down: 1}
+    200_to_100: {up: 1, down: 2}
+  eog:
+    100_to_50: {up: 1, down: 2}
+    200_to_50: {up: 1, down: 4}
+  window: [kaiser, 5.0]
+  padtype: constant
+  continuous_before_epoch: true
+  no_additional_filter: true
+annotation_timing_tolerance_seconds: 0.001
+failure_codes:
+  - MISSING_REQUIRED_EEG
+  - MISSING_REQUIRED_EOG
+  - UNEXPECTED_EEG_RATE
+  - UNEXPECTED_EOG_RATE
+  - UNKNOWN_EEG_UNIT
+  - UNKNOWN_EOG_UNIT
+  - STRUCTURAL_UNIT_MISMATCH
+  - ANNOTATION_UNKNOWN_LABEL
+  - ANNOTATION_ALIGNMENT_ERROR
+  - INCOMPLETE_EPOCH
+  - SIGNAL_DURATION_MISMATCH
+  - ANNOTATION_DURATION_MISMATCH
+  - MISSING_SIGNAL_SAMPLES
+  - CORRUPT_EDF
+  - ACQUISITION_FAILURE

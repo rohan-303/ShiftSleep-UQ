@@ -10,7 +10,12 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = {file = "LICENSE"}
 authors = [{name = "Rohan"}]
-dependencies = []
+dependencies = [
+    "numpy>=2.4,<3",
+    "scipy>=1.17,<2",
+    "PyYAML>=6,<7",
+    "pyedflib>=0.1.42,<0.2",
+]
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6"]

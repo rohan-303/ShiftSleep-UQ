@@ -191,7 +191,7 @@ Data engineering only; no ML metrics were computed.
 
 ## 19. Stage/Exclusion Audit
 
-Aggregate audit artifact: `reports/preprocessing_epoch_audit.csv`, seven rows including the failed SC replacement.
+Aggregate audit artifact: `reports/preprocessing_epoch_audit.csv`, six rows for the six successful processed recordings.
 
 Successful-record aggregate canonical labels:
 

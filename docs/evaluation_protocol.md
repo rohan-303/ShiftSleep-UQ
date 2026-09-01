@@ -1,15 +1,35 @@
-# Evaluation protocol (draft)
+# Evaluation Protocol — Step 3 Freeze Addendum
 
-1. Split at participant/subject level before epoch construction or any learned preprocessing. A subject occurs in exactly one partition within a study role.
-2. Train/dev are the only data used for fitting preprocessing, selecting hyperparameters, selecting models/checkpoints, calibrating target-free methods, thresholds, and operating points.
-3. A leave-one-dataset-out design holds one dataset/domain out as target; target labels are inaccessible in strict target-free evaluation.
-4. Freeze the protocol, configurations, split manifests, preprocessing contract, and analysis plan before opening test labels.
-5. Fit normalization/statistical transforms on training subjects only; apply frozen transforms to dev/test. No test-subject statistics.
-6. Keep source-only, cross-source, and ORACLE TARGET CALIBRATION separate in names, configs, tables, and figures.
-7. Report macro-F1, kappa, balanced accuracy, per-stage recall, confusion matrices, NLL, Brier, ECE/adaptive ECE where implemented, class-wise calibration, reliability diagrams, AUROC/AUPRC for error detection, risk-coverage/AURC, selective macro-F1, coverage/risk operating points, conformal coverage gaps, and set size as applicable. ECE alone is insufficient.
-8. Use multiple controlled seeds and record all seeds. Compare paired conditions on the same subjects where possible.
-9. Prefer subject-level bootstrap confidence intervals and subject-level resampling for statistical comparisons. PSG epochs from the same participant are correlated and must not be treated as statistically independent observations for confidence intervals or significance tests.
-10. Interpret effect sizes and intervals, account for multiplicity and repeated conditions, and distinguish exploratory analyses from confirmatory analyses.
+## Frozen target-free terminology
 
-## Missingness and comparison rules
-Mask definitions, availability assumptions, and whether models receive the mask must be predeclared. Comparisons should preserve subject and recording pairing where possible. No target-domain labels may enter source-only calibration or selection.
+- **SOURCE TRAIN:** labeled source participants used for model fitting only.
+- **SOURCE DEV:** disjoint labeled source participants used for hyperparameters, checkpoint policy, and design choices.
+- **SOURCE CALIBRATION:** a separately identified source-only split, or source DEV subset under a predeclared policy, used to fit temperature/conformal/calibration parameters after model selection.
+- **HELD-OUT TARGET DATASET:** a dataset/domain excluded from fitting, model selection, calibration, and adaptation.
+- **TARGET TEST:** the final labeled evaluation partition of the held-out target; labels are inaccessible until the protocol is frozen and evaluation is run.
+
+Primary setting: no target data, labeled or unlabeled, are accessed before final target evaluation. Any unlabeled-target adaptation is a separate adaptation setting and is not target-free domain generalization.
+
+## Train/dev/test discipline
+
+Splits are subject-level, with nights/recordings nested under subjects. No subject, duplicate recording, or derived segment may cross partitions. Dataset leave-one-domain-out is the preferred external test concept when enough harmonizable domains pass the schema audit. Test data remain untouched until preprocessing, masks, calibration, thresholds, metrics, and statistical analysis are frozen.
+
+## Model selection and preprocessing
+
+All hyperparameters, architecture choices, checkpoint selection, normalization statistics, feature selection, mask policy, and abstention thresholds use TRAIN/DEV only. Preprocessing transforms are fit on source TRAIN (or a separately predeclared source-only fit split) and applied without refitting to target. Target labels are prohibited from all fitting and selection in the primary regime.
+
+## Calibration regimes
+
+A. **SOURCE-ONLY / TARGET-FREE:** calibration uses only source TRAIN/DEV information.
+B. **CROSS-SOURCE:** calibration strategy uses multiple source domains while the held-out target remains untouched.
+C. **ORACLE TARGET CALIBRATION:** labeled target data are permitted as an explicitly labeled upper bound and never pooled with target-free results.
+
+## Reliability and selective evaluation
+
+Report predictive, probabilistic, correctness-ranking, selective, and conformal endpoints separately. Formal selective prediction requires risk-versus-coverage curves, AURC, and fixed-risk/fixed-coverage summaries; removing uncertain epochs alone is insufficient. ECE is not sufficient as a sole calibration conclusion.
+
+## Statistical plan (future; no statistics performed here)
+
+Treat domain condition (known/unseen) and modality condition (full/missing) as factorial factors, with an explicit DOMAIN × MODALITY interaction contrast. Include dataset heterogeneity, mask type, and seed as planned factors or nuisance terms. Use paired comparisons where identical subjects/predictions permit them. Use subject-level bootstrap confidence intervals, with recording/night nested within subjects; do not resample epochs as independent units.
+
+PSG epochs from the same participant are correlated and must not be treated as statistically independent observations for confidence intervals or significance tests. Repeated recordings/visits require participant-aware clustering. Dataset-level generalization should also report per-dataset estimates, not only pooled epochs. Multiple comparisons and metric families require a predeclared reporting strategy.

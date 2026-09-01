@@ -1,35 +1,30 @@
-# Novelty collision analysis
+# Step 3 Novelty Collision Analysis
 
-**Positioning rule:** classifications below mean “based on the literature identified in this audit,” not an exhaustive novelty guarantee. The search boundary is 2026-09-01. `UNCERTAIN` is used where required full text or exact bibliographic identity was not verified.
+## Scope and evidence boundary
 
-| ID | Proposed area | Classification | Evidence and collision note | Confidence |
-|---|---|---|---|---|
-| N1 | Cross-dataset sleep-stage generalization | ALREADY_ESTABLISHED | SleepDG explicitly targets unseen datasets and reports five public datasets.[1] | HIGH |
-| N2 | Multimodal sleep staging | ALREADY_ESTABLISHED | CIMSleepNet and the candidate literature directly study multimodal physiological signals.[2] | HIGH |
-| N3 | Arbitrary missing modalities | PARTIALLY_ESTABLISHED | CIMSleepNet directly addresses incomplete multimodal signals; arbitrary real-world masks and structural mismatch remain unresolved.[2] | MEDIUM |
-| N4 | Domain/subject-invariant representations | ALREADY_ESTABLISHED | SleepDG and DREAM explicitly use domain/subject-invariant representation language.[1][3] | HIGH |
-| N5 | Sleep-staging UQ | ALREADY_ESTABLISHED | SleepTransformer, U-PASS, and DREAM explicitly describe uncertainty mechanisms.[4][5][3] | HIGH |
-| N6 | Post-hoc sleep-staging probability calibration | UNCERTAIN | Candidate sources verify UQ/confidence, but formal post-hoc calibration protocol was not verified. | LOW |
-| N7 | Uncertainty error detection under cross-dataset shift | APPARENT_GAP | Cross-dataset generalization and UQ are separately evidenced; their formal error-detection intersection was not verified.[1][3][4] | LOW |
-| N8 | Selective prediction under cross-dataset shift | APPARENT_GAP | SleepTransformer mentions deferral, but formal cross-dataset risk-coverage remains unverified.[4] | LOW |
-| N9 | Risk-coverage under missing-modality shift | APPARENT_GAP | Incomplete-modality work was identified, but formal risk-coverage was not verified.[2] | LOW |
-| N10 | Risk-coverage under compound shift | APPARENT_GAP | No verified work in this audit combines unseen dataset, missing modality, and formal risk-coverage. | LOW |
-| N11 | Source-only calibration on unseen datasets | APPARENT_GAP | No verified direct sleep-staging paper established this strict regime; inaccessible papers remain collision risks. | LOW |
-| N12 | Calibration degradation under compound shift | APPARENT_GAP | No verified direct study measured source-calibrated reliability across dataset and modality interaction. | LOW |
-| N13 | Conformal coverage under cross-dataset sleep shift | APPARENT_GAP | No direct sleep-staging conformal paper was verified in this search; this is not proof of absence. | LOW |
-| N14 | Conformal coverage under missing modality | APPARENT_GAP | No direct sleep-staging conformal result was verified. | LOW |
-| N15 | Conformal coverage under compound shift | APPARENT_GAP | No direct result was verified; guarantee claims would be invalid without exchangeability. | LOW |
-| N16 | Modality-conditioned calibration | UNCERTAIN | Concept is plausible but direct sleep-staging evidence and comparator were not verified. | LOW |
-| N17 | Target-free shift-aware calibration | APPARENT_GAP | No verified direct sleep-staging implementation was found; source-free adaptation is an unresolved collision area. | LOW |
-| N18 | Unified dataset × modality × uncertainty benchmark | APPARENT_GAP | The identified works cover separate axes; a unified, leakage-safe reliability benchmark was not verified. | LOW |
+This is a bounded, source-verified audit through 2026-09-01, not a systematic review and not evidence of priority. Publisher access restrictions left two critical papers methodologically unresolved.
 
-## Interpretation
+## Critical collision conclusions
 
-The strongest collisions are N1, N2, N4, and N5: these must not be presented as new contributions. N3 is already materially occupied by CIMSleepNet. The defensible candidate is narrower: an evaluation benchmark and analysis of reliability under the interaction of held-out dataset/domain and modality loss, with strict source-only calibration and empirical (not guaranteed) conformal coverage. This remains provisional because RMSSC and the 2026 uncertainty paper were not fully method-audited.
+### RMSSC
 
-## Sources
-[1] https://arxiv.org/abs/2401.05363v5
-[2] https://www.proceedings.com/079017-3557.html
-[3] https://arxiv.org/abs/2312.03196v3
-[4] https://arxiv.org/abs/2105.11043v3
-[5] https://pubmed.ncbi.nlm.nih.gov/?term=U-PASS+sleep+staging
+Crossref verifies: Luo, Miao, Guan, Li, Huang, and Li, “RMSSC: A Robust Multimodal Framework for Sleep Stage Classification with Noisy Labels and Missing Modalities,” ICASSP 2026, DOI `10.1109/ICASSP55912.2026.11461625`, published 2026-05-03; page range NOT_VERIFIED. The title establishes a missing-modality/multimodal collision, but IEEE full text was inaccessible. Datasets, ISRUC subsets, modality masks, synthetic/natural missingness, split policy, domain-generalization protocol, calibration, error detection, selective prediction, and conformal prediction are all NOT_VERIFIED. Collision: **NOT_VERIFIED** for the central contribution; definitely an established adjacent collision for missing-modality robustness.
+
+### Direct Quantification
+
+Crossref verifies Vainikka, Huttunen, Kainulainen, Korkalainen, and Rusanen, “Direct Quantification of Uncertainty in Deep Learning-Based Automatic Sleep Staging,” IEEE TBME, 2026, DOI `10.1109/TBME.2025.3623380`; Crossref publication date June 2026. Model, datasets, MC dropout, Hypnodensity Interval, rejection experiment, calibration metrics, risk-coverage, missing modalities, and conformal prediction remain NOT_VERIFIED because the accessible publisher page was blocked. Collision: **NOT_VERIFIED**.
+
+### SF-UIDA
+
+Zhou et al., “Personalized Sleep Staging Leveraging Source-free Unsupervised Domain Adaptation,” AAAI 2025, 39(13):14529–14537, DOI `10.1609/aaai.v39i13.33592`. Official AAAI abstract verifies source-free adaptation to newly appearing unlabeled individuals without source data, using pseudo-label fine-tuning and sequential cross-view contrasting, evaluated on three public datasets and three classic models. This is **not** pure target-free domain generalization: unlabeled target individuals are used for adaptation. Missing modality, calibration/UQ, formal selective prediction, and conformal prediction are not described in the official abstract. Collision with the strict main benchmark: **PARTIAL**.
+
+## Direct calibration/selective/conformal findings
+
+- Direct sleep-staging UQ is established. Direct probability calibration under cross-dataset × missing-modality shift was not verified.
+- SleepTransformer and U-PASS support uncertainty/deferral concepts, but accessible evidence does not establish formal risk-versus-coverage/AURC under compound shift.
+- A formal selective-prediction result requires risk-coverage or equivalent coverage-at-risk analysis; deleting uncertain predictions alone is insufficient.
+- No verified standard multiclass sleep-staging conformal benchmark under compound dataset × modality shift was found. A search result identified a 2025/26 arXiv paper on conformal prediction for compositional data that includes a sleep-stage dataset, but it is an adjacent formulation rather than evidence of the proposed target-free shifted sleep-staging protocol.
+
+## Decision
+
+The project should proceed only with a qualified interaction-focused benchmark thesis. Because RMSSC and Direct Quantification remain critical unresolved collisions, Step 3 status is PARTIAL and research decision is MODIFY rather than GO.

@@ -1,19 +1,15 @@
-# Conformal prediction audit
+# Conformal Audit — Step 3 Update
 
-Split/conformal classification relies on an exchangeability condition between calibration and test examples (or an explicitly justified alternative). A source-calibrated score can have finite-sample nominal coverage for an exchangeable target distribution; that does not establish the same coverage on an unseen dataset, a different acquisition system, or a missing-modality distribution.
+## Direct search result
 
-## What ShiftSleep-UQ may claim
+No verified standard multiclass automatic sleep-staging conformal-prediction benchmark under simultaneous unseen-dataset and missing-modality shift was identified in the bounded search through 2026-09-01.
 
-- **Nominal coverage:** the requested target level, such as 90%.
-- **Empirical coverage:** the observed fraction of test subjects/epochs whose true class is in the prediction set.
-- **Coverage gap:** nominal minus empirical coverage, with subject-level uncertainty intervals.
-- Under dataset/modality shift, report empirical behavior and violations/limitations; do not claim guaranteed 90% coverage on unseen domains.
+A search result did identify an arXiv work titled **Conformal Prediction for Compositional Data** whose abstract reports an application involving sleep stages. This is direct topical adjacency, but it is a compositional-data prediction formulation, not evidence of the ShiftSleep-UQ protocol: its calibration set, exchangeability analysis under dataset shift, missing-modality condition, and subject-level sleep-staging reliability interpretation require separate inspection. Therefore the project must not claim that no conformal work exists.
 
-## Candidate methods
-APS and RAPS are reasonable multiclass conformal candidates if their score definitions, calibration unit, tie handling, and finite-sample conventions are frozen. A later implementation must compare at least source-only calibration against explicitly labeled ORACLE TARGET CALIBRATION. The target-free protocol cannot use held-out target labels for score, threshold, or method selection.
+## What can be evaluated later
 
-## Sleep-staging evidence
-No direct sleep-staging conformal paper was verified in this audit. Adjacent conformal biomedical/time-series work was not sufficiently source-verified to support a direct collision claim. Therefore compound-shift conformal coverage remains an **APPARENT_GAP / LOW confidence**, not proof of priority.
+APS/RAPS-style multiclass prediction sets may be considered only after data and label semantics are frozen. Source calibration and target evaluation must be separated. Report empirical coverage, nominal-minus-empirical gap, and set size by domain and modality condition.
 
 ## Guarantee boundary
-Conformal guarantees must be conditioned on their assumptions and calibration design. Distribution shift, dependent PSG epochs, subject-level clustering, missingness mechanisms, and dataset overlap can invalidate naive interpretations. The statistical unit for uncertainty intervals remains the participant/recording cluster, not independent PSG epochs.
+
+Nominal finite-sample coverage under calibration/test exchangeability does not automatically transfer to an unseen dataset, changed acquisition system, or changed missingness distribution. Empirical undercoverage under shift is a measurable result, not proof that all conformal guarantees fail universally. Epoch dependence requires subject-level uncertainty intervals and prevents naïve epoch-level significance claims.

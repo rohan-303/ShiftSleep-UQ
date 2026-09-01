@@ -19,3 +19,14 @@ The official PhysioNet page states 197 whole-night recordings, not 197 people. S
 [1] https://physionet.org/content/sleep-edfx/1.0.0/
 [2] https://sleepdata.org/datasets/shhs
 [3] https://physionet.org/content/capslpdb/1.0.0/
+
+## Step 4 audit status (2026-09-01)
+
+| Dataset | Verified status | Provenance |
+|---|---|---|
+| Sleep-EDF Expanded 1.0.0 | 197 records; 153 SC and 44 ST; 196/197 PSG headers parsed by official PhysioNet HTTP Range | Official page, `RECORDS`, `reports/sleep_edf_subject_manifest.csv`, `reports/sleep_edf_channel_inventory.csv` |
+| ISRUC-Sleep | ACCESS_UNRESOLVED; audited official URL returned 404 | `reports/dataset_access_registry.csv` |
+| SHHS | RAW_ACCESS_PENDING; schema NOT_VERIFIED in this run | `reports/dataset_access_registry.csv` |
+| CAP Sleep Database 1.0.0 | 108 official records; 13/108 headers parsed in final network window; heterogeneous schema | Official page, `reports/cap_channel_inventory.csv` |
+
+Unverified values remain `NOT_VERIFIED`, `ACCESS_UNRESOLVED`, or `RAW_ACCESS_PENDING`; no model-ready dataset claim is made.

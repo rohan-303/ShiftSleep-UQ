@@ -1,0 +1,7 @@
+official_url,dataset_version,filename,byte_size,sha256,acquisition_date,license_access_category,checksum_status
+https://physionet.org/files/sleep-edfx/1.0.0/RECORDS,Sleep-EDF 1.0.0,RECORDS,6348,444cb5be68f22dfcc1a4114e6b8b8f99319e28ce7cdd130750d75109b1408286,2026-09-01,official metadata / ODC terms,MATCH
+https://physionet.org/files/sleep-edfx/1.0.0/SHA256SUMS.txt,Sleep-EDF 1.0.0,SHA256SUMS.txt,NOT_RECORDED,1bc88e19e2e921f7851d7cf61e31ceb8f6d670211ca546a323e9db5a77525edf,2026-09-01,official checksum metadata,NO_OFFICIAL_CHECKSUM_FOR_CHECKSUM_FILE
+https://physionet.org/files/sleep-edfx/1.0.0/SC-subjects.xls,Sleep-EDF 1.0.0,SC-subjects.xls,NOT_RECORDED,93d65494096d375ee302f1ce3a0506575b17a918b93d7cdaa5a2b32727366080,2026-09-01,official metadata / ODC terms,MATCH
+https://physionet.org/files/sleep-edfx/1.0.0/ST-subjects.xls,Sleep-EDF 1.0.0,ST-subjects.xls,NOT_RECORDED,b377133e03897559e9e9fa8ef468f4505becaecebe1bc0c988d39a9158267758,2026-09-01,official metadata / ODC terms,MATCH
+https://physionet.org/files/capslpdb/1.0.0/RECORDS,CAP 1.0.0,RECORDS,1044,b794825833c98285c6e9f6052af79837afc1ac1939f7e410fdfc88dded52f945,2026-09-01,official metadata / license terms,MATCH
+https://physionet.org/files/capslpdb/1.0.0/gender-age.xlsx,CAP 1.0.0,gender-age.xlsx,NOT_RECORDED,9d7a4c54f352412e1b0a8793f6124d1aef7b318a13b027a2f88e497719654f36,2026-09-01,official metadata / license terms,NO_OFFICIAL_CHECKSUM

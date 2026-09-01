@@ -14,3 +14,11 @@ Every future experiment must pass this checklist and retain the evidence in its 
 - [ ] Test access is logged only after protocol freeze.
 
 Fail closed on an unresolvable identity collision, ambiguous subject mapping, or unexplained target-label access.
+
+## Step 4 source-supported additions (2026-09-01)
+
+* Sleep-EDF SC subject identity is derived from the official `SC4<ss><N>...` filename convention; all nights for one SC subject remain together.
+* Sleep-EDF ST subject identity is derived from the official `ST7<ss><N>...` filename convention; both treatment/placebo nights remain together.
+* Sleep-EDF-derived subsets cannot be treated as independent domains without release-lineage verification.
+* CAP pathology-coded filenames are not accepted as subject IDs.
+* SHHS visit grouping and ISRUC grouping remain unresolved until official access/schema evidence is available.

@@ -253,8 +253,8 @@ Because the gate is `CONTRACT_PARTIAL`, do not execute Step 6. Perform exactly o
 Final repository state before this documentation-recording commit: clean after `47e800495721cd5d1f70866ea5ef4f9137ac0ce9`; this report update is the only subsequent change. Final HEAD after recording is shown by the final verification below. No push is performed.
 
 * substantive Step 5 commit: `47e800495721cd5d1f70866ea5ef4f9137ac0ce9`
-* report-recording commit: recorded after this report update
-* expected final status: clean
+* report-recording commit: `cbf332d994e541e463617a3604a31e4ff32e8458` (`docs: record Step 5 harmonization report`)
+* final status after recording: clean
 * diff summary: Step 5 contract/configuration, validation tooling/tests, protocol amendments, source-role documentation, and manifest treatment update; no model/preprocessing artifacts
 
 Exact full report path: `C:\Users\rohan\ShiftSleep-UQ\reports\STEP_05_HARMONIZATION_FREEZE_REPORT.md`

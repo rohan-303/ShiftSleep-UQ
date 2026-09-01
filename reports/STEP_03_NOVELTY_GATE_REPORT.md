@@ -19,7 +19,7 @@ The project remains worthwhile as an interaction-focused reliability benchmark, 
 * Step 1 commit: `b6dbbe4319538b799eb2537d0321892ff395df93`
 * Step 2 audit commit: `0f76fa63b8fe56090505f75ea908d6da06287dd0`
 * Step 2 report commit: `07566b2598ea401d63dee2e22db7b002b7d6dda2`
-* Step 3 commit: final hash recorded below after the report-recording amend; push status remains NOT PUSHED
+* Step 3 commit: `1cc17ddc3824194380bca746fb107d677bdc4041` (`research: freeze ShiftSleep-UQ paper thesis`)
 * push status: NOT PUSHED
 
 Repository preflight confirmed the expected project identity, clean starting tree, branch `main`, Step 2 report presence, and passing tests. No unrelated repository was modified.
@@ -230,4 +230,4 @@ Perform a source-verified dataset acquisition and raw-schema audit only: obtain 
 
 ## 28. Git Status / Diff Summary
 
-Before the Step 3 commit, `git status --short` showed the eight modified files in Section 24 and the four new files in Section 23. Before the Step 3 commit, `git diff --stat` reported 8 tracked files changed, 187 insertions and 191 deletions; untracked files were not included in that stat. Step 1 and Step 2 hashes are recorded in Section 3. The Step 3 commit is `research: freeze ShiftSleep-UQ paper thesis`, created after this report; its exact hash and final clean status must be recorded immediately after commit. Push status: NOT PUSHED.
+At final verification, `git status --short --untracked-files=all` was clean and `git diff --check` exited 0. The substantive Step 3 research commit is `1cc17ddc3824194380bca746fb107d677bdc4041` (`research: freeze ShiftSleep-UQ paper thesis`). The report-recording commit is a separate documentation commit after that milestone. Push status: NOT PUSHED.

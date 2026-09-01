@@ -1,0 +1,16 @@
+# ISRUC channel contract evidence
+# This is a metadata/evidence manifest only; no signal values are included.
+dataset_id,cohort,source_label,modality,anatomical_interpretation,reference,native_rate_hz,provenance,selection_status
+isruc_sleep,ISRUC-S1,F3-A2,EEG,frontal-left EEG,A2,200,"ISRUC public-dataset description reproduced by peer-reviewed PMC article PMC8946692; representative NEMAR channel sidecar",verified_inventory
+isruc_sleep,ISRUC-S1,C3-A2,EEG,central-left EEG,A2,200,"ISRUC public-dataset description reproduced by peer-reviewed PMC article PMC8946692; representative NEMAR channel sidecar",PRIMARY_ISRUC_EEG
+isruc_sleep,ISRUC-S1,O1-A2,EEG,occipital-left EEG,A2,200,"ISRUC public-dataset description reproduced by peer-reviewed PMC article PMC8946692; representative NEMAR channel sidecar",verified_inventory
+isruc_sleep,ISRUC-S1,F4-A1,EEG,frontal-right EEG,A1,200,"ISRUC public-dataset description reproduced by peer-reviewed PMC article PMC8946692; representative NEMAR channel sidecar",verified_inventory
+isruc_sleep,ISRUC-S1,C4-A1,EEG,central-right EEG,A1,200,"ISRUC public-dataset description reproduced by peer-reviewed PMC article PMC8946692; representative NEMAR channel sidecar",verified_inventory
+isruc_sleep,ISRUC-S1,O2-A1,EEG,occipital-right EEG,A1,200,"ISRUC public-dataset description reproduced by peer-reviewed PMC article PMC8946692; representative NEMAR channel sidecar",verified_inventory
+isruc_sleep,ISRUC-S1,LOC-A2,EOG,left outer canthus EOG,A2,200,"ISRUC public-dataset description reproduced by peer-reviewed PMC article PMC8946692; representative NEMAR channel sidecar",PRIMARY_ISRUC_EOG
+isruc_sleep,ISRUC-S1,ROC-A1,EOG,right outer canthus EOG,A1,200,"ISRUC public-dataset description reproduced by peer-reviewed PMC article PMC8946692; representative NEMAR channel sidecar",verified_inventory
+isruc_sleep,ISRUC-S1,X1,EMG,chin/submental EMG,source label X1,200,"peer-reviewed ISRUC channel tables and representative NEMAR sidecar; exact BIDS type not trusted",secondary_inventory
+isruc_sleep,ISRUC-S1,X2,EMG,leg/auxiliary EMG,source label X2,200,"representative NEMAR sidecar; anatomical interpretation requires original source audit",secondary_inventory
+isruc_sleep,ISRUC-S1,X3,EMG,leg/auxiliary EMG,source label X3,200,"representative NEMAR sidecar; anatomical interpretation requires original source audit",secondary_inventory
+isruc_sleep,ISRUC-S2,same_labels,EEG/EOG,montage differs by session; session 2 uses E1-M2/E2-M1 and F3-M2/C3-M2,source-specific,200,"representative NEMAR S2 session-2 sidecar",not_primary_core
+isruc_sleep,ISRUC-S3,C3-A2,EEG,central-left EEG,A2,200,"representative NEMAR channel sidecar and peer-reviewed ISRUC description",secondary_inventory

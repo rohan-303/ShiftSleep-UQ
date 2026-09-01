@@ -1,7 +1,11 @@
-contract_version: "1.0.0"
+contract_version: "1.1.0"
 freeze_date: "2026-09-01"
-research_commit: "PENDING_STEP5_COMMIT"
-status: CONTRACT_PARTIAL
+research_commit: "PENDING_STEP5_1_COMMIT"
+status: CORE_PREPROCESSING_FROZEN
+final_benchmark_frozen: false
+freeze_levels:
+  CORE_PREPROCESSING_FROZEN: "Sleep-EDF SC and ISRUC-S1 have verified identity, exact channels, labels, scorer, epoch, missingness, and sampling contracts; deterministic preprocessing may be implemented, but not executed by this step."
+  FINAL_BENCHMARK_FROZEN: "All intended primary domains, including SHHS1, are acquired and every record passes schema validation."
 canonical_labels: [Wake, N1, N2, N3, REM]
 label_mappings:
   Wake: ["Sleep stage W", "W", "Wake"]
@@ -18,71 +22,93 @@ excluded_annotations:
   - "corrupt_annotation"
   - "incomplete_epoch"
   - "epoch_without_matching_signal_samples"
-  - "scorer_disagreement"
+primary_exclusion_policy: "Exclude only invalid/unscored/non-stage/alignment-failure epochs listed above; do not exclude valid Wake, transitions, or scorer-2 disagreement when scorer-1 is primary."
 epoch_duration_seconds: 30
 wake_policy:
   primary: preserve_all_valid_scored_epochs_including_wake
   label_derived_trimming: secondary_only
+scorer_policy:
+  isruc_primary: "scorer_1"
+  isruc_secondary: "scorer_2"
+  primary_selection_basis: "NEMAR v1.0.1 README states events are generated from scorer-1 Excel files and scorer-2 labels are retained in annotation extras; scorer choice is predeclared and not performance-selected."
+  disagreement_is_primary_exclusion: false
+  consensus_only: secondary_sensitivity_only
+  diagnostics: [agreement_rate, cohen_kappa, stage_specific_disagreement, confidence_by_agreement, error_by_agreement]
 
 datasets:
   - dataset_id: sleep_edf_sc
     version: "1.0.0"
-    role: PRIMARY_DOMAIN_PROVISIONAL
+    role: PRIMARY_ACCESSIBLE_CORE
     cohorts: [SC]
-    subject_key_rule: "SC filename subject token SC4<ss>; all available nights grouped by subject"
+    subject_key_rule: "SC filename subject token; all available nights grouped by participant"
     repeat_group_rule: "subject_id; nights cannot cross partitions"
     selected_modalities: [EEG, EOG]
     selected_channels:
-      EEG: {channel: "EEG Fpz-Cz", reference: "Cz", native_rate_hz: 100}
-      EOG: {channel: "EOG horizontal", reference: "documented source label", native_rate_hz: 100}
-    channel_fallbacks: none
-    native_rates: {EEG: 100, EOG: 100}
-    access_state: RAW_ACCESS_APPROVED
-    annotation_source: "official Sleep-EDF hypnogram EDF+ annotations; direct audit sample completed"
-    scorer_policy: single_official_annotation_stream
-  - dataset_id: sleep_edf_st
-    version: "1.0.0"
-    role: SECONDARY_STRESS_DOMAIN
-    cohorts: [ST]
-    subject_key_rule: "ST filename subject token ST7<ss>; both nights grouped by participant"
-    repeat_group_rule: "subject_id; placebo and temazepam nights cannot cross partitions"
-    selected_modalities: [EEG, EOG]
-    selected_channels:
-      EEG: {channel: "EEG Fpz-Cz", reference: "Cz", native_rate_hz: 100}
-      EOG: {channel: "EOG horizontal", reference: "documented source label", native_rate_hz: 100}
+      EEG: {channel: "EEG Fpz-Cz", reference: "Cz in source derivation label", native_rate_hz: 100}
+      EOG: {channel: "EOG horizontal", reference: "source derivation label retained", native_rate_hz: 100}
     channel_fallbacks: none
     native_rates: {EEG: 100, EOG: 100}
     access_state: RAW_ACCESS_APPROVED
     annotation_source: "official Sleep-EDF hypnogram EDF+ annotations"
     scorer_policy: single_official_annotation_stream
-  - dataset_id: isruc_sleep
+  - dataset_id: isruc_s1
     version: "1.0.1"
-    role: DEFERRED_PRIMARY_CANDIDATE
-    cohorts: [ISRUC-S1, ISRUC-S2, ISRUC-S3]
-    subject_key_rule: "NEMAR BIDS participant_id preserves cohort prefix and subject number"
+    role: PRIMARY_ACCESSIBLE_CORE
+    cohorts: [ISRUC-S1]
+    subject_key_rule: "NEMAR participant_id sub-I###; one recording per participant"
+    repeat_group_rule: "participant_id; no subject may cross partitions"
+    selected_modalities: [EEG, EOG]
+    selected_channels:
+      EEG: {channel: "C3-A2", anatomical_interpretation: central-left EEG, reference: A2, native_rate_hz: 200}
+      EOG: {channel: "LOC-A2", anatomical_interpretation: left outer canthus EOG, reference: A2, native_rate_hz: 200}
+    channel_fallbacks: none
+    native_rates: {EEG: 200, EOG: 200}
+    access_state: PUBLIC_METADATA_VERIFIED
+    annotation_source: "NEMAR v1.0.1 scorer-1 events derived from original ISRUC scorer-1 Excel files; scorer-2 retained as extras"
+    scorer_policy: "scorer_1 primary; scorer_2 secondary diagnostic"
+  - dataset_id: sleep_edf_st
+    version: "1.0.0"
+    role: SECONDARY_STRESS_DOMAIN
+    cohorts: [ST]
+    subject_key_rule: "ST filename subject token; both treatment nights grouped by participant"
+    repeat_group_rule: "subject_id; placebo and temazepam nights cannot cross partitions"
+    selected_modalities: [EEG, EOG]
+    selected_channels:
+      EEG: {channel: "EEG Fpz-Cz", reference: "Cz in source derivation label", native_rate_hz: 100}
+      EOG: {channel: "EOG horizontal", reference: "source derivation label retained", native_rate_hz: 100}
+    channel_fallbacks: none
+    native_rates: {EEG: 100, EOG: 100}
+    access_state: RAW_ACCESS_APPROVED
+    annotation_source: "official Sleep-EDF hypnogram EDF+ annotations"
+    scorer_policy: single_official_annotation_stream
+  - dataset_id: isruc_s2_s3
+    version: "1.0.1"
+    role: SECONDARY_SENSITIVITY_DOMAIN
+    cohorts: [ISRUC-S2, ISRUC-S3]
+    subject_key_rule: "NEMAR participant_id preserves subgroup and subject number"
     repeat_group_rule: "participant_id; all ISRUC-S2 sessions remain together"
     selected_modalities: [EEG, EOG]
-    selected_channels: {EEG: null, EOG: null}
+    selected_channels: {EEG: "not primary-frozen; S2 session-2 representative uses F3-M2/C3-M2 montage", EOG: "not primary-frozen"}
     channel_fallbacks: none
     native_rates: {documented: 200, verified_representative: 200}
     access_state: PUBLIC_METADATA_VERIFIED
-    annotation_source: "original ISRUC two-expert annotations; NEMAR scorer-1 derivative inspected"
-    scorer_policy: "primary scorer not frozen until original annotation representation is verified"
-  - dataset_id: shhs
-    version: "SHHS1/SHHS2 public schema"
-    role: CONDITIONAL_PRIMARY_CANDIDATE
-    cohorts: [SHHS1, SHHS2]
-    subject_key_rule: "NSRR participant identifier; exact visit linkage required"
+    annotation_source: "NEMAR scorer-1 events with scorer-2 extras where present"
+    scorer_policy: "scorer_1 primary for secondary analyses; exact channel contract must be separately declared"
+  - dataset_id: shhs1
+    version: "public NSRR schema"
+    role: PLANNED_PRIMARY_DOMAIN_PENDING_RAW_ACCESS
+    cohorts: [SHHS1]
+    subject_key_rule: "NSRR participant identifier"
     repeat_group_rule: "all visits for participant remain together"
     selected_modalities: [EEG, EOG]
     selected_channels:
-      EEG: {candidates: ["C3-A2", "C4-A1"], reference: A2/A1, native_rate_hz: "SHHS1 125; SHHS2 v3 125/v4 128"}
-      EOG: {candidates: ["EOG(L)", "EOG(R)"], reference: PG1, native_rate_hz: "SHHS1 50; SHHS2 v3 50/v4 64"}
-    channel_fallbacks: "none until per-record EDF validation; exclude record if selected family unavailable"
-    native_rates: {SHHS1: {EEG: 125, EOG: 50}, SHHS2_v3: {EEG: 125, EOG: 50}, SHHS2_v4: {EEG: 128, EOG: 64}}
+      EEG: {channel: "C3-A2", reference: A2, nominal_rate_hz: 125}
+      EOG: {channel: "EOG(L)-PG1", reference: PG1, nominal_rate_hz: 50}
+    channel_fallbacks: "none; per-record validation required; quarantine if exact channels/rates are unavailable"
+    native_rates: {EEG: 125, EOG: 50}
     access_state: RAW_ACCESS_PENDING
-    annotation_source: "official NSRR XML Profusion/NSRR annotations; exact primary stream pending access audit"
-    scorer_policy: "not frozen for model use until raw/XML audit"
+    annotation_source: "official NSRR XML; primary XML stream to be frozen after authorized audit"
+    scorer_policy: "pending authorized raw/XML audit"
   - dataset_id: capslpdb
     version: "1.0.0"
     role: EXTERNAL_STRESS_DOMAIN
@@ -100,20 +126,21 @@ datasets:
 modalities:
   EEG: {status: PRIMARY}
   EOG: {status: PRIMARY}
-  EMG: {status: SECONDARY_COMPATIBLE_SUBSET_ONLY, rationale: "SC is 1-Hz RMS envelope while ST/SHHS nominal EMG is 125/128-Hz; no primary equivalence"}
+  EMG: {status: SECONDARY_COMPATIBLE_SUBSET_ONLY, rationale: "Sleep-EDF SC is a processed 1-Hz RMS envelope while ISRUC/SHHS EMG representations differ; no primary equivalence"}
 resampling_policy:
-  step5: none_performed
-  step6_target: "EEG 100 Hz; EOG 50 Hz only after per-record validation; modality-specific lengths permitted"
-  unresolved: "ISRUC/SHHS per-record deviations and filter design"
+  step5_1: none_performed
+  target_rates: {EEG: 100, EOG: 50}
+  rationale: "EEG only downsampling for ISRUC/SHHS; EOG downsampling for ISRUC and none for SHHS nominal; no modality upsampling"
+  step6_requirement: "Specify deterministic anti-aliasing before any downsampling and validate every native rate per record"
 synthetic_missingness_conditions:
   semantics: "raw modality exists but is intentionally unavailable at condition time"
   representation: "explicit modality-availability mask; missing signal representation must be non-confusable with physiological zero"
-  allowed_primary: [all_present, no_EEG, no_EOG]
+  allowed_primary: [C0_all_present, C1_no_EOG, C2_no_EEG, C3_unseen_all_present, C4_unseen_no_EOG, C5_unseen_no_EEG]
   forbidden: [no_EEG_EOG]
 structural_mismatch_policy:
   separate_from_synthetic_masking: true
-  cases: [required_modality_not_acquired, required_channel_unavailable, incompatible_EMG_representation, corrupt_required_channel]
-  disposition: "exclude record or report as separate structural stress condition; never relabel as synthetic mask"
+  cases: [required_modality_not_acquired, required_channel_unavailable, incompatible_EMG_representation, corrupt_required_channel, unexpected_native_rate]
+  disposition: "quarantine/exclude exact-channel record or report as separate structural stress condition; never relabel as synthetic mask"
 shift_taxonomy:
   C0: known_domain_EEG_EOG
   C1: known_domain_EEG_only_synthetic_no_EOG
@@ -131,6 +158,7 @@ target_free_rules:
 split_rules:
   unit: subject
   sleep_edf_sc: all_nights_together
+  isruc_s1: one_recording_per_subject
   sleep_edf_st: both_treatment_nights_together
   isruc_s2: all_sessions_together
   shhs: all_visits_together
@@ -141,9 +169,12 @@ schema_acceptance_rules:
   required_primary_modalities: [EEG, EOG]
   required_annotation_epoch_seconds: 30
   reject_on: [ambiguous_subject_identity, unresolved_required_channel, unexplained_annotation_semantics, signal_annotation_duration_mismatch, unsupported_fallback]
+  accessible_core_requires: [sleep_edf_sc_exact_channels, isruc_s1_exact_channels, isruc_s1_scorer_1]
+  planned_domain_cannot_masquerade_as_acquired: true
 unresolved_optional_items:
-  - ISRUC original annotation/channel semantics and scorer representation
-  - SHHS raw approval and per-record deviations
+  - SHHS1 authorized raw/XML access and per-record deviations
+  - SHHS1 primary XML stream after access audit
+  - ISRUC secondary S2/S3 exact channel contract
   - CAP identity and full schema
   - exact secondary EMG compatible subset
   - final split membership and deterministic subset size

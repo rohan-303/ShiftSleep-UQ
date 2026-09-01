@@ -1,12 +1,11 @@
-"""Validation for the Step 5 data contract; no signal processing."""
+"""Validation for the Step 5.1 data contract; no signal processing."""
 from __future__ import annotations
 from pathlib import Path
 from typing import Any
 import yaml
 
 LABELS = {"Wake", "N1", "N2", "N3", "REM"}
-ROLES = {"PRIMARY_DOMAIN_PROVISIONAL", "SECONDARY_STRESS_DOMAIN", "DEFERRED_PRIMARY_CANDIDATE", "CONDITIONAL_PRIMARY_CANDIDATE", "EXTERNAL_STRESS_DOMAIN"}
-STATUSES = {"PRIMARY", "SECONDARY_COMPATIBLE_SUBSET_ONLY"}
+CORE = {"PRIMARY_ACCESSIBLE_CORE"}
 
 
 def load_contract(path: str | Path = "configs/data_contract_v1.yaml") -> dict[str, Any]:
@@ -16,8 +15,10 @@ def load_contract(path: str | Path = "configs/data_contract_v1.yaml") -> dict[st
 
 
 def validate_contract(data: dict[str, Any]) -> None:
-    if not isinstance(data, dict) or data.get("contract_version") != "1.0.0":
+    if not isinstance(data, dict) or data.get("contract_version") != "1.1.0":
         raise ValueError("invalid contract version")
+    if data.get("status") != "CORE_PREPROCESSING_FROZEN" or data.get("final_benchmark_frozen") is not False:
+        raise ValueError("freeze gates invalid")
     if set(data["canonical_labels"]) != LABELS:
         raise ValueError("canonical labels must be exactly Wake/N1/N2/N3/REM")
     mappings = data["label_mappings"]
@@ -29,16 +30,36 @@ def validate_contract(data: dict[str, Any]) -> None:
     for required in ("movement time", "unknown", "unscored", "artifact", "incomplete_epoch"):
         if required not in excluded:
             raise ValueError(f"missing explicit exclusion: {required}")
-    primary = [d for d in data["datasets"] if d["role"] in {"PRIMARY_DOMAIN_PROVISIONAL", "CONDITIONAL_PRIMARY_CANDIDATE"}]
-    for d in primary:
+    if "scorer_disagreement" in excluded:
+        raise ValueError("scorer disagreement must not be a primary exclusion")
+    datasets = data["datasets"]
+    core = [d for d in datasets if d["role"] in CORE]
+    if {d["dataset_id"] for d in core} != {"sleep_edf_sc", "isruc_s1"}:
+        raise ValueError("accessible core must be Sleep-EDF SC and ISRUC-S1")
+    for d in core:
         for key in ("subject_key_rule", "repeat_group_rule", "annotation_source"):
             if not d.get(key): raise ValueError(f"{d['dataset_id']} lacks {key}")
-        if d["dataset_id"] == "sleep_edf_sc" and not d["selected_channels"].get("EEG"): raise ValueError("SC EEG channel missing")
+        channels = d.get("selected_channels", {})
+        if not channels.get("EEG") or not channels.get("EOG"):
+            raise ValueError(f"{d['dataset_id']} lacks exact EEG/EOG channels")
+        if d["dataset_id"] == "isruc_s1" and d.get("scorer_policy") != "scorer_1 primary; scorer_2 secondary diagnostic":
+            raise ValueError("ISRUC primary scorer must be explicit")
+    shhs = next(d for d in datasets if d["dataset_id"] == "shhs1")
+    if shhs["role"] != "PLANNED_PRIMARY_DOMAIN_PENDING_RAW_ACCESS" or shhs["access_state"] != "RAW_ACCESS_PENDING":
+        raise ValueError("SHHS must remain explicitly pending")
+    if shhs["selected_channels"]["EEG"]["channel"] != "C3-A2" or shhs["selected_channels"]["EOG"]["channel"] != "EOG(L)-PG1":
+        raise ValueError("SHHS intended channels not frozen")
     for name, spec in data["modalities"].items():
-        if spec.get("status") not in STATUSES: raise ValueError(f"invalid modality status: {name}")
-    if "no_EEG_EOG" in data["synthetic_missingness_conditions"]["forbidden"]: pass
-    else: raise ValueError("all-primary-modality removal must be forbidden")
+        if name in {"EEG", "EOG"} and spec.get("status") != "PRIMARY":
+            raise ValueError(f"invalid primary modality status: {name}")
+    if "no_EEG_EOG" not in data["synthetic_missingness_conditions"]["forbidden"]:
+        raise ValueError("all-primary-modality removal must be forbidden")
+    if not data["structural_mismatch_policy"]["separate_from_synthetic_masking"]:
+        raise ValueError("structural mismatch must be separate")
+    if data["resampling_policy"]["target_rates"] != {"EEG": 100, "EOG": 50}:
+        raise ValueError("sampling targets invalid")
     rules = data["target_free_rules"]
-    if rules["held_out_target_allowed_before_evaluation"] is not False: raise ValueError("target leakage rule invalid")
-    if not data["structural_mismatch_policy"]["separate_from_synthetic_masking"]: raise ValueError("structural mismatch must be separate")
-    if not data["schema_acceptance_rules"]["raw_immutable"]: raise ValueError("raw immutability required")
+    if rules["held_out_target_allowed_before_evaluation"] is not False:
+        raise ValueError("target leakage rule invalid")
+    if not data["schema_acceptance_rules"]["raw_immutable"]:
+        raise ValueError("raw immutability required")

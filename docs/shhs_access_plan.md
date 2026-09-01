@@ -2,20 +2,33 @@
 
 ## Current state
 
-`PUBLIC_METADATA_VERIFIED`; `RAW_ACCESS_PENDING`. The official NSRR pages expose public documentation and require a signed-in NSRR account for raw-file access. No credentials, cookies, or agreement acceptance were automated or stored.
+`PUBLIC_METADATA_VERIFIED`; `RAW_ACCESS_PENDING`. Local environment inspection found no NSRR/SHHS access variables and no local SHHS raw files. No credentials, cookies, tokens, or agreement acceptance were automated, requested, stored, or exposed.
 
-## Official mechanism
+## Intended primary channel contract
 
-Create/sign in to an NSRR account, review the SHHS data-use terms, and request/enable SHHS raw-file access through the dataset’s official NSRR interface. The project description should state that ShiftSleep-UQ studies target-free predictive reliability under dataset/domain and synthetic missing-modality shift, uses subject-level splits, source-only calibration, and does not redistribute raw data.
+SHHS1 is a planned third domain with `C3-A2` EEG at nominal 125 Hz and `EOG(L)-PG1` at nominal 50 Hz. These are intended labels, not a claim that every file conforms. The future loader must inspect every EDF header and quarantine records missing an exact channel or having an unexpected native rate. No silent channel fallback is allowed.
 
-## Files required
+## Required Human Action
 
-For an initial core audit, request SHHS1 EDF signal files and their official XML scoring files; request SHHS2 only when its repeated-visit role is authorized. Metadata, documentation, and per-record headers are required before any preprocessing.
+1. Visit the official NSRR/SleepData SHHS resource.
+2. Create or sign in to an account.
+3. Review the current data-use terms.
+4. Request/enable access as officially required.
+5. Use this project description:
 
-## Data-use considerations
+> Research on robust and uncertainty-aware automatic sleep staging under cross-dataset and missing-modality shift. The study will use de-identified polysomnography signals and sleep-stage annotations to evaluate calibration, selective prediction, and model reliability. No attempt will be made to re-identify participants.
 
-Keep raw EDF/XML files local and immutable, honor NSRR/NHLBI terms, do not commit or redistribute restricted files, and maintain visit/participant linkage. Validate each record because official documentation warns that nominal settings have exceptions.
+Do not automate acceptance and do not provide credentials to this project.
 
-## Recommendation
+## Minimum files eventually needed
 
-Request SHHS1 first. Its public schema is scientifically adequate for a conditional EEG+EOG domain, but it is not considered acquired until raw access is approved and files are legally available.
+* selected SHHS1 EDF recordings;
+* corresponding official NSRR XML sleep-stage annotations;
+* participant/file mapping needed for subject grouping;
+* public schema metadata and per-record headers.
+
+Do not download these files without legitimate authorized access.
+
+## Role and freeze semantics
+
+SHHS1 is `PLANNED_PRIMARY_DOMAIN_PENDING_RAW_ACCESS`. It remains part of the intended three-domain paper benchmark, but it is not acquired and cannot be represented as an accessible dataset. The accessible core may proceed to deterministic preprocessing engineering without model/result claims; the final benchmark remains unfrozen until SHHS1 is authorized, acquired, and per-record schema validated.

@@ -1,6 +1,6 @@
 # Benchmark specification (post-Step-2 draft)
 
-**Status: STEP 5 AMENDED / CONTRACT_PARTIAL.** The machine-readable contract is explicit but cannot authorize preprocessing until the listed primary-data blockers are closed.
+**Status: STEP 5.1 AMENDED / CORE_PREPROCESSING_FROZEN.** Deterministic preprocessing engineering may be implemented for the accessible Sleep-EDF SC + ISRUC-S1 core. The final three-domain benchmark remains incomplete until SHHS1 is authorized, acquired, and per-record validated.
 
 ## Benchmark axes
 

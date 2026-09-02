@@ -1,0 +1,31 @@
+field,original_value,nemar_value,equal,notes
+file_bytes,143885120,91778304,FALSE,NEMAR provider/local object is 52106816 bytes shorter
+sha256,4ff7c64f79131213e15107a4f53d40db0081ec2246142b67d2343b2b8dbbb42f,900755de373ff9045c9ad758236c6f304dd3bb8f39dbbade55b56b6be454968f,FALSE,Different provider objects; NEMAR hash matches its manifest
+header_length,5120,5120,TRUE,EDF header length
+signal_count,19,19,TRUE,All signals retained in NEMAR header
+number_of_data_records,13200,13200,TRUE,Declared data-record count; NEMAR body incomplete
+record_duration_s,2.0,2.0,TRUE,EDF record duration
+record_start_date,18.05.09,18.05.09,TRUE,EDF start date
+record_start_time,23.37.00,23.37.00,TRUE,EDF start time
+patient_or_subject_metadata,1,1,TRUE,Fixed EDF patient field
+computed_expected_total_bytes,143885120,143885120,TRUE,Header-derived expected total
+actual_minus_expected_delta,0,-52106816,FALSE,Original body valid; NEMAR body truncated
+complete_records,13200,8419,FALSE,NEMAR has 8419 complete records plus 6084 bytes of a partial record
+channel_labels,"LOC-A2|ROC-A1|F3-A2|C3-A2|O1-A2|F4-A1|C4-A1|O2-A1|X1|X2|X3|X4|X5|X6|DC3|X7|X8|SaO2|DC8","LOC-A2|ROC-A1|F3-A2|C3-A2|O1-A2|F4-A1|C4-A1|O2-A1|X1|X2|X3|X4|X5|X6|DC3|X7|X8|SaO2|DC8",TRUE,Identical order and labels
+samples_per_channel_record,"400|400|400|400|400|400|400|400|400|400|400|400|400|25|50|50|50|25|50","400|400|400|400|400|400|400|400|400|400|400|400|400|25|50|50|50|25|50",TRUE,Identical EDF signal layout
+sampling_rates_Hz,"200|200|200|200|200|200|200|200|200|200|200|200|200|12.5|25|25|25|12.5|25","200|200|200|200|200|200|200|200|200|200|200|200|200|12.5|25|25|25|12.5|25",TRUE,Primary EEG/EOG channels are 200 Hz
+physical_dimensions,"uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|%|", "uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|%|",TRUE,Identical calibration units
+primary_physical_min_max,"C3-A2=-25/25; LOC-A2=-25/25","C3-A2=-25/25; LOC-A2=-25/25",TRUE,Identical primary ranges
+primary_digital_min_max,"C3-A2=-32768/32767; LOC-A2=-32768/32767","C3-A2=-32768/32767; LOC-A2=-32768/32767",TRUE,Identical primary digital ranges
+original_scorer_1_epochs,880,562 events,FALSE,NEMAR events cover 561 full 30-s epochs plus one 8-s event
+original_scorer_1_duration_s,26400,16838 event span,FALSE,NEMAR event span ends at 16838 s
+scorer_1_stage_sequence_prefix,562 compared epochs,562 compared epochs,TRUE,All directly comparable NEMAR event values match original scorer-1 prefix
+scorer_2_metadata,present as 1_2.txt and 1_2.xlsx,present as scorer2_label/scorer2_label_value columns,NOT_VERIFIED,Local NEMAR events present scorer-2 fields but no independent full scorer-2 sequence audit requested beyond preservation metadata
+C3-A2_common_physical_samples,3367600,3367600,TRUE,8419 complete records x 400 samples
+C3-A2_max_abs_difference_uV,0.0,0.0,TRUE,Physical values identical over common region
+C3-A2_mean_abs_difference_uV,0.0,0.0,TRUE,Physical values identical over common region
+C3-A2_pearson_r,1.0,1.0,TRUE,Computed on common region
+LOC-A2_common_physical_samples,3367600,3367600,TRUE,8419 complete records x 400 samples
+LOC-A2_max_abs_difference_uV,0.0,0.0,TRUE,Physical values identical over common region
+LOC-A2_mean_abs_difference_uV,0.0,0.0,TRUE,Physical values identical over common region
+LOC-A2_pearson_r,1.0,1.0,TRUE,Computed on common region

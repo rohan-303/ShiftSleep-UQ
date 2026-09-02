@@ -1,0 +1,6 @@
+filename,absolute_or_project_relative_path,bytes,sha256,file_type,provider,subject,scorer_if_applicable,status
+1.rec,data/raw/isruc-original/subject-1/1/1.rec,143885120,4ff7c64f79131213e15107a4f53d40db0081ec2246142b67d2343b2b8dbbb42f,REC/EDF signal recording,ORIGINAL_ISRUC_MEGA,1,NA,ORIGINAL_BODY_VALID
+1_1.txt,data/raw/isruc-original/subject-1/1/1_1.txt,2640,24793ceba5ee9845d6913a209ac423fd20e9e541f47f67356e89f19d26a4b085,plain-text stage annotations,ORIGINAL_ISRUC_MEGA,1,scorer_1,ACQUIRED_UNMODIFIED
+1_1.xlsx,data/raw/isruc-original/subject-1/1/1_1.xlsx,41524,8c665f5f8316c15edfbc5a7ca669e59cb537e185fb7747cdef04ad39e48c0c26,XLSX scored annotation workbook,ORIGINAL_ISRUC_MEGA,1,scorer_1,ACQUIRED_UNMODIFIED
+1_2.txt,data/raw/isruc-original/subject-1/1/1_2.txt,2640,d3bb8ac5afd08664d8d1a28a04826076cb53afc8878f1e186620daec527831fe,plain-text stage annotations,ORIGINAL_ISRUC_MEGA,1,scorer_2,ACQUIRED_UNMODIFIED
+1_2.xlsx,data/raw/isruc-original/subject-1/1/1_2.xlsx,41012,ce34a7a0e1da1f53c0973fc8d80a3921de0ee12d7e7d6fe086af83211cfd5e31,XLSX scored annotation workbook,ORIGINAL_ISRUC_MEGA,1,scorer_2,ACQUIRED_UNMODIFIED

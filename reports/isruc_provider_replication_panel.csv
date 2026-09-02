@@ -1,0 +1,3 @@
+subject,recording_id,role,selection_basis,historical_nemar_status,historical_failure_code,selected_before_original_download
+2,I002,KNOWN_TRUNCATED_REPLICATION,Pre-existing provider-integrity audit identified EDF declared-byte/body mismatch; selected before examining original subject-2 files,EXCLUDED_PROVIDER_INTEGRITY,EDF_DECLARED_BYTE_MISMATCH,true
+3,I003,KNOWN_VALID_CONTROL,Pre-existing provider-integrity audit identified body-valid NEMAR object and preprocessing inclusion; selected before examining original subject-3 files,ACQUIRED,,true

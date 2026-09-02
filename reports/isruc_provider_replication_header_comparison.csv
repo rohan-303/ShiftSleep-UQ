@@ -1,0 +1,35 @@
+pair,field,original_value,nemar_value,equal,notes
+I002,header_length,5120,5120,true,EDF header length
+I002,signal_count,19,19,true,All signals retained
+I002,declared_data_records,14460,14460,true,Header declares full recording in both
+I002,record_duration_s,2.0,2.0,true,EDF data-record duration
+I002,declared_recording_duration_s,28920.0,28920.0,true,Header-derived duration
+I002,record_start_date,08.06.09,08.06.09,true,EDF start date
+I002,record_start_time,22.59.00,22.59.00,true,EDF start time
+I002,subject_field,2,2,true,EDF patient/subject field
+I002,channel_labels,"LOC-A2|ROC-A1|F3-A2|C3-A2|O1-A2|F4-A1|C4-A1|O2-A1|X1|X2|X3|X4|X5|X6|DC3|X7|X8|SaO2|DC8","LOC-A2|ROC-A1|F3-A2|C3-A2|O1-A1|F4-A1|C4-A1|O2-A1|X1|X2|X3|X4|X5|X6|DC3|X7|X8|SaO2|DC8",true,Identical full channel order
+I002,samples_per_signal_record,"400|400|400|400|400|400|400|400|400|400|400|400|400|25|50|50|50|25|50","400|400|400|400|400|400|400|400|400|400|400|400|400|25|50|50|50|25|50",true,Identical signal layout
+I002,sampling_rates_Hz,"200|200|200|200|200|200|200|200|200|200|200|200|200|12.5|25|25|25|12.5|25","200|200|200|200|200|200|200|200|200|200|200|200|200|12.5|25|25|25|12.5|25",true,Primary EEG/EOG 200 Hz
+I002,physical_dimensions,"uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|%|","uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|%|",true,Identical units
+I002,physical_min_max,"-25/25|-25/25|-25/25|-25/25|-25/25|-25/25|-25/25|-25/25|-101/101|-87/87|-39/39|-33/33|-612/612|-21/21|-3802/3802|-40/40|-40/40|0/100|0/200","-25/25|-25/25|-25/25|-25/25|-25/25|-25/25|-25/25|-25/25|-101/101|-87/87|-39/39|-33/33|-612/612|-21/21|-3802/3802|-40/40|-40/40|0/100|0/200",true,Identical calibration ranges
+I002,digital_min_max,-32768/32767,-32768/32767,true,All channels
+I002,actual_body_bytes,157619120,58458112,false,NEMAR shortened object
+I002,computed_expected_bytes,157619120,157619120,true,Same header formula
+I002,actual_minus_expected_delta,0,-99161008,false,Original valid; NEMAR truncated
+I003,header_length,5120,5120,true,EDF header length
+I003,signal_count,19,19,true,All signals retained
+I003,declared_data_records,14145,14145,true,Header declares full recording in both
+I003,record_duration_s,2.0,2.0,true,EDF data-record duration
+I003,declared_recording_duration_s,28290.0,28290.0,true,Header-derived duration
+I003,record_start_date,21.05.09,21.05.09,true,EDF start date
+I003,record_start_time,23.26.00,23.26.00,true,EDF start time
+I003,subject_field,3,3,true,EDF patient/subject field
+I003,channel_labels,"LOC-A2|ROC-A1|F3-A2|C3-A2|O1-A2|F4-A1|C4-A1|O2-A1|X1|X2|X3|X4|X5|X6|DC3|X7|X8|SaO2|DC8","LOC-A2|ROC-A1|F3-A2|C3-A2|O1-A2|F4-A1|C4-A1|O2-A1|X1|X2|X3|X4|X5|X6|DC3|X7|X8|SaO2|DC8",true,Identical full channel order
+I003,samples_per_signal_record,"400|400|400|400|400|400|400|400|400|400|400|400|400|25|50|50|50|25|50","400|400|400|400|400|400|400|400|400|400|400|400|400|25|50|50|50|25|50",true,Identical signal layout
+I003,sampling_rates_Hz,"200|200|200|200|200|200|200|200|200|200|200|200|200|12.5|25|25|25|12.5|25","200|200|200|200|200|200|200|200|200|200|200|200|200|12.5|25|25|25|12.5|25",true,Primary EEG/EOG 200 Hz
+I003,physical_dimensions,"uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|%|","uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|uV|%|",true,Identical units
+I003,physical_min_max,"-25/25|-25/25|-25/25|-25/25|-25/25|-25/25|-25/25|-25/25|-101/101|-87/87|-39/39|-33/33|-612/612|-14/14|-2879/2879|-142/142|-373/373|0/100|0/200","-25/25|-25/25|-25/25|-25/25|-25/25|-25/25|-25/25|-25/25|-101/101|-87/87|-39/39|-33/33|-612/612|-14/14|-2879/2879|-142/142|-373/373|0/100|0/200",true,Identical calibration ranges
+I003,digital_min_max,-32768/32767,-32768/32767,true,All channels
+I003,actual_body_bytes,154185620,154185620,true,Exact same bytes
+I003,computed_expected_bytes,154185620,154185620,true,Body formula passes both
+I003,actual_minus_expected_delta,0,0,true,Both complete

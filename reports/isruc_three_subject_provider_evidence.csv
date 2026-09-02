@@ -1,0 +1,4 @@
+recording_id,historical_nemar_status,original_body_valid,nemar_body_valid,original_expected_bytes,nemar_actual_bytes,nemar_byte_delta,header_equivalent,required_channels_equivalent,sampling_equivalent,signal_overlap_identical,scorer1_overlap_identical,scorer2_overlap_identical,classification
+I001,EXCLUDED_PROVIDER_INTEGRITY,true,false,143885120,91778304,-52106816,true,true,true,true,true,true,ACCURATE_TRUNCATED_PREFIX
+I002,EXCLUDED_PROVIDER_INTEGRITY,true,false,157619120,58458112,-99161008,true,true,true,true,true,true,ACCURATE_TRUNCATED_PREFIX
+I003,ACQUIRED,true,true,154185620,154185620,0,true,true,true,true,true,true,COMPLETE_EQUIVALENT

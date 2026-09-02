@@ -1,0 +1,6 @@
+filename,absolute_or_project_relative_path,bytes,sha256,file_type,provider,subject,scorer_if_applicable,acquisition_time,status
+2.rec,data/raw/isruc-original/subject-2/2/2.rec,157619120,adf2129c7a296a72d29a2b5f84955bfa4ad5b1913a9c741ebdbc261715ffd2b9,REC/EDF signal recording,ORIGINAL_ISRUC_MEGA,2,NA,2026-09-02 transfer completed,ORIGINAL_BODY_VALID
+2_1.txt,data/raw/isruc-original/subject-2/2/2_1.txt,2892,08ed23beb35bfc821b319ea5674298efde4e6f623f3dafdf1d98a7d9ec80c11d,plain-text stage annotations,ORIGINAL_ISRUC_MEGA,2,scorer_1,2026-09-02 transfer completed,ACQUIRED_UNMODIFIED
+2_1.xlsx,data/raw/isruc-original/subject-2/2/2_1.xlsx,44233,23690b1f559c55482ef600d261f669e231d7da1f9b0d3b5f3573d2cea77b7460,XLSX scored annotation workbook,ORIGINAL_ISRUC_MEGA,2,scorer_1,2026-09-02 transfer completed,ACQUIRED_UNMODIFIED
+2_2.txt,data/raw/isruc-original/subject-2/2/2_2.txt,2892,75ae479ead1defc3a0e9c36820f347870921977163f16040fbc1c39f420ba1f3,plain-text stage annotations,ORIGINAL_ISRUC_MEGA,2,scorer_2,2026-09-02 transfer completed,ACQUIRED_UNMODIFIED
+2_2.xlsx,data/raw/isruc-original/subject-2/2/2_2.xlsx,45069,1595feb21e20bc8f9da015006a6ae0c15b5f3994382b9edd308e2b947b56d8fa,XLSX scored annotation workbook,ORIGINAL_ISRUC_MEGA,2,scorer_2,2026-09-02 transfer completed,ACQUIRED_UNMODIFIED

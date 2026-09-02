@@ -1,0 +1,30 @@
+cohort_version: 1.0.0
+data_contract_version: 1.1.0
+preprocessing_version: 0.1.0
+freeze_date: '2026-09-02'
+datasets:
+  sleep_edf_sc:
+    expected_subjects: 78
+    included_subjects: 33
+    excluded_subjects: 45
+    expected_recordings: 153
+    included_recordings: 48
+    excluded_recordings: 105
+    manifest_file: reports/core_recording_manifest_v1.csv
+    manifest_sha256: 024a5c57f0949adca2de0cb487ca49a38de1a23d77a91627254ab44a903be682
+    inclusion_policy: fixed structural eligibility only; no stage/signal-quality/model-performance
+      selection
+    subject_grouping_rule: all Sleep-EDF SC provider-available nights remain grouped
+      by subject_id
+  isruc_s1:
+    expected_subjects: 100
+    included_subjects: 15
+    excluded_subjects: 85
+    expected_recordings: 100
+    included_recordings: 15
+    excluded_recordings: 85
+    manifest_file: reports/core_recording_manifest_v1.csv
+    manifest_sha256: 024a5c57f0949adca2de0cb487ca49a38de1a23d77a91627254ab44a903be682
+    inclusion_policy: fixed structural eligibility only; no stage/signal-quality/model-performance
+      selection
+    subject_grouping_rule: one fixed S1 recording per NEMAR participant_id

@@ -59,15 +59,26 @@ def summarize_epoch_accounting(expanded):
         raise PreprocessingError("ACCOUNTING_INVARIANT_D_FAILED")
     return counts, exclusions, valid, excluded
 
+def filter_signal_supported_epochs(epochs, signal_duration_seconds: float):
+    """Keep canonical epochs fully backed by signal; return excluded overflow count."""
+    supported=[]; overflow=0
+    for epoch in epochs:
+        if epoch.canonical is not None and epoch.exclusion is None and epoch.onset + 30.0 > signal_duration_seconds:
+            overflow += 1
+        else:
+            supported.append(epoch)
+    return supported, overflow
+
 def recording_spec(dataset: str, subject: str, raw_root: Path, annotation_root: Path):
     if dataset == "sleep_edf_sc":
         # Frozen SC identity: subject/night token is the filename stem without modality suffix.
         p=raw_root/"sleep-edfx"/"1.0.0"/"sleep-cassette"/f"{subject}-PSG.edf"
-        # Official pairing retains the subject/night token and uses a source-specific
-        # hypnogram suffix (C or H); accept only an exact existing official pair.
+        # Official SC hypnograms preserve the PSG identifier through its source-series
+        # letter, then carry one source-specific annotation suffix (e.g. E0→EC/EJ,
+        # F0→FC, G0→GC). Accept exactly one local official match; do not guess.
         ann_dir=annotation_root/"sleep-edfx"/"1.0.0"
-        candidates=[ann_dir/(subject[:-1]+suffix+"-Hypnogram.edf") for suffix in ("C","H")] if subject.endswith("E0") else [ann_dir/(subject+"-Hypnogram.edf")]
-        a=next((x for x in candidates if x.exists()), candidates[0])
+        candidates=sorted(ann_dir.glob(f"{subject[:-1]}?-Hypnogram.edf"))
+        a=candidates[0] if len(candidates)==1 else ann_dir/(subject+"-Hypnogram.edf")
         return p,a,"EEG Fpz-Cz","EOG horizontal",100,100,"SC","official Sleep-EDF"
     if dataset == "isruc_s1":
         p=raw_root/"isruc-nemar"/"v1.0.1"/f"sub-{subject}_task-sleep_eeg.edf"
@@ -87,6 +98,13 @@ def process_one(dataset: str, subject: str, raw_root: Path, output_root: Path, a
         expanded=expand_annotations(events, dataset=dataset)
         counts, exclusions, valid_count, excluded_count = summarize_epoch_accounting(expanded)
         valid=[x for x in expanded if x.canonical is not None and x.exclusion is None]
+        valid, signal_overflow = filter_signal_supported_epochs(valid, duration)
+        if signal_overflow:
+            for epoch in [x for x in expanded if x.canonical is not None and x.exclusion is None and x.onset + 30.0 > duration]:
+                counts[epoch.canonical.lower()] -= 1
+            exclusions['missing_signal_samples'] = exclusions.get('missing_signal_samples', 0) + signal_overflow
+            valid_count = len(valid)
+            excluded_count = sum(exclusions.values())
         row.update({"total_source_stage_epochs":len(expanded), "excluded_epochs":excluded_count,
                     "valid_canonical_epochs":valid_count, **counts,
                     **{"excluded_" + k: v for k, v in exclusions.items()}})

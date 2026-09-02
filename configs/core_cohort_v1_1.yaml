@@ -1,0 +1,27 @@
+cohort_version: 1.1.0
+status: UNDER_REVIEW
+freeze_reassessment: CORE_DATA_BLOCKED
+supersedes:
+  cohort_version: 1.0.0
+  status: SUPERSEDED
+  reason: Step 7.2 demonstrated Sleep-EDF pairing and signal-boundary preprocessing false positives; v1.0.0 is preserved as historical provenance.
+data_contract_version: 1.1.0
+preprocessing_version: 0.1.0
+scientific_contract_change: NONE
+candidate_datasets:
+  sleep_edf_sc:
+    expected_subjects: 78
+    candidate_included_subjects: 78
+    expected_recordings: 153
+    candidate_included_recordings: 153
+    status: STRUCTURALLY_VALID
+    manifest_file: reports/core_recording_manifest_v1_1.csv
+  isruc_s1:
+    expected_subjects: 100
+    candidate_included_subjects: 15
+    expected_recordings: 100
+    candidate_included_recordings: 15
+    status: QUESTIONABLE_NOT_FROZEN
+    reason: 83 exact required-channel failures are systematic source-schema heterogeneity; 2 provider bodies are EDF-declared-size truncated.
+cohort_gate: CORE_DATA_BLOCKED
+no_splits_or_models: true

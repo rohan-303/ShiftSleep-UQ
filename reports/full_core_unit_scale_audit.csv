@@ -1,5 +1,5 @@
 dataset,signal,median_recording_mad_uv,unit_scale_status,notes
 isruc_s1,eeg,0.7501163482666016,UNIT_SCALE_PASS,No cross-dataset normalization; only gross 1e3/1e6 scale anomalies are screened.
 isruc_s1,eog,0.8280418515205383,UNIT_SCALE_PASS,No cross-dataset normalization; only gross 1e3/1e6 scale anomalies are screened.
-sleep_edf_sc,eeg,11.63956069946289,UNIT_SCALE_PASS,No cross-dataset normalization; only gross 1e3/1e6 scale anomalies are screened.
-sleep_edf_sc,eog,21.970687866210938,UNIT_SCALE_PASS,No cross-dataset normalization; only gross 1e3/1e6 scale anomalies are screened.
+sleep_edf_sc,eeg,11.122833251953125,UNIT_SCALE_PASS,No cross-dataset normalization; only gross 1e3/1e6 scale anomalies are screened.
+sleep_edf_sc,eog,19.693359375,UNIT_SCALE_PASS,No cross-dataset normalization; only gross 1e3/1e6 scale anomalies are screened.

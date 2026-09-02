@@ -2,7 +2,24 @@ import hashlib
 import numpy as np
 import pytest
 from shiftsleep_uq.data.preprocessing import *
-from shiftsleep_uq.data.preprocess import summarize_epoch_accounting
+from shiftsleep_uq.data.preprocess import summarize_epoch_accounting, recording_spec, filter_signal_supported_epochs
+
+
+def test_sleep_edf_pairing_discovers_exact_official_non_ch_variant(tmp_path):
+    raw = tmp_path / "raw"
+    ann = tmp_path / "metadata" / "sleep-edfx" / "1.0.0"
+    ann.mkdir(parents=True)
+    expected = ann / "SC4261FC-Hypnogram.edf"
+    expected.touch()
+    _, resolved, *_ = recording_spec("sleep_edf_sc", "SC4261F0", raw, tmp_path / "metadata")
+    assert resolved == expected
+
+
+def test_signal_boundary_excludes_only_canonical_epochs_without_samples():
+    epochs = expand_annotations([(0, 30, 'Sleep stage W'), (30, 30, 'Sleep stage N1')])
+    supported, overflow = filter_signal_supported_epochs(epochs, signal_duration_seconds=30)
+    assert [x.canonical for x in supported] == ['Wake']
+    assert overflow == 1
 
 def test_label_mapping_and_rk():
     assert canonicalize_label('Sleep stage W')=='Wake'

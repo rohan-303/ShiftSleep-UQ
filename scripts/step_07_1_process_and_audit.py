@@ -14,7 +14,7 @@ import yaml
 from shiftsleep_uq.data.preprocess import process_one, read_edf, read_isruc_events, read_sc_events
 
 ROOT=Path(__file__).resolve().parents[1]
-RAW=ROOT/'data/raw'; META=RAW/'metadata'; OUT=ROOT/'data/processed/core_v1'; REPORTS=ROOT/'reports'
+RAW=ROOT/'data/raw'; META=RAW/'metadata'; OUT=ROOT/'data/processed/core_v1_1'; REPORTS=ROOT/'reports'
 LABELS=['Wake','N1','N2','N3','REM']
 
 def digest(path: Path)->str:
@@ -42,16 +42,16 @@ def exclusion_status(code:str)->str:
  if any(x in code for x in ('EDF','CHANNEL','RATE','SCHEMA')): return 'EXCLUDED_SCHEMA'
  return 'EXCLUDED_OTHER_STRUCTURAL'
 
-def schema_row(dataset, subject, recording):
+def schema_row(dataset, subject_id, recording):
  try:
-  p,a,ec,oc,_,_,cohort,_=__import__('shiftsleep_uq.data.preprocess',fromlist=['recording_spec']).recording_spec(dataset,subject,RAW,META)
+  p,a,ec,oc,_,_,cohort,_=__import__('shiftsleep_uq.data.preprocess',fromlist=['recording_spec']).recording_spec(dataset,recording,RAW,META)
   (_, _),rates,units,duration,labels=read_edf(p,(ec,oc))
   events=read_sc_events(a) if dataset=='sleep_edf_sc' else read_isruc_events(a)
   allowed={'sleep_edf_sc':{'Sleep stage W','Sleep stage 1','Sleep stage 2','Sleep stage 3','Sleep stage 4','Sleep stage R','Sleep stage ?','Movement time'},'isruc_s1':{'Sleep stage W','Sleep stage N1','Sleep stage N2','Sleep stage N3','Sleep stage R','Sleep stage U'}}[dataset]
   values={x[2] for x in events}
-  return {'dataset':dataset,'subject_id':subject,'recording_id':recording,'EEG_label':ec,'EOG_label':oc,'EEG_rate':rates[0],'EOG_rate':rates[1],'EEG_unit':units[0],'EOG_unit':units[1],'duration_seconds':duration,'annotation_type':'EDF+ hypnogram' if dataset=='sleep_edf_sc' else 'NEMAR BIDS events.tsv','primary_scorer':'official_single_stream' if dataset=='sleep_edf_sc' else 'scorer_1','source_label_schema_validation':'PASS' if values <= allowed else 'FAIL','observed_source_labels':'|'.join(sorted(values)),'status':'PASS' if values <= allowed else 'FAIL'}
+  return {'dataset':dataset,'subject_id':subject_id,'recording_id':recording,'EEG_label':ec,'EOG_label':oc,'EEG_rate':rates[0],'EOG_rate':rates[1],'EEG_unit':units[0],'EOG_unit':units[1],'duration_seconds':duration,'annotation_type':'EDF+ hypnogram' if dataset=='sleep_edf_sc' else 'NEMAR BIDS events.tsv','primary_scorer':'official_single_stream' if dataset=='sleep_edf_sc' else 'scorer_1','source_label_schema_validation':'PASS' if values <= allowed else 'FAIL','observed_source_labels':'|'.join(sorted(values)),'status':'PASS' if values <= allowed else 'FAIL'}
  except Exception as e:
-  return {'dataset':dataset,'subject_id':subject,'recording_id':recording,'status':'FAIL','failure_code':type(e).__name__}
+  return {'dataset':dataset,'subject_id':subject_id,'recording_id':recording,'status':'FAIL','failure_code':type(e).__name__}
 
 def qcrow(dataset,subject,recording,row):
  if row.get('status')!='SUCCESS': return []
@@ -91,7 +91,7 @@ def main():
   duration_rows.append({'dataset':r['dataset'],'subject_id':r['subject_id'],'recording_id':r['recording_id'],'psg_duration_seconds':psg,'annotation_staging_duration_seconds':source,'valid_canonical_duration_seconds':valid,'alignment_status':'PASS' if r['terminal_status']=='INCLUDED' and a['accounting_delta']==0 else 'EXCLUDED','failure_code':r.get('failure_code','')})
  write('full_core_duration_alignment_audit.csv',duration_rows)
  record_fields=['dataset','cohort','subject_id','recording_id','expected','source_distribution','expected_eeg','expected_eog','subject_group','terminal_status','exclusion_reason','contract_version','preprocessing_version','valid_canonical_epochs','output_path','output_sha256','failure_code']
- write('core_recording_manifest_v1.csv',all_rows,record_fields)
+ write('core_recording_manifest_v1_1.csv',all_rows,record_fields)
  write('full_core_signal_qc.csv',qc)
  # subject roll-up; all usable SC nights remain grouped by subject.
  subjects=[]
@@ -100,7 +100,7 @@ def main():
    rs=[r for r in all_rows if r['dataset']==ds and r['subject_id']==subject]; good=[r for r in rs if r['terminal_status']=='INCLUDED']; bad=[r for r in rs if r['terminal_status']!='INCLUDED']
    status='SUBJECT_COMPLETE' if len(good)==len(rs) else ('SUBJECT_PARTIAL' if good else 'SUBJECT_EXCLUDED')
    subjects.append({'dataset':ds,'cohort':rs[0]['cohort'],'subject_id':subject,'expected_recordings':len(rs),'acquired_recordings':sum(r.get('status')=='SUCCESS' or provider[(ds,r['recording_id'])]['terminal_status']=='ACQUIRED' for r in rs),'valid_recordings':len(good),'excluded_recordings':len(bad),'subject_status':status,'total_valid_epochs':sum(int(r.get('valid_canonical_epochs',0) or 0) for r in good),**{x.lower():sum(int(r.get(x.lower(),0) or 0) for r in good) for x in LABELS},'structural_failure_codes':'|'.join(sorted({r.get('failure_code','') for r in bad if r.get('failure_code','')})),'contract_version':'1.1.0','preprocessing_version':'0.1.0'})
- write('core_subject_manifest_v1.csv',subjects)
+ write('core_subject_manifest_v1_1.csv',subjects)
  # stage distributions, descriptive only
  stage=[]
  for r in all_rows:

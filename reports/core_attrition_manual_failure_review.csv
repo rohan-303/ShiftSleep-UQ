@@ -1,0 +1,8 @@
+dataset,recording_id,failure_code,raw_evidence,validator_expectation,validator_result,scientific_interpretation
+isruc_s1,I001,EDF_DECLARED_BYTE_MISMATCH,EDF header required-channel labels and provider audit,exact C3-A2 and LOC-A2 labels required by frozen contract,EXCLUDED_SCHEMA,TRUE_STRUCTURAL_FAILURE
+isruc_s1,I002,EDF_DECLARED_BYTE_MISMATCH,EDF header required-channel labels and provider audit,exact C3-A2 and LOC-A2 labels required by frozen contract,EXCLUDED_SCHEMA,TRUE_STRUCTURAL_FAILURE
+isruc_s1,I011,MISSING_REQUIRED_EEG,EDF header required-channel labels and provider audit,exact C3-A2 and LOC-A2 labels required by frozen contract,EXCLUDED_OTHER_STRUCTURAL,TRUE_STRUCTURAL_FAILURE
+isruc_s1,I013,MISSING_REQUIRED_EEG,EDF header required-channel labels and provider audit,exact C3-A2 and LOC-A2 labels required by frozen contract,EXCLUDED_OTHER_STRUCTURAL,TRUE_STRUCTURAL_FAILURE
+isruc_s1,I014,MISSING_REQUIRED_EEG,EDF header required-channel labels and provider audit,exact C3-A2 and LOC-A2 labels required by frozen contract,EXCLUDED_OTHER_STRUCTURAL,TRUE_STRUCTURAL_FAILURE
+isruc_s1,I017,MISSING_REQUIRED_EEG,EDF header required-channel labels and provider audit,exact C3-A2 and LOC-A2 labels required by frozen contract,EXCLUDED_OTHER_STRUCTURAL,TRUE_STRUCTURAL_FAILURE
+isruc_s1,I019,MISSING_REQUIRED_EEG,EDF header required-channel labels and provider audit,exact C3-A2 and LOC-A2 labels required by frozen contract,EXCLUDED_OTHER_STRUCTURAL,TRUE_STRUCTURAL_FAILURE

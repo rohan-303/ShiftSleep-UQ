@@ -15,7 +15,7 @@ The official original ISRUC-Sleep Cohort I route is verified as a public MEGA fo
 1. Official dataset landing page: https://sleeptight.isr.uc.pt/
 2. Official download page: https://sleeptight.isr.uc.pt/?page_id=48
 3. Official Cohort I MEGA folder: https://mega.nz/folder/QJgDQDDZ#ZMDj3w82msavACurqP48IA
-4. Dataset paper linked by the official page: “ISRUC-Sleep: A comprehensive public dataset for sleep researchers” (Sleep and Breathing, 2016).
+4. Dataset paper linked by the official page: Khalighi et al., “ISRUC-Sleep: A comprehensive public dataset for sleep researchers,” *Computer Methods and Programs in Biomedicine* 124:180–192 (2016), DOI: https://doi.org/10.1016/j.cmpb.2015.10.013.
 
 The official download page describes Cohort I as 100 individual polysomnography recordings with annotations by two experts and subject metadata. It publishes the Cohort I download as 14.12 GB and states that the download is hosted through MEGA.
 
@@ -66,8 +66,16 @@ No original-provider file was written into `data/raw`, so there are no original-
 
 ## Required next action
 
-Run the same subject-1 comparison from a user-authorized environment with a functioning MEGA transfer client or browser download path. Preserve the original files immutably, record source URLs/MEGA identifiers, local byte sizes, SHA-256 hashes, REC/EDF header fields, annotation file hashes, and exact comparison outcomes. Do not perform a provider migration or change the frozen ISRUC contract until that comparison is complete.
+Subject 1 comparison is complete. Before any provider migration or scientific contract decision, repeat the same provenance-preserving comparison for a predeclared small sample of additional subjects, including at least one subject whose NEMAR object is body-valid and one systematic channel-schema failure. Do not change the contract or replace provider files based on subject 1 alone.
+
+## Original-vs-NEMAR subject-1 comparison
+
+The original provider `1.rec` is complete: actual bytes = declared bytes = 143,885,120, delta = 0, SHA-256 = `4ff7c64f79131213e15107a4f53d40db0081ec2246142b67d2343b2b8dbbb42f`. Its header contains 19 signals, 13,200 two-second records, and the exact required channels `C3-A2` and `LOC-A2`. Both original scorer text files contain 880 epochs; both XLSX annotation files pass ZIP integrity checks.
+
+NEMAR I001 is a different object with SHA-256 `900755de373ff9045c9ad758236c6f304dd3bb8f39dbbade55b56b6be454968f`, manifest/local bytes 91,778,304, and EDF-declared bytes 143,885,120 (delta -52,106,816). NEMAR recorded checksum `MATCH`, header `PASS`, body `FAIL`, and terminal status `EXCLUDED_PROVIDER_INTEGRITY`. A bounded official NEMAR Range request returned HTTP 206 with `bytes 0-5119/91778304`; a later retry against the recorded signed URL returned HTTP 403 after expiry. The existing NEMAR audit remains the authoritative full-object accounting.
+
+This comparison strongly supports `ORIGINAL_COMPLETE_NEMAR_PROVIDER_OBJECT_TRUNCATED` for I001. It does not authorize replacement of the NEMAR object or any change to the ISRUC scientific contract. Machine-readable evidence: `reports/isruc_original_nemar_subject1_comparison.csv`.
 
 ## Repository artifact
 
-This feasibility report is the only new research artifact from this follow-up. The Step 7.2 core gate remains `CORE_DATA_BLOCKED`; the original-provider comparison gate is `ACQUISITION_BLOCKED`.
+This follow-up produced the corrected feasibility report and `isruc_original_nemar_subject1_comparison.csv`; original files remain under ignored raw-data storage and were not committed. The Step 7.2 core gate remains `CORE_DATA_BLOCKED`; the original-provider comparison gate is now `COMPARISON_COMPLETE_SUBJECT_1`, with broader provider migration still unresolved.

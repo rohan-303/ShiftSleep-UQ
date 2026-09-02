@@ -1,0 +1,3 @@
+dataset,signal,median_mad_uv,unit_scale_status,notes
+isruc_original,eeg,0.7501163482666016,UNIT_SCALE_PASS,No normalization; gross scale audit only.
+isruc_original,eog,0.8157050013542175,UNIT_SCALE_PASS,No normalization; gross scale audit only.

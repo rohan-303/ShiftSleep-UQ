@@ -1,0 +1,9 @@
+metric,value
+old_nemar_expected_subjects,100
+old_nemar_included_subjects,15
+old_nemar_retention,15.00%
+new_original_expected_subjects,100
+new_original_included_subjects,17
+new_original_retention,17.00%
+subjects_recovered_by_original_migration,2
+subjects_still_excluded,83

@@ -1,0 +1,14 @@
+cohort_version: "isruc_original_v1"
+provider: "ORIGINAL_ISRUC_MEGA"
+expected_subjects: 100
+included_subjects: 17
+excluded_subjects: 83
+recording_manifest: "reports/isruc_original_recording_manifest_v1.csv"
+recording_manifest_sha256: "3f016edba53c9f899868c63c03b7369707b409d159252998ff83a96671159e75"
+subject_manifest: "reports/isruc_original_subject_manifest_v1.csv"
+subject_manifest_sha256: "7771a9ce5f109a37f26acbd79ab982bec0ee2beb36b387a1e104d328648c635d"
+data_contract_version: "1.1.0"
+preprocessing_version: "0.1.0"
+provider_decision_source: "reports/STEP_07_4_ISRUC_PROVIDER_REPLICATION_REPORT.md"
+inclusion_policy: "Include only complete original-provider bundles with valid REC body, exact C3-A2 and LOC-A2 channels at 200 Hz/uV, valid original scorer-1 annotations, exact alignment, finite output, and zero accounting delta. Preserve every other expected subject as an explicit exclusion."
+status: "PARTIAL_ACQUISITION_BANDWIDTH_BLOCKED"

@@ -133,4 +133,34 @@ def process_one(dataset: str, subject: str, raw_root: Path, output_root: Path, a
 def main(argv=None):
     ap=argparse.ArgumentParser(); ap.add_argument("--dataset",choices=["sleep_edf_sc","isruc_s1"],required=True); ap.add_argument("--subject",required=True); ap.add_argument("--raw-root",default="data/raw"); ap.add_argument("--output-root",default="data/processed/core_v1"); ap.add_argument("--annotation-root",default="data/raw/metadata"); ap.add_argument("--contract",default="configs/data_contract_v1.yaml"); ap.add_argument("--preprocessing-config",default="configs/preprocessing_v1.yaml"); ap.add_argument("--dry-run",action="store_true"); args=ap.parse_args(argv)
     row=process_one(args.dataset,args.subject,Path(args.raw_root),Path(args.output_root),Path(args.annotation_root),args.dry_run); print(json.dumps(row,sort_keys=True)); return 0 if row["status"] in {"SUCCESS","DRY_RUN"} else 2
+def original_recording_spec(subject: str, subject_root: Path):
+    """Resolve an immutable original ISRUC-S1 subject bundle."""
+    n = str(subject).removeprefix("I")
+    candidates = sorted(subject_root.rglob(f"{n}.rec"))
+    if len(candidates) != 1:
+        raise PreprocessingError("ORIGINAL_SIGNAL_RESOLUTION_ERROR")
+    signal = candidates[0]
+    annotation = signal.with_name(f"{n}_1.txt")
+    if not annotation.exists():
+        raise PreprocessingError("ORIGINAL_SCORER1_MISSING")
+    return signal, annotation, "scorer_1_original_txt"
+
+
+def read_original_scorer1(path: Path):
+    """Read ISRUC original scorer-1 numeric labels as 30-second events."""
+    code_to_label = {"0": "Sleep stage W", "1": "Sleep stage N1", "2": "Sleep stage N2",
+                     "3": "Sleep stage N3", "5": "Sleep stage R"}
+    events = []
+    with path.open(encoding="utf-8-sig") as handle:
+        for index, raw in enumerate(handle):
+            value = raw.strip()
+            if not value:
+                continue
+            if value not in code_to_label:
+                raise PreprocessingError(f"ANNOTATION_UNKNOWN_LABEL:{value}")
+            events.append((float(index * 30), 30.0, code_to_label[value]))
+    if not events:
+        raise PreprocessingError("ANNOTATION_EMPTY")
+    return events
+
 if __name__=="__main__": raise SystemExit(main())

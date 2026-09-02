@@ -1,0 +1,137 @@
+subject_id,scorer,epoch_count,label_vocabulary,file_integrity,scorer_identity,source_path
+I001,scorer_1,880,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-1\1\1_1.txt
+I001,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-1\1\1_2.txt
+I002,scorer_1,964,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-2\2\2_1.txt
+I002,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-2\2\2_2.txt
+I003,scorer_1,943,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-3\3\3_1.txt
+I003,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-3\3\3_2.txt
+I004,scorer_1,963,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-4\4\4\4_1.txt
+I004,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-4\4\4\4_2.txt
+I005,scorer_1,875,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-5\5\5\5_1.txt
+I005,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-5\5\5\5_2.txt
+I006,scorer_1,897,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-6\6\6\6_1.txt
+I006,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-6\6\6\6_2.txt
+I007,scorer_1,933,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-7\7\7_1.txt
+I007,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-7\7\7_2.txt
+I008,scorer_1,904,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-8\8\8_1.txt
+I008,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-8\8\8_2.txt
+I009,scorer_1,969,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-9\9\9_1.txt
+I009,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-9\9\9_2.txt
+I010,scorer_1,842,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-10\10\10_1.txt
+I010,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-10\10\10_2.txt
+I011,scorer_1,997,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-11\11\11_1.txt
+I011,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-11\11\11_2.txt
+I012,scorer_1,850,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-12\12\12_1.txt
+I012,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-12\12\12_2.txt
+I013,scorer_1,882,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-13\13\13_1.txt
+I013,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-13\13\13_2.txt
+I014,scorer_1,906,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-14\14\14_1.txt
+I014,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-14\14\14_2.txt
+I015,scorer_1,786,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-15\15\15_1.txt
+I015,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-15\15\15_2.txt
+I016,scorer_1,883,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-16\16\16_1.txt
+I016,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-16\16\16_2.txt
+I017,scorer_1,851,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-17\17\17_1.txt
+I017,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-17\17\17_2.txt
+I018,scorer_1,999,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-18\18\18_1.txt
+I018,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-18\18\18_2.txt
+I019,scorer_1,828,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-19\19\19_1.txt
+I019,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-19\19\19_2.txt
+I020,scorer_1,950,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-20\20\20_1.txt
+I020,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-20\20\20_2.txt
+I021,scorer_1,1054,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-21\21\21_1.txt
+I021,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-21\21\21_2.txt
+I022,scorer_1,849,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-22\22\22_1.txt
+I022,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-22\22\22_2.txt
+I023,scorer_1,892,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-23\23\23_1.txt
+I023,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-23\23\23_2.txt
+I024,scorer_1,830,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-24\24\24_1.txt
+I024,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-24\24\24_2.txt
+I025,scorer_1,921,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-25\25\25_1.txt
+I025,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-25\25\25_2.txt
+I026,scorer_1,1062,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-26\26\26_1.txt
+I026,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-26\26\26_2.txt
+I027,scorer_1,918,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-27\27\27_1.txt
+I027,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-27\27\27_2.txt
+I028,scorer_1,882,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-28\28\28_1.txt
+I028,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-28\28\28_2.txt
+I029,scorer_1,912,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-29\29\29_1.txt
+I029,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-29\29\29_2.txt
+I030,scorer_1,882,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-30\30\30_1.txt
+I030,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-30\30\30_2.txt
+I031,scorer_1,877,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-31\31\31_1.txt
+I031,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-31\31\31_2.txt
+I032,scorer_1,1010,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-32\32\32_1.txt
+I032,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-32\32\32_2.txt
+I033,scorer_1,920,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-33\33\33_1.txt
+I033,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-33\33\33_2.txt
+I034,scorer_1,871,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-34\34\34_1.txt
+I034,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-34\34\34_2.txt
+I035,scorer_1,788,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-35\35\35_1.txt
+I035,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-35\35\35_2.txt
+I036,scorer_1,987,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,scorer_1,data\raw\isruc-original\subject-36\36\36_1.txt
+I036,scorer_2,,,PASS,scorer_2,data\raw\isruc-original\subject-36\36\36_2.txt
+I037,scorer_2,,,MISSING,scorer_2,
+I038,scorer_2,,,MISSING,scorer_2,
+I039,scorer_2,,,MISSING,scorer_2,
+I040,scorer_2,,,MISSING,scorer_2,
+I041,scorer_2,,,MISSING,scorer_2,
+I042,scorer_2,,,MISSING,scorer_2,
+I043,scorer_2,,,MISSING,scorer_2,
+I044,scorer_2,,,MISSING,scorer_2,
+I045,scorer_2,,,MISSING,scorer_2,
+I046,scorer_2,,,MISSING,scorer_2,
+I047,scorer_2,,,MISSING,scorer_2,
+I048,scorer_2,,,MISSING,scorer_2,
+I049,scorer_2,,,MISSING,scorer_2,
+I050,scorer_2,,,MISSING,scorer_2,
+I051,scorer_2,,,MISSING,scorer_2,
+I052,scorer_2,,,MISSING,scorer_2,
+I053,scorer_2,,,MISSING,scorer_2,
+I054,scorer_2,,,MISSING,scorer_2,
+I055,scorer_2,,,MISSING,scorer_2,
+I056,scorer_2,,,MISSING,scorer_2,
+I057,scorer_2,,,MISSING,scorer_2,
+I058,scorer_2,,,MISSING,scorer_2,
+I059,scorer_2,,,MISSING,scorer_2,
+I060,scorer_2,,,MISSING,scorer_2,
+I061,scorer_2,,,MISSING,scorer_2,
+I062,scorer_2,,,MISSING,scorer_2,
+I063,scorer_2,,,MISSING,scorer_2,
+I064,scorer_2,,,MISSING,scorer_2,
+I065,scorer_2,,,MISSING,scorer_2,
+I066,scorer_2,,,MISSING,scorer_2,
+I067,scorer_2,,,MISSING,scorer_2,
+I068,scorer_2,,,MISSING,scorer_2,
+I069,scorer_2,,,MISSING,scorer_2,
+I070,scorer_2,,,MISSING,scorer_2,
+I071,scorer_2,,,MISSING,scorer_2,
+I072,scorer_2,,,MISSING,scorer_2,
+I073,scorer_2,,,MISSING,scorer_2,
+I074,scorer_2,,,MISSING,scorer_2,
+I075,scorer_2,,,MISSING,scorer_2,
+I076,scorer_2,,,MISSING,scorer_2,
+I077,scorer_2,,,MISSING,scorer_2,
+I078,scorer_2,,,MISSING,scorer_2,
+I079,scorer_2,,,MISSING,scorer_2,
+I080,scorer_2,,,MISSING,scorer_2,
+I081,scorer_2,,,MISSING,scorer_2,
+I082,scorer_2,,,MISSING,scorer_2,
+I083,scorer_2,,,MISSING,scorer_2,
+I084,scorer_2,,,MISSING,scorer_2,
+I085,scorer_2,,,MISSING,scorer_2,
+I086,scorer_2,,,MISSING,scorer_2,
+I087,scorer_2,,,MISSING,scorer_2,
+I088,scorer_2,,,MISSING,scorer_2,
+I089,scorer_2,,,MISSING,scorer_2,
+I090,scorer_2,,,MISSING,scorer_2,
+I091,scorer_2,,,MISSING,scorer_2,
+I092,scorer_2,,,MISSING,scorer_2,
+I093,scorer_2,,,MISSING,scorer_2,
+I094,scorer_2,,,MISSING,scorer_2,
+I095,scorer_2,,,MISSING,scorer_2,
+I096,scorer_2,,,MISSING,scorer_2,
+I097,scorer_2,,,MISSING,scorer_2,
+I098,scorer_2,,,MISSING,scorer_2,
+I099,scorer_2,,,MISSING,scorer_2,
+I100,scorer_2,,,MISSING,scorer_2,

@@ -17,7 +17,7 @@ def test_real_nemar_event_table_accounting(subject):
     raw = Counter(label for _, _, label in events)
     assert set(raw) <= {"Sleep stage W", "Sleep stage N1", "Sleep stage N2",
                          "Sleep stage N3", "Sleep stage R", "Sleep stage U"}
-    expanded = expand_annotations(events)
+    expanded = expand_annotations(events, dataset="isruc_s1")
     counts, exclusions, valid, excluded = summarize_epoch_accounting(expanded)
     assert valid + excluded == len(expanded)
     assert valid == sum(counts.values())

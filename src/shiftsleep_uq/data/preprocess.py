@@ -84,7 +84,7 @@ def process_one(dataset: str, subject: str, raw_root: Path, output_root: Path, a
         if rates != [float(er),float(orate)]: raise PreprocessingError("UNEXPECTED_NATIVE_RATE")
         eeg=unit_to_uv(eeg,units[0]); eog=unit_to_uv(eog,units[1])
         events=read_sc_events(a) if dataset=="sleep_edf_sc" else read_isruc_events(a)
-        expanded=expand_annotations(events)
+        expanded=expand_annotations(events, dataset=dataset)
         counts, exclusions, valid_count, excluded_count = summarize_epoch_accounting(expanded)
         valid=[x for x in expanded if x.canonical is not None and x.exclusion is None]
         row.update({"total_source_stage_epochs":len(expanded), "excluded_epochs":excluded_count,

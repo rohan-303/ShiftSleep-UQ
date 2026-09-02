@@ -1,0 +1,23 @@
+canonical_label,accepted_source_string,dataset_or_context,source_semantics,evidence,exact_match_required,status
+Wake,Sleep stage W,sleep_edf_sc,Official Sleep-EDF hypnogram Wake label,Local official hypnogram audit SC4001EC/SC4002EC/SC4011EH/SC4012EC/SC4021EH; Step 6.1 report section 5,TRUE,VERIFIED_SOURCE_ALIAS
+Wake,Sleep stage W,isruc_s1,NEMAR scorer-1 Wake label,NEMAR v1.0.1 README/event metadata and local I001-I005 events.tsv audit; Step 6.1 report section 5,TRUE,VERIFIED_SOURCE_ALIAS
+Wake,W,internal_canonical,Explicit internal canonical shorthand; not accepted by dataset adapters,configs/data_contract_v1.yaml and unit-level canonical mapper only,TRUE,INTERNAL_CANONICAL_ALIAS
+Wake,Wake,internal_canonical,Explicit internal canonical label; not accepted by dataset adapters,configs/data_contract_v1.yaml and unit-level canonical mapper only,TRUE,INTERNAL_CANONICAL_ALIAS
+N1,Sleep stage 1,sleep_edf_sc,Official Sleep-EDF numbered stage-1 label,Local official hypnogram audit SC4001EC/SC4002EC/SC4011EH/SC4012EC/SC4021EH,TRUE,VERIFIED_SOURCE_ALIAS
+N1,Sleep stage N1,isruc_s1,NEMAR scorer-1 N1 label,NEMAR v1.0.1 README/event metadata and local I001-I005 events.tsv audit,TRUE,VERIFIED_SOURCE_ALIAS
+N1,Stage 1,internal_canonical,Explicit internal/test R&K-style shorthand; not accepted by dataset adapters,configs/data_contract_v1.yaml and test_dataset_specific_allowlist_is_exact_after_whitespace_normalization,TRUE,INTERNAL_CANONICAL_ALIAS
+N1,N1,internal_canonical,Explicit internal canonical label; not accepted by dataset adapters,configs/data_contract_v1.yaml and unit-level canonical mapper only,TRUE,INTERNAL_CANONICAL_ALIAS
+N2,Sleep stage 2,sleep_edf_sc,Official Sleep-EDF numbered stage-2 label,Local official hypnogram audit SC4001EC/SC4002EC/SC4011EH/SC4012EC/SC4021EH,TRUE,VERIFIED_SOURCE_ALIAS
+N2,Sleep stage N2,isruc_s1,NEMAR scorer-1 N2 label,NEMAR v1.0.1 README/event metadata and local I001-I005 events.tsv audit,TRUE,VERIFIED_SOURCE_ALIAS
+N2,Stage 2,internal_canonical,Explicit internal/test R&K-style shorthand; not accepted by dataset adapters,configs/data_contract_v1.yaml and unit-level canonical mapper only,TRUE,INTERNAL_CANONICAL_ALIAS
+N2,N2,internal_canonical,Explicit internal canonical label; not accepted by dataset adapters,configs/data_contract_v1.yaml and unit-level canonical mapper only,TRUE,INTERNAL_CANONICAL_ALIAS
+N3,Sleep stage 3,sleep_edf_sc,Official Sleep-EDF numbered stage-3 label,Local official hypnogram audit SC4001EC/SC4002EC/SC4011EH/SC4012EC/SC4021EH,TRUE,VERIFIED_SOURCE_ALIAS
+N3,Sleep stage 4,sleep_edf_sc,Official Sleep-EDF numbered stage-4 label mapped to canonical N3,Local official hypnogram audit SC4001EC/SC4002EC/SC4011EH/SC4012EC/SC4021EH,TRUE,VERIFIED_SOURCE_ALIAS
+N3,Sleep stage N3,isruc_s1,NEMAR scorer-1 N3 label,NEMAR v1.0.1 README/event metadata and local I001-I005 events.tsv audit,TRUE,VERIFIED_SOURCE_ALIAS
+N3,Stage 3,internal_canonical,Explicit internal/test R&K-style shorthand; not accepted by dataset adapters,configs/data_contract_v1.yaml and unit-level canonical mapper only,TRUE,INTERNAL_CANONICAL_ALIAS
+N3,Stage 4,internal_canonical,Explicit internal/test R&K-style shorthand mapped to N3; not accepted by dataset adapters,configs/data_contract_v1.yaml and unit-level canonical mapper only,TRUE,INTERNAL_CANONICAL_ALIAS
+N3,N3,internal_canonical,Explicit internal canonical label; not accepted by dataset adapters,configs/data_contract_v1.yaml and unit-level canonical mapper only,TRUE,INTERNAL_CANONICAL_ALIAS
+REM,Sleep stage R,sleep_edf_sc,Official Sleep-EDF REM label,Local official hypnogram audit SC4001EC/SC4002EC/SC4011EH/SC4012EC/SC4021EH,TRUE,VERIFIED_SOURCE_ALIAS
+REM,Sleep stage R,isruc_s1,NEMAR scorer-1 REM label,NEMAR v1.0.1 README/event metadata and local I001-I005 events.tsv audit,TRUE,VERIFIED_SOURCE_ALIAS
+REM,Stage R,internal_canonical,Explicit internal/test R&K-style shorthand; not accepted by dataset adapters,configs/data_contract_v1.yaml and unit-level canonical mapper only,TRUE,INTERNAL_CANONICAL_ALIAS
+REM,REM,internal_canonical,Explicit internal canonical label; not accepted by dataset adapters,configs/data_contract_v1.yaml and unit-level canonical mapper only,TRUE,INTERNAL_CANONICAL_ALIAS

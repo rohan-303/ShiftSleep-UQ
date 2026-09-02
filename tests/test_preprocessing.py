@@ -15,8 +15,29 @@ def test_exact_nemar_labels():
     assert canonicalize_label('Sleep stage N2') == 'N2'
     assert canonicalize_label('Sleep stage N3') == 'N3'
     assert canonicalize_label('Sleep stage R') == 'REM'
-    with pytest.raises(PreprocessingError, match='ANNOTATION_UNKNOWN_LABEL'):
+    with pytest.raises(PreprocessingError, match='ANNOTATION_EXCLUDED_LABEL:unscored'):
         canonicalize_label('Sleep stage U')
+
+
+def test_dataset_specific_exact_label_allowlists_precede_shared_canonical_mapping():
+    assert canonicalize_label('Sleep stage 1', dataset='sleep_edf_sc') == 'N1'
+    assert canonicalize_label('Sleep stage N1', dataset='isruc_s1') == 'N1'
+    with pytest.raises(PreprocessingError, match='ANNOTATION_SOURCE_LABEL_NOT_ALLOWED'):
+        canonicalize_label('Sleep stage N1', dataset='sleep_edf_sc')
+    with pytest.raises(PreprocessingError, match='ANNOTATION_SOURCE_LABEL_NOT_ALLOWED'):
+        canonicalize_label('Sleep stage 1', dataset='isruc_s1')
+
+
+def test_dataset_specific_allowlist_is_exact_after_whitespace_normalization():
+    assert canonicalize_label('  Sleep   stage 1  ', dataset='sleep_edf_sc') == 'N1'
+    assert canonicalize_label('Sleep stage 4', dataset='sleep_edf_sc') == 'N3'
+    assert canonicalize_label('Stage 1') == 'N1'  # explicit internal/test alias only
+    with pytest.raises(PreprocessingError, match='ANNOTATION_SOURCE_LABEL_NOT_ALLOWED'):
+        canonicalize_label('Stage 1', dataset='sleep_edf_sc')
+    with pytest.raises(PreprocessingError, match='ANNOTATION_SOURCE_LABEL_NOT_ALLOWED'):
+        canonicalize_label('sleep stage 1', dataset='sleep_edf_sc')
+    with pytest.raises(PreprocessingError, match='ANNOTATION_SOURCE_LABEL_NOT_ALLOWED'):
+        canonicalize_label('Sleep stage X', dataset='isruc_s1')
 
 def test_nemar_unknown_and_fuzzy_labels_never_map_to_wake():
     for label in ['Sleep stage X', 'sleep stage n1x', 'Sleep Stage N2']:
@@ -24,7 +45,7 @@ def test_nemar_unknown_and_fuzzy_labels_never_map_to_wake():
             canonicalize_label(label)
 
 def test_unknown_never_wake():
-    with pytest.raises(PreprocessingError,match='ANNOTATION_UNKNOWN_LABEL'): canonicalize_label('Sleep stage ?')
+    with pytest.raises(PreprocessingError,match='ANNOTATION_EXCLUDED_LABEL:unknown'): canonicalize_label('Sleep stage ?')
 
 def test_unit_conversion():
     x=np.array([1.0]); assert unit_to_uv(x,'V')[0]==1e6; assert unit_to_uv(x,'mV')[0]==1e3; assert unit_to_uv(x,'uV')[0]==1
@@ -62,7 +83,7 @@ def test_accounting_invariant_a_and_d():
                                     (60,30,'Sleep stage U')])
     counts, exclusions, valid, excluded = summarize_epoch_accounting(expanded)
     assert counts == {'wake': 1, 'n1': 1, 'n2': 0, 'n3': 0, 'rem': 0}
-    assert exclusions['unknown'] == 1
+    assert exclusions['unscored'] == 1
     assert valid == 2 and excluded == 1 and valid + excluded == len(expanded)
 
 def test_scorer2_does_not_change_primary():

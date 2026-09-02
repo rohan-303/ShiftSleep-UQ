@@ -8,7 +8,28 @@ from scipy.signal import resample_poly
 
 LABELS = ("Wake", "N1", "N2", "N3", "REM")
 LABEL_TO_INT = {x: i for i, x in enumerate(LABELS)}
-EXCLUSIONS = {"movement", "movement time", "sleep stage ?", "sleep stage u", "?", "unknown", "unscored", "artifact", "corrupt_annotation"}
+# Exclusions are exact strings after whitespace normalization.  They are not
+# case-folded or fuzzily inferred; dataset schemas restrict which source form
+# may appear in a real adapter stream.
+EXCLUSION_REASONS = {
+    "Movement time": "movement", "Sleep stage ?": "unknown", "Sleep stage U": "unscored",
+    "?": "unknown", "unknown": "unknown", "unscored": "unscored",
+    "artifact": "artifact", "corrupt_annotation": "artifact",
+}
+
+# The shared mapper recognizes only exact source spellings. Dataset allowlists are
+# applied before canonicalization so a valid label from one source cannot silently
+# be accepted in another source's annotation stream.
+DATASET_ALLOWED_SOURCE_LABELS = {
+    "sleep_edf_sc": frozenset({
+        "Sleep stage W", "Sleep stage 1", "Sleep stage 2", "Sleep stage 3",
+        "Sleep stage 4", "Sleep stage R", "Sleep stage ?", "Movement time",
+    }),
+    "isruc_s1": frozenset({
+        "Sleep stage W", "Sleep stage N1", "Sleep stage N2", "Sleep stage N3",
+        "Sleep stage R", "Sleep stage U",
+    }),
+}
 
 class PreprocessingError(ValueError): pass
 
@@ -21,10 +42,16 @@ class EpochLabel:
     source_index: int
     exclusion: str | None = None
 
-def canonicalize_label(value: str) -> str:
+def canonicalize_label(value: str, *, dataset: str | None = None) -> str:
     s = " ".join(str(value).strip().split())
-    if s in EXCLUSIONS or "movement" in s.lower():
-        raise PreprocessingError(f"ANNOTATION_UNKNOWN_LABEL:{s}")
+    if dataset is not None:
+        allowed = DATASET_ALLOWED_SOURCE_LABELS.get(dataset)
+        if allowed is None:
+            raise PreprocessingError(f"UNKNOWN_DATASET_LABEL_SCHEMA:{dataset}")
+        if s not in allowed:
+            raise PreprocessingError(f"ANNOTATION_SOURCE_LABEL_NOT_ALLOWED:{dataset}:{s}")
+    if s in EXCLUSION_REASONS:
+        raise PreprocessingError(f"ANNOTATION_EXCLUDED_LABEL:{EXCLUSION_REASONS[s]}")
     mapping = {
         "Sleep stage W":"Wake", "W":"Wake", "Wake":"Wake",
         # Sleep-EDF SC uses numbered stage labels; NEMAR ISRUC uses the
@@ -51,7 +78,7 @@ def resample_continuous(values: np.ndarray, source_rate: float, target_rate: flo
     if abs(ratio - round(ratio)) > 1e-12: raise PreprocessingError("NON_INTEGER_DOWNsample_UNSUPPORTED")
     return resample_poly(np.asarray(values, dtype=np.float64), 1, int(round(ratio)), window=("kaiser", 5.0), padtype="constant")
 
-def expand_annotations(events: Iterable[tuple[float,float,str]], tolerance: float = .001) -> list[EpochLabel]:
+def expand_annotations(events: Iterable[tuple[float,float,str]], tolerance: float = .001, *, dataset: str | None = None) -> list[EpochLabel]:
     out=[]
     for i,(onset,duration,label) in enumerate(events):
         onset=float(onset); duration=float(duration)
@@ -62,9 +89,15 @@ def expand_annotations(events: Iterable[tuple[float,float,str]], tolerance: floa
             continue
         if abs(duration/30-round(duration/30)) > tolerance/30:
             out.append(EpochLabel(onset,duration,str(label),None,i,"alignment_error")); continue
-        try: canon=canonicalize_label(label); exc=None
+        try: canon=canonicalize_label(label, dataset=dataset); exc=None
         except PreprocessingError as e:
-            canon=None; exc="movement" if "movement" in str(label).lower() else ("unknown" if "UNKNOWN_LABEL" in str(e) else "other")
+            canon=None
+            if "ANNOTATION_EXCLUDED_LABEL:" in str(e):
+                exc=str(e).rsplit(":", 1)[1]
+            elif "ANNOTATION_SOURCE_LABEL_NOT_ALLOWED" in str(e):
+                exc="unknown"
+            else:
+                exc="unknown" if "UNKNOWN_LABEL" in str(e) else "other"
         for k in range(int(round(duration/30))):
             out.append(EpochLabel(onset+30*k,30,str(label),canon,i,exc))
     return out

@@ -16,6 +16,7 @@ from shiftsleep_uq.data.preprocess import (
     unit_to_uv, validate_output,
 )
 from shiftsleep_uq.data.preprocessing import expand_annotations
+from shiftsleep_uq.data.montage_contract import resolve_isruc_channels
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data/raw/isruc-original"
@@ -115,9 +116,11 @@ def process_original(n: int, *, output_path: Path | None = None) -> dict:
         f = pyedflib.EdfReader(str(rec))
         try:
             labels = [str(x) for x in f.getSignalLabels()]
-            required = ["C3-A2", "LOC-A2"]
-            if any(x not in labels for x in required): raise PreprocessingError("MISSING_REQUIRED_CHANNEL")
-            ei, oi = labels.index(required[0]), labels.index(required[1])
+            try:
+                montage = resolve_isruc_channels(labels)
+            except ValueError as e:
+                raise PreprocessingError(str(e)) from e
+            ei, oi = int(montage["eeg_index"]), int(montage["eog_index"])
             rates = [float(f.getSampleFrequency(ei)), float(f.getSampleFrequency(oi))]
             units = [str(f.getPhysicalDimension(ei)), str(f.getPhysicalDimension(oi))]
             if rates != [200.0, 200.0]: raise PreprocessingError("UNEXPECTED_NATIVE_RATE")
@@ -148,10 +151,13 @@ def process_original(n: int, *, output_path: Path | None = None) -> dict:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         fd, tmp = tempfile.mkstemp(prefix=output_path.name + ".", suffix=".tmp", dir=output_path.parent); os.close(fd)
         meta = {"dataset":"isruc_s1", "provider":"ORIGINAL_ISRUC_MEGA", "subject_id":f"I{n:03d}",
-                "recording_id":f"I{n:03d}", "source_eeg_channel":"C3-A2", "source_eog_channel":"LOC-A2",
+                "recording_id":f"I{n:03d}", "source_eeg_channel":montage["source_eeg_derivation"], "source_eog_channel":montage["source_eog_derivation"],
+                "source_eeg_derivation":montage["source_eeg_derivation"], "source_eog_derivation":montage["source_eog_derivation"],
+                "eeg_anatomical_role":montage["eeg_anatomical_role"], "eog_anatomical_role":montage["eog_anatomical_role"],
+                "montage_variant":montage["montage_variant"],
                 "native_eeg_rate":200, "native_eog_rate":200, "target_eeg_rate":100, "target_eog_rate":50,
                 "canonical_unit":"uV", "annotation_source":"original ISRUC scorer-1 TXT",
-                "scorer":"scorer_1", "contract_version":"1.1.0", "preprocessing_version":"0.1.0",
+                "scorer":"scorer_1", "contract_version":"1.2.0", "preprocessing_version":"0.1.0",
                 "normalized":False, "standardized":False}
         try:
             with open(tmp, "wb") as h:
@@ -166,9 +172,10 @@ def process_original(n: int, *, output_path: Path | None = None) -> dict:
                    output_sha256=digest(output_path), total_source_stage_epochs=len(expanded),
                    excluded_epochs=excluded_count, valid_canonical_epochs=valid_count, **counts,
                    **{"excluded_" + k:v for k,v in exclusions.items()}, signal_duration_seconds=duration,
-                   scorer1_epochs=len(events), annotation_vocabulary=vocab, channels="C3-A2|LOC-A2",
+                   scorer1_epochs=len(events), annotation_vocabulary=vocab, channels=f"{montage['source_eeg_derivation']}|{montage['source_eog_derivation']}",
                    eeg_rate=200.0, eog_rate=200.0, eeg_unit=units[0], eog_unit=units[1],
-                   eeg_index=ei, eog_index=oi)
+                   eeg_index=ei, eog_index=oi, source_eeg_derivation=montage["source_eeg_derivation"],
+                   source_eog_derivation=montage["source_eog_derivation"], montage_variant=montage["montage_variant"])
         return row
     except PreprocessingError as e:
         row["failure_code"] = str(e).split(":",1)[0]; return row

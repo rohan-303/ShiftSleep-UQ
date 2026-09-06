@@ -48,7 +48,7 @@ Every subject must pass independent checks before it can enter the migrated coho
 - all acquired files inventoried and SHA-256 hashed;
 - REC/EDF header parsed;
 - body-size formula passes exactly;
-- required `C3-A2` and `LOC-A2` channels present;
+- exact contract `1.2.0` pairing present: `C3-A2` + `LOC-A2` or `C3-M2` + `E1-M2`;
 - native primary rates and units verified;
 - full source channel inventory retained;
 - scorer-1 TXT/XLSX relationship validated;
@@ -99,8 +99,9 @@ Only after all 100 subjects have terminal acquisition and validation statuses:
 
 Migration is provenance repair only. It must not change:
 
-- primary EEG `C3-A2`;
-- primary EOG `LOC-A2`;
+- primary EEG role `LEFT_CENTRAL_EEG`, with exact source derivation `C3-A2` or `C3-M2`;
+- primary EOG role `LEFT_OCULAR_EOG`, with exact source derivation `LOC-A2` or `E1-M2`;
+- exact source derivation strings and `montage_variant` must be retained;
 - scorer-1 primary status;
 - scorer-2 diagnostic status;
 - stage mapping;
@@ -112,3 +113,7 @@ Migration is provenance repair only. It must not change:
 - target-free protocol.
 
 Any proposed contract change requires a separate protocol decision and must not be hidden inside acquisition or cohort rebuild work.
+
+## Step 7.8 execution state
+
+The amended contract is now `1.2.0`. I001-I036 have complete official-provider bundles; I037-I100 remain terminally unacquired because the approved account-free MEGA route is currently unavailable/quota-blocked. The Step 7.8 rebuild artifacts therefore remain partial until the remaining official acquisition is completed.

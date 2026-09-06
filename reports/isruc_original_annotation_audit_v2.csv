@@ -1,0 +1,101 @@
+subject_id,scorer1_source,scorer1_sha256,epoch_count,label_vocabulary,thirty_second_semantics,file_integrity
+I001,data\raw\isruc-original\subject-1\1\1_1.txt,24793ceba5ee9845d6913a209ac423fd20e9e541f47f67356e89f19d26a4b085,880,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I002,data\raw\isruc-original\subject-2\2\2_1.txt,08ed23beb35bfc821b319ea5674298efde4e6f623f3dafdf1d98a7d9ec80c11d,964,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I003,data\raw\isruc-original\subject-3\3\3_1.txt,45fac8a128b91a4abeacec2dec95646ade6c6e3c17013132a3ad2f1bb08907b0,943,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I004,data\raw\isruc-original\subject-4\4\4\4_1.txt,84d47e08774e4d982e590c13967d8411de9f3ac8d47a6fa1b26172f0d8188a2b,963,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I005,data\raw\isruc-original\subject-5\5\5\5_1.txt,1d2791fc8e84a7c4b0910e934d03a56c91ba2282d1be9de7e812088dd15cec0e,875,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I006,data\raw\isruc-original\subject-6\6\6\6_1.txt,94cc2021caf7cdf9acced7ca9ddec020ed805837bc30207630de548a0f0e86fb,897,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage W,PASS,PASS
+I007,data\raw\isruc-original\subject-7\7\7_1.txt,a5460bca55f93468e88d3e8ab299cccd71ec88c1da3b79ec854e4622f1967c8d,933,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I008,data\raw\isruc-original\subject-8\8\8_1.txt,7cfda8d4c63ee1cb1b593a8ed626184b5d443a6f963935d6cbc4ac23b7e2d965,904,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I009,data\raw\isruc-original\subject-9\9\9_1.txt,b5914ce17b2c51129f730381fcc5c59e735aa32437049848416021495d3aa88f,969,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I010,data\raw\isruc-original\subject-10\10\10_1.txt,1b75031f35742f7f53432cb5e249539c249c1f7badc7fd59ab38554836015227,842,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I011,data\raw\isruc-original\subject-11\11\11_1.txt,f2bcfd3ebaf8be80f9bce48ce0f67b2db3031909f99c707337ea75e93f95de63,997,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I012,data\raw\isruc-original\subject-12\12\12_1.txt,edc5271d4d757ef9a19e0ec35cb2098dc557e810206056944676cd60b87db33f,850,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I013,data\raw\isruc-original\subject-13\13\13_1.txt,b481cc029a656132c04a6aa9425696884f695c85a90e6ff47d033deb0855cff2,882,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I014,data\raw\isruc-original\subject-14\14\14_1.txt,1c9236b4f2997b3b95c4b071386f9e4a0a18d027a4f038464221286870717918,906,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I015,data\raw\isruc-original\subject-15\15\15_1.txt,02387c6f2f08a22d9e9ed7418bdf9723fa6330ae4dd119d2bd66da3d2a04497b,786,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I016,data\raw\isruc-original\subject-16\16\16_1.txt,f20ee9b25021c856344880f390379955715e59246e601398afe54754e49e9510,883,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I017,data\raw\isruc-original\subject-17\17\17_1.txt,b29aa6d9e084601cd275f7404d36f5ff4d8d58c0e062092ae16b4097912525d3,851,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I018,data\raw\isruc-original\subject-18\18\18_1.txt,8294a31be2ce72e7b2eb29a28937dd0a9a29929a27a9cea9d427b44105f76dc6,999,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I019,data\raw\isruc-original\subject-19\19\19_1.txt,88b94eb632ed6a6872ae646a3d4c301e905101659b06a5d6e13eaa42389e605e,828,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I020,data\raw\isruc-original\subject-20\20\20_1.txt,044b9373544e8cfd66b421c519f870deaf83edb3827cf0cfaf68cbde8351e1d6,950,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I021,data\raw\isruc-original\subject-21\21\21_1.txt,631d90d4a4d2e3a07e87451039998fbfc2651b5ebe95cde0c1ba960a9b2bc213,1054,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I022,data\raw\isruc-original\subject-22\22\22_1.txt,6945bc34ef219702a0c5282c58c91bc076a6952411d4222fb9aa64f214ab6b7b,849,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I023,data\raw\isruc-original\subject-23\23\23_1.txt,181a2ace190687eedda139b2370c2ede5617d6834ef6be9aafb5dfab0032f864,892,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I024,data\raw\isruc-original\subject-24\24\24_1.txt,fb02f6b4eae74b146d1081bac4c185c3ce503a965f4f1beed3e1ad0d1da951b0,830,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I025,data\raw\isruc-original\subject-25\25\25_1.txt,970374ff8890b20d22db2994f35595069f8ec9d324ead18f8dcd3ec6d5b92865,921,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I026,data\raw\isruc-original\subject-26\26\26_1.txt,6fae0d73c1cbe819f1382afb601ec7d14aa4489266b736538034b24f6e63740c,1062,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I027,data\raw\isruc-original\subject-27\27\27_1.txt,5a70c40fadee888818ab69429a1d9b9001043483c4704da5651b69dafe4da652,918,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I028,data\raw\isruc-original\subject-28\28\28_1.txt,4f3ebb698637527b7b79f9664f8ff4e9800c6d9cf22e2214d5bfc40efc83a4ac,882,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I029,data\raw\isruc-original\subject-29\29\29_1.txt,397d3429b9ccb3707b8f33d73d7a74272edd1de7e5daadbc34e6a41dbb48321b,912,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I030,data\raw\isruc-original\subject-30\30\30_1.txt,3c0e26cc7d51bc7d58abd50fe7ba3090573fa113e4b1959e95a0f763938ce22a,882,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I031,data\raw\isruc-original\subject-31\31\31_1.txt,3b9495a8a015f300ce2986520bde6e68f1c0b163ee88508dcb24b15bcbeb22c1,877,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I032,data\raw\isruc-original\subject-32\32\32_1.txt,f100c3648b7ecfa65c55d4524eee5c8367c7ad4ca75e9b5c38cb9b0d5f763760,1010,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I033,data\raw\isruc-original\subject-33\33\33_1.txt,c715f1678873480169c580de5691a4d55a4f2f7765d47c80d5b0e98f06a6e380,920,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I034,data\raw\isruc-original\subject-34\34\34_1.txt,15f00e3fac04d4911403dd108e8a57a833ac16191427074e2929a0bf0e6c2045,871,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I035,data\raw\isruc-original\subject-35\35\35_1.txt,4f92016cd5ba5a74cf680334a876ad88bb8d42f22262585eed8f4319b9b5e1d1,788,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I036,data\raw\isruc-original\subject-36\36\36_1.txt,5f5dca6d76a6d3b928b45df7d6a2a743c05ed0c5a89833158a2700c0ea82ab28,987,Sleep stage N1|Sleep stage N2|Sleep stage N3|Sleep stage R|Sleep stage W,PASS,PASS
+I037,,,,,NOT_AVAILABLE,MISSING
+I038,,,,,NOT_AVAILABLE,MISSING
+I039,,,,,NOT_AVAILABLE,MISSING
+I040,,,,,NOT_AVAILABLE,MISSING
+I041,,,,,NOT_AVAILABLE,MISSING
+I042,,,,,NOT_AVAILABLE,MISSING
+I043,,,,,NOT_AVAILABLE,MISSING
+I044,,,,,NOT_AVAILABLE,MISSING
+I045,,,,,NOT_AVAILABLE,MISSING
+I046,,,,,NOT_AVAILABLE,MISSING
+I047,,,,,NOT_AVAILABLE,MISSING
+I048,,,,,NOT_AVAILABLE,MISSING
+I049,,,,,NOT_AVAILABLE,MISSING
+I050,,,,,NOT_AVAILABLE,MISSING
+I051,,,,,NOT_AVAILABLE,MISSING
+I052,,,,,NOT_AVAILABLE,MISSING
+I053,,,,,NOT_AVAILABLE,MISSING
+I054,,,,,NOT_AVAILABLE,MISSING
+I055,,,,,NOT_AVAILABLE,MISSING
+I056,,,,,NOT_AVAILABLE,MISSING
+I057,,,,,NOT_AVAILABLE,MISSING
+I058,,,,,NOT_AVAILABLE,MISSING
+I059,,,,,NOT_AVAILABLE,MISSING
+I060,,,,,NOT_AVAILABLE,MISSING
+I061,,,,,NOT_AVAILABLE,MISSING
+I062,,,,,NOT_AVAILABLE,MISSING
+I063,,,,,NOT_AVAILABLE,MISSING
+I064,,,,,NOT_AVAILABLE,MISSING
+I065,,,,,NOT_AVAILABLE,MISSING
+I066,,,,,NOT_AVAILABLE,MISSING
+I067,,,,,NOT_AVAILABLE,MISSING
+I068,,,,,NOT_AVAILABLE,MISSING
+I069,,,,,NOT_AVAILABLE,MISSING
+I070,,,,,NOT_AVAILABLE,MISSING
+I071,,,,,NOT_AVAILABLE,MISSING
+I072,,,,,NOT_AVAILABLE,MISSING
+I073,,,,,NOT_AVAILABLE,MISSING
+I074,,,,,NOT_AVAILABLE,MISSING
+I075,,,,,NOT_AVAILABLE,MISSING
+I076,,,,,NOT_AVAILABLE,MISSING
+I077,,,,,NOT_AVAILABLE,MISSING
+I078,,,,,NOT_AVAILABLE,MISSING
+I079,,,,,NOT_AVAILABLE,MISSING
+I080,,,,,NOT_AVAILABLE,MISSING
+I081,,,,,NOT_AVAILABLE,MISSING
+I082,,,,,NOT_AVAILABLE,MISSING
+I083,,,,,NOT_AVAILABLE,MISSING
+I084,,,,,NOT_AVAILABLE,MISSING
+I085,,,,,NOT_AVAILABLE,MISSING
+I086,,,,,NOT_AVAILABLE,MISSING
+I087,,,,,NOT_AVAILABLE,MISSING
+I088,,,,,NOT_AVAILABLE,MISSING
+I089,,,,,NOT_AVAILABLE,MISSING
+I090,,,,,NOT_AVAILABLE,MISSING
+I091,,,,,NOT_AVAILABLE,MISSING
+I092,,,,,NOT_AVAILABLE,MISSING
+I093,,,,,NOT_AVAILABLE,MISSING
+I094,,,,,NOT_AVAILABLE,MISSING
+I095,,,,,NOT_AVAILABLE,MISSING
+I096,,,,,NOT_AVAILABLE,MISSING
+I097,,,,,NOT_AVAILABLE,MISSING
+I098,,,,,NOT_AVAILABLE,MISSING
+I099,,,,,NOT_AVAILABLE,MISSING
+I100,,,,,NOT_AVAILABLE,MISSING

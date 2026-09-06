@@ -1,0 +1,5 @@
+montage_variant,subject_count,valid_epoch_total,descriptive_only
+ISRUC_A1A2,17,15429,True
+ISRUC_M1M2,19,17328,True
+UNSUPPORTED,0,0,True
+ACQUISITION_FAILURE,64,0,True

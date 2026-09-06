@@ -36,3 +36,15 @@
 
 * OLD: cross-dataset channel comparison remained provisional.
 * NEW: EEG and EOG are harmonized as modality families while montage/reference differences remain explicit domain shift; no exact anatomical equivalence is claimed across Sleep-EDF, ISRUC, and SHHS.
+
+## A-07.7-01 — ISRUC Source-Supported Montage-Family Harmonization
+
+* DISCOVERED: Step 7.6 established before modeling that 17/35 body-valid original-provider ISRUC-S1 recordings use exact `C3-A2` + `LOC-A2`, while 18/35 use exact `C3-M2` + `E1-M2` with `E2-M1` as companion EOG context. Independent raw EDF parsing, pyedflib, and the project parser agreed on all inspected fields.
+* OLD: ISRUC primary EEG was exact `C3-A2`; ISRUC primary EOG was exact `LOC-A2`; alternate M1/M2 records were structurally excluded.
+* NEW: ISRUC EEG role is `LEFT_CENTRAL_EEG`, accepting only exact `C3-A2` or exact `C3-M2`; ISRUC EOG role is `LEFT_OCULAR_EOG`, accepting only exact `LOC-A2` or exact `E1-M2`.
+* EVIDENCE: AAST Standard Polysomnography technical guideline (which identifies AASM technical specifications as its basis) describes central EEG derivations including `C3-M2`, EOG electrodes E1/E2 at the outer canthi, and M2/M1 reference conventions; ISRUC peer-reviewed schema descriptions identify `C3-A2` and `LOC-A2`; Step 7.6 raw headers show the two exact source families.
+* DECISION: `ADOPT_SOURCE_SUPPORTED_CHANNEL_FAMILY`.
+* LIMITS: same physiological role is supported; exact physical placement and numerical equivalence are not claimed. Exact source derivations remain mandatory metadata. No mathematical re-reference, renaming, aliasing, or fuzzy matching is allowed.
+* STRATUM: `ISRUC_A1A2` and `ISRUC_M1M2` are mandatory acquisition-nuisance strata for future montage-stratified reliability sensitivity analyses.
+* TARGET-FREE STATUS: discovered before modeling; no model accuracy, calibration, uncertainty, stage-distribution optimization, or target-domain fitting was used.
+* IMPACT: data contract version changes from `1.1.0` to `1.2.0`; canonical labels, scorer-1 policy, 30-second epochs, target rates, units, resampling implementation, normalization prohibition, C0–C5 semantics, and target-free safeguards are unchanged.

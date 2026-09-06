@@ -5,7 +5,7 @@ from shiftsleep_uq.data.contracts import LABELS, load_contract, validate_contrac
 
 def test_contract_loads_and_core_gate_is_explicit():
     c = load_contract()
-    assert c["contract_version"] == "1.1.0"
+    assert c["contract_version"] == "1.2.0"
     assert c["status"] == "CORE_PREPROCESSING_FROZEN"
     assert c["final_benchmark_frozen"] is False
 
@@ -13,8 +13,8 @@ def test_contract_loads_and_core_gate_is_explicit():
 def test_isruc_primary_channels_and_scorer():
     c = load_contract()
     d = next(x for x in c["datasets"] if x["dataset_id"] == "isruc_s1")
-    assert d["selected_channels"]["EEG"]["channel"] == "C3-A2"
-    assert d["selected_channels"]["EOG"]["channel"] == "LOC-A2"
+    assert d["selected_channels"]["EEG"]["accepted_exact_derivations"] == ["C3-A2", "C3-M2"]
+    assert d["selected_channels"]["EOG"]["accepted_exact_derivations"] == ["LOC-A2", "E1-M2"]
     assert d["scorer_policy"].startswith("scorer_1 primary")
 
 

@@ -1,10 +1,10 @@
-contract_version: "1.1.0"
+contract_version: "1.2.0"
 freeze_date: "2026-09-01"
 research_commit: "PENDING_STEP5_1_COMMIT"
 status: CORE_PREPROCESSING_FROZEN
 final_benchmark_frozen: false
 freeze_levels:
-  CORE_PREPROCESSING_FROZEN: "Sleep-EDF SC and ISRUC-S1 have verified identity, exact channels, labels, scorer, epoch, missingness, and sampling contracts; deterministic preprocessing may be implemented, but not executed by this step."
+  CORE_PREPROCESSING_FROZEN: "Sleep-EDF SC and ISRUC-S1 have verified identity, exact source derivations or frozen source-supported channel-family roles, labels, scorer, epoch, missingness, and sampling contracts; deterministic preprocessing may be implemented, but not executed by this step."
   FINAL_BENCHMARK_FROZEN: "All intended primary domains, including SHHS1, are acquired and every record passes schema validation."
 canonical_labels: [Wake, N1, N2, N3, REM]
 label_mappings:
@@ -60,9 +60,15 @@ datasets:
     repeat_group_rule: "participant_id; no subject may cross partitions"
     selected_modalities: [EEG, EOG]
     selected_channels:
-      EEG: {channel: "C3-A2", anatomical_interpretation: central-left EEG, reference: A2, native_rate_hz: 200}
-      EOG: {channel: "LOC-A2", anatomical_interpretation: left outer canthus EOG, reference: A2, native_rate_hz: 200}
+      EEG: {role: "LEFT_CENTRAL_EEG", accepted_exact_derivations: ["C3-A2", "C3-M2"], native_rate_hz: 200}
+      EOG: {role: "LEFT_OCULAR_EOG", accepted_exact_derivations: ["LOC-A2", "E1-M2"], native_rate_hz: 200}
     channel_fallbacks: none
+    exact_derivation_allowlist:
+      - {eeg: "C3-A2", eog: "LOC-A2", montage_variant: "ISRUC_A1A2"}
+      - {eeg: "C3-M2", eog: "E1-M2", montage_variant: "ISRUC_M1M2"}
+    derivation_identity_policy: "Retain exact source derivations; no renaming, aliasing, re-referencing, numerical-equivalence claim, or fuzzy matching."
+    mandatory_metadata: [source_eeg_derivation, source_eog_derivation, eeg_anatomical_role, eog_anatomical_role, montage_variant]
+    montage_sensitivity_strata: [ISRUC_A1A2, ISRUC_M1M2]
     native_rates: {EEG: 200, EOG: 200}
     access_state: PUBLIC_METADATA_VERIFIED
     annotation_source: "NEMAR v1.0.1 scorer-1 events derived from original ISRUC scorer-1 Excel files; scorer-2 retained as extras"
@@ -170,7 +176,7 @@ schema_acceptance_rules:
   required_primary_modalities: [EEG, EOG]
   required_annotation_epoch_seconds: 30
   reject_on: [ambiguous_subject_identity, unresolved_required_channel, unexplained_annotation_semantics, signal_annotation_duration_mismatch, unsupported_fallback]
-  accessible_core_requires: [sleep_edf_sc_exact_channels, isruc_s1_exact_channels, isruc_s1_scorer_1]
+  accessible_core_requires: [sleep_edf_sc_exact_channels, isruc_s1_source_supported_channel_family, isruc_s1_scorer_1]
   planned_domain_cannot_masquerade_as_acquired: true
 unresolved_optional_items:
   - SHHS1 authorized raw/XML access and per-record deviations

@@ -15,7 +15,7 @@ def load_contract(path: str | Path = "configs/data_contract_v1.yaml") -> dict[st
 
 
 def validate_contract(data: dict[str, Any]) -> None:
-    if not isinstance(data, dict) or data.get("contract_version") != "1.1.0":
+    if not isinstance(data, dict) or data.get("contract_version") != "1.2.0":
         raise ValueError("invalid contract version")
     if data.get("status") != "CORE_PREPROCESSING_FROZEN" or data.get("final_benchmark_frozen") is not False:
         raise ValueError("freeze gates invalid")
@@ -42,6 +42,18 @@ def validate_contract(data: dict[str, Any]) -> None:
         channels = d.get("selected_channels", {})
         if not channels.get("EEG") or not channels.get("EOG"):
             raise ValueError(f"{d['dataset_id']} lacks exact EEG/EOG channels")
+        if d["dataset_id"] == "isruc_s1":
+            if channels["EEG"].get("accepted_exact_derivations") != ["C3-A2", "C3-M2"]:
+                raise ValueError("ISRUC EEG allowlist invalid")
+            if channels["EOG"].get("accepted_exact_derivations") != ["LOC-A2", "E1-M2"]:
+                raise ValueError("ISRUC EOG allowlist invalid")
+            if d.get("exact_derivation_allowlist") != [
+                {"eeg": "C3-A2", "eog": "LOC-A2", "montage_variant": "ISRUC_A1A2"},
+                {"eeg": "C3-M2", "eog": "E1-M2", "montage_variant": "ISRUC_M1M2"},
+            ]:
+                raise ValueError("ISRUC exact derivation pair allowlist invalid")
+            if d.get("channel_fallbacks") != "none":
+                raise ValueError("ISRUC fallback policy invalid")
         if d["dataset_id"] == "isruc_s1" and d.get("scorer_policy") != "scorer_1 primary; scorer_2 secondary diagnostic":
             raise ValueError("ISRUC primary scorer must be explicit")
     shhs = next(d for d in datasets if d["dataset_id"] == "shhs1")

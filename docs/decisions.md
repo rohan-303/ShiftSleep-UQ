@@ -22,3 +22,6 @@ Append-only. Dates use the local project date recorded at creation; later change
 
 ## D007 — New method is conditional
 **Date:** 2026-09-01. Introduce at most one lightweight calibration method only if baseline evidence identifies a specific failure mode.
+
+## D008 — Adopt exact source-supported ISRUC montage families
+**Date:** 2026-09-02. Step 7.7 adopts an exact allowlist of `C3-A2` + `LOC-A2` and `C3-M2` + `E1-M2` as distinct ISRUC source-supported channel families. Exact derivations remain metadata; no electrode or numerical equivalence is claimed. Future ISRUC reliability results must be montage-stratified. This protocol amendment was made before modeling and without model or target results.

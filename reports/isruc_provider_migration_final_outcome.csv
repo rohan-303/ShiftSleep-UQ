@@ -1,3 +1,3 @@
 provider_cohort,expected_subjects,included_subjects,exclusion_rate,provider_truncation_exclusions,status,acquired_complete_bundles,a1a2_included,m1m2_included,structural_exclusions,acquisition_exclusions,subjects_recovered_vs_old
 OLD_NEMAR,100,15,85.00%,2,HISTORICAL_SUPERSEDED_PENDING_SUCCESSFUL_REBUILD,,,,,,
-ORIGINAL_ISRUC_MEGA_CONTRACT_1.2.0,100,36,,,PARTIAL,36,17,19,0,64,21
+ORIGINAL_ISRUC_MEGA_CONTRACT_1.2.0,100,70,,,PARTIAL,70,17,53,1,29,55

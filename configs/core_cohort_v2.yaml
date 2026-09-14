@@ -1,0 +1,29 @@
+cohort_version: 2.0.0
+cohort_id: accessible_core_v2
+status: ACTIVE_FROZEN
+cohort_gate: CORE_DATA_FROZEN
+final_benchmark_gate: NO
+supersedes:
+  cohort_version: 1.1.0
+  status: SUPERSEDED
+data_contract_version: 1.2.0
+data_contract_sha256: ea8b2774a02192b1dcdb7f0b9ccaaef4232fd0772d8b154c47d0e707f73be036
+preprocessing_version: 0.1.0
+preprocessing_sha256: 70cd20ccee62b14a23e5996c9f76b6a708a4e69bde03f36bdf4ee8dffa9ef794
+no_splits_or_models: true
+sleep_edf_sc:
+  subjects: 78
+  recordings: 153
+  valid_epochs: 414961
+  manifest: reports/core_recording_manifest_v1_1.csv
+  manifest_sha256: 417286a0b5562c80693c4c410f64b3dcf773c8328568f5123deecca34c92a806
+isruc_original_v3:
+  subjects: 99
+  recordings: 99
+  valid_epochs: 89312
+  A1A2_subjects: 17
+  M1M2_subjects: 82
+  structural_exclusions: 1
+  manifest: reports/isruc_original_recording_manifest_v2.csv
+  manifest_sha256: 773fb7f3d9d2b3a169d4cafb3feff6207e8d3fec5f81aec015f08e311394ea01
+  cohort_config: configs/isruc_original_cohort_v3.yaml

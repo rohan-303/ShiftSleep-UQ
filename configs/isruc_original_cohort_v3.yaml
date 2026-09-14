@@ -1,0 +1,47 @@
+cohort_version: 3.0.0
+cohort_id: isruc_original_v3
+status: ACTIVE_FROZEN
+cohort_gate: ISRUC_ORIGINAL_COHORT_FROZEN
+active_primary: true
+supersedes:
+  - cohort_id: isruc_original_v2
+    cohort_version: 2.0.0
+    status: SUPERSEDED
+  - cohort_id: historical_nemar_isruc
+    status: SUPERSEDED
+data_contract_version: 1.2.0
+data_contract_sha256: ea8b2774a02192b1dcdb7f0b9ccaaef4232fd0772d8b154c47d0e707f73be036
+preprocessing_version: 0.1.0
+preprocessing_sha256: 70cd20ccee62b14a23e5996c9f76b6a708a4e69bde03f36bdf4ee8dffa9ef794
+provider: ORIGINAL_ISRUC_MEGA
+expected_subjects: 100
+complete_bundles: 100
+included_subjects: 99
+included_recordings: 99
+structural_exclusions: 1
+acquisition_exclusions: 0
+valid_epochs: 89312
+montage_counts:
+  ISRUC_A1A2: 17
+  ISRUC_M1M2: 82
+recording_manifest: reports/isruc_original_recording_manifest_v2.csv
+subject_manifest: reports/isruc_original_subject_manifest_v2.csv
+acquisition_manifest: reports/isruc_original_acquisition_manifest_v2.csv
+montage_distribution: reports/isruc_montage_distribution_v2.csv
+montage_qc: reports/isruc_montage_qc_v2.csv
+manifest_hash_file: reports/isruc_original_cohort_v3_hashes.txt
+manifest_hashes:
+  recording_manifest_sha256: 773fb7f3d9d2b3a169d4cafb3feff6207e8d3fec5f81aec015f08e311394ea01
+  subject_manifest_sha256: c69c552f6f6b324109e48b52cbf853a61a7f1d75585e441b4739e3bdc358d835
+  acquisition_manifest_sha256: bc372c65714c5d7e6de47b5cab1351f3677a5bfca800f3a316f1f15d250bd24e
+montage_contract:
+  ISRUC_A1A2:
+    eeg: C3-A2
+    eog: LOC-A2
+  ISRUC_M1M2:
+    eeg: C3-M2
+    eog: E1-M2
+  fallback: none
+  rereferencing: forbidden
+annotation_policy: scorer_1_primary_scorer_2_diagnostic
+no_splits_or_models: true

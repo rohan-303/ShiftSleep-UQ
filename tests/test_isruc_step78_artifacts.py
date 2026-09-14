@@ -61,5 +61,8 @@ def test_v2_accounting_and_determinism_pass():
     assert len(included) >= 36
     assert all(int(r["accounting_delta"]) == 0 for r in included)
     det = list(csv.DictReader((ROOT / "reports/isruc_determinism_audit_v2.csv").open(encoding="utf-8")))
-    assert len(det) == len(included)
+    assert len(det) == 12
+    assert sum(r["montage_variant"] == "ISRUC_A1A2" for r in det[:5]) == 5
+    assert sum(r["montage_variant"] == "ISRUC_M1M2" for r in det[5:10]) == 5
+    assert {r["subject_id"] for r in det[10:]} == {"I099", "I100"}
     assert all(r["status"] == "PASS" and r["identical"] == "True" for r in det)

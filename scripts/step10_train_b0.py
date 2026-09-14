@@ -161,7 +161,7 @@ def train_one_run(experiment_id: str, seed: int, normalization: dict[str, Any], 
     for epoch in range(1, training_config["max_epochs"] + 1):
         epoch_started = time.perf_counter()
         train_loader = DataLoader(train, batch_size=batch_size, shuffle=True, generator=make_epoch_generator(seed, epoch), num_workers=0, pin_memory=device.type == "cuda")
-        train_stats = train_one_epoch(model, train_loader, optimizer, device=device, max_grad_norm=training_config["gradient_clipping"]["max_norm"])
+        train_stats = train_one_epoch(model, train_loader, optimizer, device=device, max_grad_norm=training_config["gradient"]["max_norm"])
         dev_stats = evaluate_source_dev(model, dev_loader, device=device)
         selected = selector.observe(epoch, dev_stats["macro_f1"], dev_stats["nll"])
         row = {"epoch": epoch, **train_stats, **dev_stats, "learning_rate": optimizer.param_groups[0]["lr"], "checkpoint_selected": selected, "elapsed_training_seconds": time.perf_counter() - epoch_started}

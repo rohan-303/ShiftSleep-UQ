@@ -84,17 +84,64 @@ class ManifestEpochDataset(Dataset[dict[str, Any]]):
             path = self._resolve_npz(row, subject)
             if not path.exists():
                 continue
-            with np.load(path, allow_pickle=False) as arrays:
-                n_epochs = int(arrays["labels"].shape[0])
+            if role in {"CALIBRATION", "TEST"}:
+                epoch_field = "valid_canonical_epochs" if dataset == "sleep_edf_sc" else "valid_epochs"
+                n_epochs = int(row.get(epoch_field, "0"))
+            else:
+                with np.load(path, allow_pickle=False) as arrays:
+                    n_epochs = int(arrays["labels"].shape[0])
             recording_id = row.get("recording_id", subject)
             self.records.extend((path, index, subject, recording_id) for index in range(n_epochs))
         if not self.records:
             raise FileNotFoundError(f"no processed epoch files available for {dataset}/{role}")
         self._cache: dict[Path, dict[str, np.ndarray]] = {}
+        self._accessed: set[tuple[str, str, str, str, str, str]] = set()
         self.normalization: dict[str, dict[str, float]] | None = None
 
     def set_normalization(self, normalization: dict[str, dict[str, float]]) -> None:
         self.normalization = normalization
+
+    @property
+    def access_events(self) -> list[dict[str, str]]:
+        return [
+            {
+                "dataset": dataset,
+                "source_role": role,
+                "purpose": purpose,
+                "subject_id": subject,
+                "recording_id": recording,
+                "path": path,
+            }
+            for dataset, role, purpose, subject, recording, path in sorted(self._accessed)
+        ]
+
+    @property
+    def subject_ids(self) -> tuple[str, ...]:
+        return tuple(sorted({subject for _, _, subject, _ in self.records}))
+
+    @property
+    def recording_ids(self) -> tuple[str, ...]:
+        return tuple(sorted({recording for _, _, _, recording in self.records}))
+
+    def _load_recording(self, path: Path, subject: str, recording: str) -> dict[str, np.ndarray]:
+        key = (self.dataset, self.role, self.purpose, subject, recording, str(path))
+        self._accessed.add(key)
+        if path not in self._cache:
+            with np.load(path, allow_pickle=False) as arrays:
+                self._cache[path] = {
+                    "eeg": arrays["eeg"],
+                    "eog": arrays["eog"],
+                    "labels": arrays["labels"],
+                }
+        return self._cache[path]
+
+    def iter_recordings(self):
+        seen: set[Path] = set()
+        for path, _, subject, recording in self.records:
+            if path in seen:
+                continue
+            seen.add(path)
+            yield self._load_recording(path, subject, recording), subject, recording
 
     def _resolve_npz(self, row: dict[str, str], subject: str) -> Path:
         if row.get("output_path"):
@@ -105,25 +152,26 @@ class ManifestEpochDataset(Dataset[dict[str, Any]]):
             if relative.exists():
                 return relative
         prefix = "sleep_edf_sc" if self.dataset == "sleep_edf_sc" else "isruc_s1"
-        expected = self.root / "data/processed/core_v1_1" / f"{prefix}__{subject}__core_v1.npz"
-        if expected.exists():
-            return expected
-        matches = list((self.root / "data/processed/core_v1_1").glob(f"{prefix}__*{subject}*.npz"))
-        return matches[0] if matches else expected
+        roots = (
+            [self.root / "data/processed/core_v1_1", self.root / "data/processed/core_v1"]
+            if self.dataset == "sleep_edf_sc"
+            else [self.root / "data/processed/isruc_original_v2", self.root / "data/processed/core_v1_1", self.root / "data/processed/isruc_original_v1"]
+        )
+        recording_id = row.get("recording_id", subject)
+        patterns = [f"{prefix}__{recording_id}__*.npz", f"{prefix}__{subject}__*.npz"]
+        for directory in roots:
+            for pattern in patterns:
+                matches = sorted(directory.glob(pattern))
+                if matches:
+                    return matches[0]
+        return roots[0] / f"{prefix}__{recording_id}__core_v1.npz"
 
     def __len__(self) -> int:
         return len(self.records)
 
     def __getitem__(self, index: int) -> dict[str, Any]:
         path, epoch_index, subject, recording_id = self.records[index]
-        if path not in self._cache:
-            with np.load(path, allow_pickle=False) as arrays:
-                self._cache[path] = {
-                    "eeg": arrays["eeg"],
-                    "eog": arrays["eog"],
-                    "labels": arrays["labels"],
-                }
-        arrays = self._cache[path]
+        arrays = self._load_recording(path, subject, recording_id)
         label = int(arrays["labels"][epoch_index])
         if label < 0 or label >= 5:
             raise ValueError(f"label outside frozen class range: {label}")

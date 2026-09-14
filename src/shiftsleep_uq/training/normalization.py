@@ -54,10 +54,15 @@ def fit_source_train_dataset(dataset: object, *, role: str, std_epsilon: float =
     if role != "TRAIN":
         raise NormalizationRoleError("normalization fitting requires SOURCE TRAIN role")
     moments = {"EEG": StreamingMoments(), "EOG": StreamingMoments()}
-    for index in range(len(dataset)):  # type: ignore[arg-type]
-        sample = dataset[index]  # type: ignore[index]
-        moments["EEG"].update(np.asarray(sample["eeg"]))
-        moments["EOG"].update(np.asarray(sample["eog"]))
+    if hasattr(dataset, "iter_recordings"):
+        for arrays, _, _ in dataset.iter_recordings():  # type: ignore[attr-defined]
+            moments["EEG"].update(np.asarray(arrays["eeg"]))
+            moments["EOG"].update(np.asarray(arrays["eog"]))
+    else:
+        for index in range(len(dataset)):  # type: ignore[arg-type]
+            sample = dataset[index]  # type: ignore[index]
+            moments["EEG"].update(np.asarray(sample["eeg"]))
+            moments["EOG"].update(np.asarray(sample["eog"]))
     return {
         modality: {
             "mean": moments[modality].finalize(std_epsilon=std_epsilon)[0],

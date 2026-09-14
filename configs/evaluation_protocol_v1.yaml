@@ -1,0 +1,187 @@
+protocol_version: 1.0.0
+protocol_gate: EXPERIMENT_PROTOCOL_FROZEN
+project: ShiftSleep-UQ
+scope: pre_model_protocol_freeze
+model_implementation_allowed: false
+training_allowed: false
+final_benchmark_gate: NO
+cohorts:
+  accessible_core:
+    config: configs/core_cohort_v2.yaml
+    sha256: e8dbc91b04b4b54797e8d83be1866b28674fa2587e31507f94b3583e1f24f9ae
+    data_contract_version: 1.2.0
+    preprocessing_version: 0.1.0
+  isruc:
+    config: configs/isruc_original_cohort_v3.yaml
+    sha256: af4fb75be97df99443d5b7bc42d8f49bd55440702d07dffd49563356f7cece9d
+    subjects: 99
+    valid_epochs: 89312
+  sleep_edf_sc:
+    manifest: reports/core_recording_manifest_v1_1.csv
+    sha256: 417286a0b5562c80693c4c410f64b3dcf773c8328568f5123deecca34c92a806
+    subjects: 78
+    recordings: 153
+    valid_epochs: 414961
+experiment_matrix:
+  D1_SLEEPEDF_TO_ISRUC:
+    source_datasets: [sleep_edf_sc]
+    target_dataset: isruc_s1
+    target_subjects: 99
+    target_role: ALL_INCLUDED_TARGET_SUBJECTS
+    target_adaptation: forbidden
+  D2_ISRUC_TO_SLEEPEDF:
+    source_datasets: [isruc_s1]
+    target_dataset: sleep_edf_sc
+    target_subjects: 78
+    target_role: ALL_INCLUDED_TARGET_SUBJECTS
+    target_adaptation: forbidden
+future_shhs:
+  rule: LEAVE_ONE_DATASET_OUT_DOMAIN_GENERALIZATION
+  source_pool: all_other_validated_primary_datasets
+  target: entirety_of_frozen_target_dataset
+  reshuffle_existing_partitions: false
+  performance_driven_repartitioning: false
+split:
+  manifest: reports/subject_partitions_v1.csv
+  seed: 2026
+  unit: SUBJECT
+  proportions:
+    TRAIN: 0.70
+    DEV: 0.15
+    CALIBRATION: 0.15
+  rounding: largest_remainder_fixed_role_order_TRAIN_DEV_CALIBRATION
+  stratification:
+    sleep_edf_sc: NONE
+    isruc_s1: montage_variant_only
+  roles: [TRAIN, DEV, CALIBRATION]
+  target_subject_source_role_ignored: true
+oracle:
+  manifest: reports/oracle_target_partitions_v1.csv
+  split_seed: 2027
+  proportions:
+    ORACLE_CALIBRATION: 0.20
+    ORACLE_EVALUATION: 0.80
+  stratification:
+    sleep_edf_sc: subject_grouped
+    isruc_s1: montage_variant_only
+  primary_results_use_oracle: false
+normalization:
+  persisted_preprocessing_outputs: unnormalized
+  method: global_mean_and_standard_deviation_per_modality
+  fit_scope: SOURCE_TRAIN_ONLY
+  apply_to: [SOURCE_TRAIN, SOURCE_DEV, SOURCE_CALIBRATION, TARGET]
+  target_adaptive: false
+  subject_adaptive: false
+  montage_adaptive: false
+model_development_boundaries:
+  TRAIN: [parameter_optimization, augmentation_if_predeclared, normalization_fitting]
+  DEV: [checkpoint_selection, architecture_and_hyperparameter_selection, early_stopping]
+  CALIBRATION: [temperature_scaling, source_only_abstention_analysis_if_predeclared, conformal_scores]
+  TARGET: [primary_evaluation_only]
+model_seeds: [17, 42, 2026]
+checkpoint_selection:
+  primary_criterion: SOURCE_DEV_MACRO_F1
+  tie_breaks: [HIGHER_SOURCE_DEV_MACRO_F1, LOWER_SOURCE_DEV_NLL, EARLIER_EPOCH]
+  target_information_allowed: false
+hyperparameter_selection:
+  fit_data: SOURCE_TRAIN
+  selection_data: SOURCE_DEV
+  calibration_or_target_allowed: false
+c0_c5:
+  C0: known_domain_EEG_EOG
+  C1: known_domain_EEG_only_synthetic_no_EOG
+  C2: known_domain_EOG_only_synthetic_no_EEG
+  C3: unseen_domain_EEG_EOG
+  C4: unseen_domain_EEG_only_synthetic_no_EOG
+  C5: unseen_domain_EOG_only_synthetic_no_EEG
+missing_modality:
+  representation: frozen_explicit_missing_modality_tensor
+  physiological_signal_synthesis: forbidden
+  modality_mask: explicit_when_supported
+  alternate_modality_substitution: forbidden
+calibration:
+  primary: SOURCE_ONLY
+  source_only:
+    method: TEMPERATURE_SCALING
+    fit_labels: SOURCE_CALIBRATION_ONLY
+    report: [UNCALIBRATED, SOURCE_TEMPERATURE_SCALED]
+  cross_source:
+    status: NOT_APPLICABLE_FOR_TWO_DOMAIN_CORE
+    future_rule: source_calibration_subjects_only
+  oracle_target:
+    status: UPPER_BOUND_ONLY
+    separate_from_primary: true
+uncertainty:
+  primary: PREDICTIVE_ENTROPY
+  secondary: ONE_MINUS_MAX_PROBABILITY
+  error_definition: predicted_class_differs_from_ground_truth
+  higher_score_means: MORE_UNCERTAIN_AND_MORE_LIKELY_ERROR
+metrics:
+  predictive_primary: macro-F1
+  predictive_secondary: [Cohen_kappa, balanced_accuracy, per_stage_recall, confusion_matrix]
+  calibration_primary: [NLL, Brier_score]
+  reliability: [ECE_15_equal_width, adaptive_ECE_15_equal_mass_when_feasible, classwise_reliability, classwise_ECE]
+  error_detection: [AUROC, AUPRC]
+  selective:
+    primary: AURC
+    risk: 1_minus_accuracy
+    retained_coverages: [0.95, 0.90, 0.80, 0.70, 0.50]
+    additional: [selective_macro_F1, empirical_risk_coverage_curve]
+  conformal:
+    primary_method: APS
+    probabilities: UNCALIBRATED
+    fit_scope: SOURCE_CALIBRATION_ONLY
+    alpha: [0.10, 0.05]
+    report: [empirical_coverage, nominal_minus_empirical_gap, mean_set_size, median_set_size, singleton_fraction]
+    guarantee_boundary: empirical_under_shift_only_no_transferred_formal_guarantee
+  class_list: [Wake, N1, N2, N3, REM]
+conformal:
+  primary_method: APS
+  probabilities: UNCALIBRATED
+  fit_scope: SOURCE_CALIBRATION_ONLY
+  alpha: [0.10, 0.05]
+  report: [empirical_coverage, nominal_minus_empirical_gap, mean_set_size, median_set_size, singleton_fraction]
+  guarantee_boundary: empirical_under_shift_only_no_transferred_formal_guarantee
+montage_sensitivity:
+  required_when_target: isruc_s1
+  strata: [ISRUC_A1A2, ISRUC_M1M2]
+  metrics: [macro-F1, NLL, Brier_score, error_detection_AUROC, error_detection_AUPRC, AURC]
+  no_target_rebalancing: true
+statistics:
+  unit: SUBJECT
+  bootstrap_replicates: 2000
+  bootstrap_seed: 2028
+  confidence_interval: percentile_95
+  resampling: subject_with_replacement_all_subject_epochs_intact
+  multi_seed_aggregation: mean_and_standard_deviation
+  bootstrap_seed_pairing: same_subject_indices_across_model_seeds
+  paired_comparisons: paired_subject_bootstrap_metric_delta
+  epoch_level_inference: forbidden
+  primary_inference: [macro_F1_degradation, NLL_degradation, AURC_degradation, conformal_coverage_gap, domain_modality_interaction]
+  p_values: not_implemented_in_step_8
+  multiple_comparison_policy: secondary_p_values_require_documented_familywise_fdr
+interaction:
+  domain_by_modality: predeclared_contrast_using_authoritative_C0_C5
+  direction: not_assumed
+  current_two_domain_reporting: reciprocal_descriptive_and_subject_bootstrap_contrast
+  future_shhs_extension: same_contrast_without_retuning
+target_free_firewall:
+  target_labels_before_primary_evaluation: false
+  target_raw_distributions_before_primary_evaluation: false
+  target_normalization_statistics: false
+  target_class_or_stage_frequencies: false
+  target_montage_for_tuning: false
+  target_feature_representation_statistics: false
+  target_calibration_uncertainty_thresholds: false
+  target_conformal_scores: false
+  target_error_rates: false
+  intrinsic_montage_metadata_for_analysis_only: true
+lightweight_method_gate:
+  authorized_in_step_8: false
+  requires: reproducible_baseline_failure_mode_and_separate_preregistration
+artifacts:
+  source_partitions: reports/subject_partitions_v1.csv
+  oracle_partitions: reports/oracle_target_partitions_v1.csv
+  split_audit: reports/step08_subject_split_audit.csv
+  human_protocol: docs/experimental_protocol_v1.md
+  protocol_hashes: reports/step08_protocol_hashes.txt

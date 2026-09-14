@@ -1,0 +1,47 @@
+baseline_id: B0_DUAL_BRANCH_RAW_CNN
+version: 1.0.0
+name: Dual-Branch Raw-Signal CNN
+scope: epoch_wise_benchmark_baseline
+class_order: [Wake, N1, N2, N3, REM]
+input:
+  EEG: {channels: 1, samples: 3000, sampling_rate_hz: 100}
+  EOG: {channels: 1, samples: 1500, sampling_rate_hz: 50}
+  modality_mask: [EEG_available, EOG_available]
+  allowed_masks: [[1, 1], [1, 0], [0, 1]]
+  forbidden_masks: [[0, 0]]
+  cross_epoch_context: false
+encoders:
+  shared_weights: false
+  normalization: GroupNorm
+  activation: GELU
+  dropout: 0.20
+  EEG:
+    stem: {in_channels: 1, out_channels: 32, kernel_size: 51, stride: 2, padding: 25, bias: false}
+    residual_blocks:
+      - {in_channels: 32, out_channels: 64, kernel_size: 7, first_stride: 2, second_stride: 1, groups: 8}
+      - {in_channels: 64, out_channels: 128, kernel_size: 5, first_stride: 2, second_stride: 1, groups: 8}
+      - {in_channels: 128, out_channels: 128, kernel_size: 3, first_stride: 2, second_stride: 1, groups: 8}
+    pooled_dimension: 128
+    projection: {in_features: 128, out_features: 128}
+  EOG:
+    stem: {in_channels: 1, out_channels: 32, kernel_size: 25, stride: 2, padding: 12, bias: false}
+    residual_blocks:
+      - {in_channels: 32, out_channels: 64, kernel_size: 7, first_stride: 2, second_stride: 1, groups: 8}
+      - {in_channels: 64, out_channels: 128, kernel_size: 5, first_stride: 2, second_stride: 1, groups: 8}
+      - {in_channels: 128, out_channels: 128, kernel_size: 3, first_stride: 2, second_stride: 1, groups: 8}
+    pooled_dimension: 128
+    projection: {in_features: 128, out_features: 128}
+fusion:
+  type: late_concatenation
+  input_dimension: 256
+  modality_gating: deterministic_embedding_zeroing
+head:
+  layers: ["Linear(256,128)", GELU, "Dropout(0.30)", "Linear(128,5)"]
+  output: raw_logits
+initialization:
+  convolution_and_linear: kaiming_normal_for_nonlinear_path
+  biases: zero
+  groupnorm_weight: 1.0
+  groupnorm_bias: 0.0
+pretrained_weights: false
+sequence_context: false

@@ -15,6 +15,7 @@ dependencies = [
     "scipy>=1.17,<2",
     "PyYAML>=6,<7",
     "pyedflib>=0.1.42,<0.2",
+    "torch>=2.14,<2.15",
 ]
 
 [project.optional-dependencies]

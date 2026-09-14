@@ -1,0 +1,53 @@
+training_id: B0_DUAL_BRANCH_RAW_CNN_TRAINING
+version: 1.0.0
+baseline_id: B0_DUAL_BRANCH_RAW_CNN
+protocol_version: 1.1.0
+training_modality_mask: [1, 1]
+optimizer:
+  name: AdamW
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  betas: [0.9, 0.999]
+  eps: 1.0e-8
+scheduler: NONE
+loss:
+  name: CrossEntropyLoss
+  weight: NONE
+  label_smoothing: 0.0
+sampling:
+  epoch_definition: one_pass_over_all_source_train_epochs
+  mode: natural_epoch_level
+  shuffle: deterministic_per_epoch
+  balance_subjects: false
+  balance_stages: false
+  balance_montages: false
+  balance_recordings: false
+augmentation: NONE
+batch_size:
+  physical: 128
+  effective: 128
+gradient:
+  clipping: global_norm
+  max_norm: 1.0
+precision: FP32
+max_epochs: 30
+minimum_epochs: 5
+early_stopping:
+  patience: 6
+  metric: SOURCE_DEV_MACRO_F1
+  tolerance: 1.0e-6
+  tie_breaks: [HIGHER_SOURCE_DEV_MACRO_F1, LOWER_SOURCE_DEV_NLL, EARLIER_EPOCH]
+seeds: [17, 42, 2026]
+normalization:
+  fit_scope: SOURCE_TRAIN_ONLY
+  std_epsilon: 1.0e-8
+  modalities: [EEG, EOG]
+conditions:
+  C0: {population: SOURCE_TEST, mask: [1, 1]}
+  C1: {population: SOURCE_TEST, mask: [1, 0]}
+  C2: {population: SOURCE_TEST, mask: [0, 1]}
+  C3: {population: COMPLETE_TARGET, mask: [1, 1]}
+  C4: {population: COMPLETE_TARGET, mask: [1, 0]}
+  C5: {population: COMPLETE_TARGET, mask: [0, 1]}
+experiment_directions: [D1_SLEEPEDF_TO_ISRUC, D2_ISRUC_TO_SLEEPEDF]
+full_experiment_checkpoint_count: 6

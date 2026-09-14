@@ -1,0 +1,9 @@
+dataset,source_role,subject_count,recording_count,valid_epoch_count,ISRUC_A1A2_subject_count,ISRUC_M1M2_subject_count,partition_rule
+isruc_s1,TRAIN,59,59,53037,10,49,subject-level; ISRUC stratified by frozen montage_variant only
+isruc_s1,DEV,15,15,13785,3,12,subject-level; ISRUC stratified by frozen montage_variant only
+isruc_s1,CALIBRATION,10,10,8899,2,8,subject-level; ISRUC stratified by frozen montage_variant only
+isruc_s1,TEST,15,15,13591,2,13,subject-level; ISRUC stratified by frozen montage_variant only
+sleep_edf_sc,TRAIN,47,93,252742,0,0,subject-level; no label/stage/epoch-count stratification
+sleep_edf_sc,DEV,12,24,65042,0,0,subject-level; no label/stage/epoch-count stratification
+sleep_edf_sc,CALIBRATION,8,15,39561,0,0,subject-level; no label/stage/epoch-count stratification
+sleep_edf_sc,TEST,11,21,57616,0,0,subject-level; no label/stage/epoch-count stratification

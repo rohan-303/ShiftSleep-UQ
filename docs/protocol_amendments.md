@@ -48,3 +48,16 @@
 * STRATUM: `ISRUC_A1A2` and `ISRUC_M1M2` are mandatory acquisition-nuisance strata for future montage-stratified reliability sensitivity analyses.
 * TARGET-FREE STATUS: discovered before modeling; no model accuracy, calibration, uncertainty, stage-distribution optimization, or target-domain fitting was used.
 * IMPACT: data contract version changes from `1.1.0` to `1.2.0`; canonical labels, scorer-1 policy, 30-second epochs, target rates, units, resampling implementation, normalization prohibition, C0–C5 semantics, and target-free safeguards are unchanged.
+
+## A-08.1-01 — Independent Source-Test Partition for Known-Domain Evaluation
+
+* DISCOVERED: before modeling, predictions, calibration outputs, or performance results existed. The prior source roles could not provide an untouched in-domain evaluation population for paired C0–C2.
+* OLD: source roles were TRAIN 70%, DEV 15%, CALIBRATION 15%, with no independent SOURCE TEST role.
+* NEW: source roles are TRAIN 60%, DEV 15%, CALIBRATION 10%, TEST 15%, all subject-level. Sleep-EDF is unstratified; ISRUC is stratified only by frozen montage variant.
+* COUNTS: Sleep-EDF is 47/12/8/11; ISRUC is 59/15/10/15, with ISRUC_A1A2 10/3/2/2 and ISRUC_M1M2 49/12/8/13.
+* EVIDENCE: `configs/evaluation_protocol_v1_1.yaml`, `reports/subject_partitions_v2.csv`, and `reports/step08_1_subject_split_audit.csv`.
+* DECISION: `ADOPT_INDEPENDENT_SOURCE_TEST_FOR_C0_C2`.
+* FIREWALL: TEST is final C0–C2 evaluation only and cannot influence fitting, normalization, checkpoint/hyperparameter selection, temperature scaling, conformal quantiles, or thresholds.
+* MAPPING: C0–C2 use paired SOURCE TEST; C3–C5 use paired complete TARGET populations.
+* UNCHANGED: cohorts, target populations, C0–C5 meanings, metrics, seeds, oracle protocol, and montage contract.
+* STATUS: protocol remains `EXPERIMENT_PROTOCOL_FROZEN` under version `1.1.0`; Step 9 is not executed.

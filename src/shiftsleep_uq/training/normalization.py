@@ -21,12 +21,19 @@ class StreamingMoments:
         if not np.isfinite(array).all():
             raise ValueError("normalization input contains non-finite values")
         flat = array.reshape(-1)
-        for value in flat:
-            self.count += 1
-            delta = float(value) - self.mean_value
-            self.mean_value += delta / self.count
-            delta2 = float(value) - self.mean_value
-            self.m2 += delta * delta2
+        batch_count = int(flat.size)
+        batch_mean = float(flat.mean(dtype=np.float64))
+        batch_m2 = float(np.sum((flat - batch_mean) ** 2, dtype=np.float64))
+        if self.count == 0:
+            self.count = batch_count
+            self.mean_value = batch_mean
+            self.m2 = batch_m2
+            return
+        total = self.count + batch_count
+        delta = batch_mean - self.mean_value
+        self.m2 += batch_m2 + (delta * delta * self.count * batch_count / total)
+        self.mean_value += delta * batch_count / total
+        self.count = total
 
     def finalize(self, *, std_epsilon: float = 1e-8) -> tuple[float, float]:
         if self.count == 0:

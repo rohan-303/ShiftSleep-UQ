@@ -7,10 +7,14 @@ import csv
 import hashlib
 import json
 import subprocess
+import sys
 import time
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 
 import torch
 import yaml
@@ -23,7 +27,6 @@ from shiftsleep_uq.training.engine import evaluate_source_dev, train_one_epoch
 from shiftsleep_uq.training.normalization import fit_source_train_dataset
 from shiftsleep_uq.training.reproducibility import make_epoch_generator, seed_everything
 
-ROOT = Path(__file__).resolve().parents[1]
 EXPERIMENTS = ("D1_SLEEPEDF_TO_ISRUC", "D2_ISRUC_TO_SLEEPEDF")
 SEEDS = (17, 42, 2026)
 HASHES = {

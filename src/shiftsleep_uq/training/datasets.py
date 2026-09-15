@@ -22,6 +22,8 @@ _ALLOWED_PURPOSE_ROLES = {
     "dev": {"DEV"},
     "calibration": {"CALIBRATION"},
     "test": {"TEST"},
+    "evaluation_test": {"TEST"},
+    "evaluation_target": {"COMPLETE_TARGET"},
 }
 
 
@@ -64,6 +66,8 @@ class ManifestEpochDataset(Dataset[dict[str, Any]]):
             for row in partition_rows
             if row["dataset"] == dataset and row["source_role"] == role
         }
+        if role == "COMPLETE_TARGET":
+            subjects = {row["subject_id"] for row in partition_rows if row["dataset"] == dataset}
         if not subjects:
             raise ValueError(f"no frozen subjects for dataset={dataset}, role={role}")
         manifest_path = (
@@ -78,7 +82,7 @@ class ManifestEpochDataset(Dataset[dict[str, Any]]):
         ]
         if not records:
             raise ValueError(f"no included records for dataset={dataset}, role={role}")
-        self.records: list[tuple[Path, int, str, str]] = []
+        self.records: list[tuple[Path, int, str, str, str]] = []
         for row in records:
             subject = row["subject_id"]
             path = self._resolve_npz(row, subject)
@@ -91,7 +95,8 @@ class ManifestEpochDataset(Dataset[dict[str, Any]]):
                 with np.load(path, allow_pickle=False) as arrays:
                     n_epochs = int(arrays["labels"].shape[0])
             recording_id = row.get("recording_id", subject)
-            self.records.extend((path, index, subject, recording_id) for index in range(n_epochs))
+            montage = row.get("montage_variant", "NA")
+            self.records.extend((path, index, subject, recording_id, montage) for index in range(n_epochs))
         if not self.records:
             raise FileNotFoundError(f"no processed epoch files available for {dataset}/{role}")
         self._cache: dict[Path, dict[str, np.ndarray]] = {}
@@ -117,11 +122,11 @@ class ManifestEpochDataset(Dataset[dict[str, Any]]):
 
     @property
     def subject_ids(self) -> tuple[str, ...]:
-        return tuple(sorted({subject for _, _, subject, _ in self.records}))
+        return tuple(sorted({subject for _, _, subject, _, _ in self.records}))
 
     @property
     def recording_ids(self) -> tuple[str, ...]:
-        return tuple(sorted({recording for _, _, _, recording in self.records}))
+        return tuple(sorted({recording for _, _, _, recording, _ in self.records}))
 
     def _load_recording(self, path: Path, subject: str, recording: str) -> dict[str, np.ndarray]:
         key = (self.dataset, self.role, self.purpose, subject, recording, str(path))
@@ -137,7 +142,7 @@ class ManifestEpochDataset(Dataset[dict[str, Any]]):
 
     def iter_recordings(self):
         seen: set[Path] = set()
-        for path, _, subject, recording in self.records:
+        for path, _, subject, recording, _ in self.records:
             if path in seen:
                 continue
             seen.add(path)
@@ -170,7 +175,7 @@ class ManifestEpochDataset(Dataset[dict[str, Any]]):
         return len(self.records)
 
     def __getitem__(self, index: int) -> dict[str, Any]:
-        path, epoch_index, subject, recording_id = self.records[index]
+        path, epoch_index, subject, recording_id, montage = self.records[index]
         arrays = self._load_recording(path, subject, recording_id)
         label = int(arrays["labels"][epoch_index])
         if label < 0 or label >= 5:
@@ -187,9 +192,21 @@ class ManifestEpochDataset(Dataset[dict[str, Any]]):
             "dataset": self.dataset,
             "subject_id": subject,
             "recording_id": recording_id,
+            "epoch_index": torch.tensor(epoch_index, dtype=torch.long),
+            "montage_variant": montage,
             "source_role": self.role,
         }
 
 
 def build_source_dataset(experiment_id: str, role: str, purpose: str, *, root: str | Path = ".") -> ManifestEpochDataset:
     return ManifestEpochDataset(source_dataset_for_experiment(experiment_id), role, purpose, root=root)
+
+
+def build_evaluation_dataset(experiment_id: str, population: str, *, root: str | Path = ".") -> ManifestEpochDataset:
+    """Build a Phase-B dataset; no fitting APIs accept these datasets."""
+    if population == "SOURCE_TEST":
+        return ManifestEpochDataset(source_dataset_for_experiment(experiment_id), "TEST", "evaluation_test", root=root)
+    if population == "COMPLETE_TARGET":
+        target = "isruc_s1" if experiment_id == "D1_SLEEPEDF_TO_ISRUC" else "sleep_edf_sc"
+        return ManifestEpochDataset(target, "COMPLETE_TARGET", "evaluation_target", root=root)
+    raise ValueError(f"unknown evaluation population: {population}")

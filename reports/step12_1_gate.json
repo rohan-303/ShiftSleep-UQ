@@ -1,0 +1,52 @@
+{
+  "step": "12.1",
+  "qa_outcome": "STEP12_GATE_DECISION_REPAIRED",
+  "duplicate_v1_files": [
+    "reports/b0_oracle_aps_v1.csv",
+    "reports/b0_oracle_conformal_results_v1.csv"
+  ],
+  "duplicate_v1_sha256": "cfe82bc68f917efa07e8b7f6165d23dbb37a838572082c8584604620337a32ea",
+  "repaired_aps_artifact": "reports/b0_oracle_aps_v1_1.csv",
+  "independent_recoverable_compound_cells": [
+    [
+      "D1_SLEEPEDF_TO_ISRUC",
+      "C4"
+    ],
+    [
+      "D1_SLEEPEDF_TO_ISRUC",
+      "C5"
+    ],
+    [
+      "D2_ISRUC_TO_SLEEPEDF",
+      "C4"
+    ],
+    [
+      "D2_ISRUC_TO_SLEEPEDF",
+      "C5"
+    ]
+  ],
+  "independent_recoverable_count": 4,
+  "criterion_a_written_reliability_cells": [
+    [
+      "D1_SLEEPEDF_TO_ISRUC",
+      "C4"
+    ],
+    [
+      "D1_SLEEPEDF_TO_ISRUC",
+      "C5"
+    ],
+    [
+      "D2_ISRUC_TO_SLEEPEDF",
+      "C4"
+    ],
+    [
+      "D2_ISRUC_TO_SLEEPEDF",
+      "C5"
+    ]
+  ],
+  "criterion_a_implemented_reliability_cells": [],
+  "criterion_a_gate_spec_implementation_mismatch": true,
+  "criterion_b_written_recoverable_count": 4,
+  "final_lightweight_method_gate": "LIGHTWEIGHT_METHOD_NOT_AUTHORIZED",
+  "final_modality_conditioning_gate": "MODALITY_CONDITIONING_SUPPORTED"
+}

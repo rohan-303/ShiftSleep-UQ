@@ -1,0 +1,101 @@
+criterion,experiment_id,condition,metric,value,threshold,pass,reason
+A_IMPLEMENTED_STEP12,D1_SLEEPEDF_TO_ISRUC,C4,source_temperature_worsening,False,any source delta > metric tolerance,False,Exact Step 12 runner rule: cal_fail is source-temperature worsening only.
+A_WRITTEN_PROSE_RECONSTRUCTION,D1_SLEEPEDF_TO_ISRUC,C4,reliability_failure_beyond_predictive,True,NLL/Brier/ECE/ranking/conformal evidence,True,Independent descriptive evidence; ECE is a point reconstruction because no domain ECE contrast was exported.
+A_IMPLEMENTATION_MATCH,D1_SLEEPEDF_TO_ISRUC,C4,implementation_vs_written,False,must match,False,"Mismatch indicates the runner operationalizes only source-temperature worsening, not the written reliability taxonomy."
+B_ORACLE_RECOVERABILITY,D1_SLEEPEDF_TO_ISRUC,C4,NLL,-0.025515758310224346,relative reduction >= 0.05 OR CI high < 0,True,relative_reduction=0.023815; ci_high=-0.013904; threshold_pass=False; ci_pass=True
+B_ORACLE_RECOVERABILITY,D1_SLEEPEDF_TO_ISRUC,C4,Brier,-0.0077108983494076355,relative reduction >= 0.03 OR CI high < 0,True,relative_reduction=0.013930; ci_high=-0.003937; threshold_pass=False; ci_pass=True
+B_ORACLE_RECOVERABILITY,D1_SLEEPEDF_TO_ISRUC,C4,ECE,-0.052197548365757615,absolute reduction >= 0.01 OR CI high < 0,True,absolute_reduction=0.052198; ci_high=-0.031561
+B_ORACLE_CONFORMAL,D1_SLEEPEDF_TO_ISRUC,C4,APS_alpha_0.1,0.06335602166967635,absolute error improves and no pathological inflation,True,source_abs=0.068551; oracle_abs=0.005195; size_increase=-1.275330; pathological=False
+B_ORACLE_CONFORMAL,D1_SLEEPEDF_TO_ISRUC,C4,APS_alpha_0.05,0.01755799416585646,absolute error improves and no pathological inflation,True,source_abs=0.018551; oracle_abs=0.000993; size_increase=-0.781997; pathological=False
+B_COMPOUND_CELL_RECOVERABLE,D1_SLEEPEDF_TO_ISRUC,C4,joint,True,at least one meaningful NLL/Brier/ECE/conformal recovery,True,Independent cell-level summary; Criterion B requires at least two passing compound cells.
+C_SOURCE_ONLY_PLAUSIBILITY,D1_SLEEPEDF_TO_ISRUC,C4,design_constraint,True,source-only frozen candidate possible,True,Design feasibility only; no efficacy claim.
+D_PREDICTIVE_COMPONENT,D1_SLEEPEDF_TO_ISRUC,C4,macro-F1,-0.15696800313337034,substantial negative predictive transfer,True,macro-F1 delta=-0.156968; calibration cannot change argmax.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C4,NLL,0.8370947569862466,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C4,Brier,0.413512307278259,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C4,error_AUROC,-0.23524718766115194,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C4,error_AUPRC,0.025722107082835805,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C4,AURC,0.24367373184691285,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C4,gap,0.019953901337437168,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+A_COMPOUND_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C4,NLL,0.8370947569862466,descriptive reliability evidence,True,Numeric compound-cell evidence retained for independent review.
+A_COMPOUND_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C4,Brier,0.413512307278259,descriptive reliability evidence,True,Numeric compound-cell evidence retained for independent review.
+A_COMPOUND_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C4,ECE,nan,descriptive reliability evidence,True,Numeric compound-cell evidence retained for independent review.
+MODALITY_CONDITIONING,D1_SLEEPEDF_TO_ISRUC,C4,NLL,-0.0020678977698538326,material improvement: point delta < 0 or CI entirely below 0,True,"ci95=[-0.007919801165277206,0.0045187103199004494]"
+MODALITY_CONDITIONING,D1_SLEEPEDF_TO_ISRUC,C4,Brier,-0.0010649306902061895,material improvement: point delta < 0 or CI entirely below 0,True,"ci95=[-0.0032731777875433963,0.001349437948515345]"
+MODALITY_CONDITIONING,D1_SLEEPEDF_TO_ISRUC,C4,ECE,-0.008181932798047561,material improvement: point delta < 0 or CI entirely below 0,True,"ci95=[-0.02965611856847214,0.014509609756512259]"
+MODALITY_CONDITIONING_APS,D1_SLEEPEDF_TO_ISRUC,C4,APS_alpha_0.1,-0.054896513404639524,absolute error delta < 0 and no pathological inflation,True,mean_set_size_delta=-0.709682; pathological=False
+MODALITY_CONDITIONING_APS,D1_SLEEPEDF_TO_ISRUC,C4,APS_alpha_0.05,-0.01682178080288932,absolute error delta < 0 and no pathological inflation,True,mean_set_size_delta=-0.563606; pathological=False
+A_IMPLEMENTED_STEP12,D1_SLEEPEDF_TO_ISRUC,C5,source_temperature_worsening,False,any source delta > metric tolerance,False,Exact Step 12 runner rule: cal_fail is source-temperature worsening only.
+A_WRITTEN_PROSE_RECONSTRUCTION,D1_SLEEPEDF_TO_ISRUC,C5,reliability_failure_beyond_predictive,True,NLL/Brier/ECE/ranking/conformal evidence,True,Independent descriptive evidence; ECE is a point reconstruction because no domain ECE contrast was exported.
+A_IMPLEMENTATION_MATCH,D1_SLEEPEDF_TO_ISRUC,C5,implementation_vs_written,False,must match,False,"Mismatch indicates the runner operationalizes only source-temperature worsening, not the written reliability taxonomy."
+B_ORACLE_RECOVERABILITY,D1_SLEEPEDF_TO_ISRUC,C5,NLL,-0.1558453613930555,relative reduction >= 0.05 OR CI high < 0,True,relative_reduction=0.097426; ci_high=-0.121664; threshold_pass=True; ci_pass=True
+B_ORACLE_RECOVERABILITY,D1_SLEEPEDF_TO_ISRUC,C5,Brier,-0.06951273882757991,relative reduction >= 0.03 OR CI high < 0,True,relative_reduction=0.085584; ci_high=-0.058598; threshold_pass=True; ci_pass=True
+B_ORACLE_RECOVERABILITY,D1_SLEEPEDF_TO_ISRUC,C5,ECE,-0.15493514845994416,absolute reduction >= 0.01 OR CI high < 0,True,absolute_reduction=0.154935; ci_high=-0.140676
+B_ORACLE_CONFORMAL,D1_SLEEPEDF_TO_ISRUC,C5,APS_alpha_0.1,0.029184608973468418,absolute error improves and no pathological inflation,True,source_abs=0.039519; oracle_abs=0.010335; size_increase=-0.528712; pathological=False
+B_ORACLE_CONFORMAL,D1_SLEEPEDF_TO_ISRUC,C5,APS_alpha_0.05,-0.0020558410890401113,absolute error improves and no pathological inflation,False,source_abs=0.010481; oracle_abs=0.012536; size_increase=-0.053091; pathological=False
+B_COMPOUND_CELL_RECOVERABLE,D1_SLEEPEDF_TO_ISRUC,C5,joint,True,at least one meaningful NLL/Brier/ECE/conformal recovery,True,Independent cell-level summary; Criterion B requires at least two passing compound cells.
+C_SOURCE_ONLY_PLAUSIBILITY,D1_SLEEPEDF_TO_ISRUC,C5,design_constraint,True,source-only frozen candidate possible,True,Design feasibility only; no efficacy claim.
+D_PREDICTIVE_COMPONENT,D1_SLEEPEDF_TO_ISRUC,C5,macro-F1,-0.17671126671125692,substantial negative predictive transfer,True,macro-F1 delta=-0.176711; calibration cannot change argmax.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C5,NLL,1.0471146508070228,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C5,Brier,0.4937021696131762,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C5,error_AUROC,-0.25483704126095824,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C5,error_AUPRC,0.17003450222695504,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C5,AURC,0.5085970555304804,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C5,gap,0.05531155869126555,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+A_COMPOUND_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C5,NLL,1.0471146508070228,descriptive reliability evidence,True,Numeric compound-cell evidence retained for independent review.
+A_COMPOUND_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C5,Brier,0.4937021696131762,descriptive reliability evidence,True,Numeric compound-cell evidence retained for independent review.
+A_COMPOUND_EVIDENCE,D1_SLEEPEDF_TO_ISRUC,C5,ECE,nan,descriptive reliability evidence,True,Numeric compound-cell evidence retained for independent review.
+MODALITY_CONDITIONING,D1_SLEEPEDF_TO_ISRUC,C5,NLL,-0.03732188321470509,material improvement: point delta < 0 or CI entirely below 0,True,"ci95=[-0.051460838302871785,-0.02447764736319821]"
+MODALITY_CONDITIONING,D1_SLEEPEDF_TO_ISRUC,C5,Brier,-0.023746733299062406,material improvement: point delta < 0 or CI entirely below 0,True,"ci95=[-0.02911322618777569,-0.018732219447749984]"
+MODALITY_CONDITIONING,D1_SLEEPEDF_TO_ISRUC,C5,ECE,-0.06765086458307037,material improvement: point delta < 0 or CI entirely below 0,True,"ci95=[-0.07048996568830647,-0.05541522946360616]"
+MODALITY_CONDITIONING_APS,D1_SLEEPEDF_TO_ISRUC,C5,APS_alpha_0.1,-0.02398944297819139,absolute error delta < 0 and no pathological inflation,True,mean_set_size_delta=-0.429268; pathological=False
+MODALITY_CONDITIONING_APS,D1_SLEEPEDF_TO_ISRUC,C5,APS_alpha_0.05,0.0011390470898735572,absolute error delta < 0 and no pathological inflation,False,mean_set_size_delta=-0.019739; pathological=False
+A_IMPLEMENTED_STEP12,D2_ISRUC_TO_SLEEPEDF,C4,source_temperature_worsening,False,any source delta > metric tolerance,False,Exact Step 12 runner rule: cal_fail is source-temperature worsening only.
+A_WRITTEN_PROSE_RECONSTRUCTION,D2_ISRUC_TO_SLEEPEDF,C4,reliability_failure_beyond_predictive,True,NLL/Brier/ECE/ranking/conformal evidence,True,Independent descriptive evidence; ECE is a point reconstruction because no domain ECE contrast was exported.
+A_IMPLEMENTATION_MATCH,D2_ISRUC_TO_SLEEPEDF,C4,implementation_vs_written,False,must match,False,"Mismatch indicates the runner operationalizes only source-temperature worsening, not the written reliability taxonomy."
+B_ORACLE_RECOVERABILITY,D2_ISRUC_TO_SLEEPEDF,C4,NLL,-0.1983667798427593,relative reduction >= 0.05 OR CI high < 0,True,relative_reduction=0.135510; ci_high=-0.112683; threshold_pass=True; ci_pass=True
+B_ORACLE_RECOVERABILITY,D2_ISRUC_TO_SLEEPEDF,C4,Brier,-0.01040001963847026,relative reduction >= 0.03 OR CI high < 0,False,relative_reduction=0.016199; ci_high=0.010984; threshold_pass=False; ci_pass=False
+B_ORACLE_RECOVERABILITY,D2_ISRUC_TO_SLEEPEDF,C4,ECE,-0.018004334085330906,absolute reduction >= 0.01 OR CI high < 0,True,absolute_reduction=0.018004; ci_high=0.038980
+B_ORACLE_CONFORMAL,D2_ISRUC_TO_SLEEPEDF,C4,APS_alpha_0.1,-0.025260344359383513,absolute error improves and no pathological inflation,False,source_abs=0.074740; oracle_abs=0.100000; size_increase=1.806383; pathological=True
+B_ORACLE_CONFORMAL,D2_ISRUC_TO_SLEEPEDF,C4,APS_alpha_0.05,0.037109102059870724,absolute error improves and no pathological inflation,True,source_abs=0.087109; oracle_abs=0.050000; size_increase=1.493841; pathological=False
+B_COMPOUND_CELL_RECOVERABLE,D2_ISRUC_TO_SLEEPEDF,C4,joint,True,at least one meaningful NLL/Brier/ECE/conformal recovery,True,Independent cell-level summary; Criterion B requires at least two passing compound cells.
+C_SOURCE_ONLY_PLAUSIBILITY,D2_ISRUC_TO_SLEEPEDF,C4,design_constraint,True,source-only frozen candidate possible,True,Design feasibility only; no efficacy claim.
+D_PREDICTIVE_COMPONENT,D2_ISRUC_TO_SLEEPEDF,C4,macro-F1,-0.26397241604002936,substantial negative predictive transfer,True,macro-F1 delta=-0.263972; calibration cannot change argmax.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C4,NLL,0.8112416474545316,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C4,Brier,0.25226793717692914,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C4,error_AUROC,-0.07118509905433397,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C4,error_AUPRC,0.09663698091842321,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C4,AURC,0.18920268632607873,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C4,gap,0.1095265772298644,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+A_COMPOUND_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C4,NLL,0.8112416474545316,descriptive reliability evidence,True,Numeric compound-cell evidence retained for independent review.
+A_COMPOUND_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C4,Brier,0.25226793717692914,descriptive reliability evidence,True,Numeric compound-cell evidence retained for independent review.
+A_COMPOUND_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C4,ECE,nan,descriptive reliability evidence,True,Numeric compound-cell evidence retained for independent review.
+MODALITY_CONDITIONING,D2_ISRUC_TO_SLEEPEDF,C4,NLL,-0.018960341801948832,material improvement: point delta < 0 or CI entirely below 0,True,"ci95=[-0.046805814634302875,0.009534862958779809]"
+MODALITY_CONDITIONING,D2_ISRUC_TO_SLEEPEDF,C4,Brier,0.006798375975422211,material improvement: point delta < 0 or CI entirely below 0,False,"ci95=[-0.0026327526429637815,0.01653479512700508]"
+MODALITY_CONDITIONING,D2_ISRUC_TO_SLEEPEDF,C4,ECE,0.030498282834690804,material improvement: point delta < 0 or CI entirely below 0,False,"ci95=[0.004705453037315481,0.050846283013699096]"
+MODALITY_CONDITIONING_APS,D2_ISRUC_TO_SLEEPEDF,C4,APS_alpha_0.1,0.0701466715892829,absolute error delta < 0 and no pathological inflation,False,mean_set_size_delta=1.428686; pathological=True
+MODALITY_CONDITIONING_APS,D2_ISRUC_TO_SLEEPEDF,C4,APS_alpha_0.05,-0.0022429433177009184,absolute error delta < 0 and no pathological inflation,False,mean_set_size_delta=1.170450; pathological=True
+A_IMPLEMENTED_STEP12,D2_ISRUC_TO_SLEEPEDF,C5,source_temperature_worsening,False,any source delta > metric tolerance,False,Exact Step 12 runner rule: cal_fail is source-temperature worsening only.
+A_WRITTEN_PROSE_RECONSTRUCTION,D2_ISRUC_TO_SLEEPEDF,C5,reliability_failure_beyond_predictive,True,NLL/Brier/ECE/ranking/conformal evidence,True,Independent descriptive evidence; ECE is a point reconstruction because no domain ECE contrast was exported.
+A_IMPLEMENTATION_MATCH,D2_ISRUC_TO_SLEEPEDF,C5,implementation_vs_written,False,must match,False,"Mismatch indicates the runner operationalizes only source-temperature worsening, not the written reliability taxonomy."
+B_ORACLE_RECOVERABILITY,D2_ISRUC_TO_SLEEPEDF,C5,NLL,-0.04349511781796522,relative reduction >= 0.05 OR CI high < 0,True,relative_reduction=0.036444; ci_high=-0.024568; threshold_pass=False; ci_pass=True
+B_ORACLE_RECOVERABILITY,D2_ISRUC_TO_SLEEPEDF,C5,Brier,-0.028658000252019034,relative reduction >= 0.03 OR CI high < 0,True,relative_reduction=0.042765; ci_high=-0.023847; threshold_pass=True; ci_pass=True
+B_ORACLE_RECOVERABILITY,D2_ISRUC_TO_SLEEPEDF,C5,ECE,-0.05317813351687832,absolute reduction >= 0.01 OR CI high < 0,True,absolute_reduction=0.053178; ci_high=-0.042264
+B_ORACLE_CONFORMAL,D2_ISRUC_TO_SLEEPEDF,C5,APS_alpha_0.1,0.02920311589404978,absolute error improves and no pathological inflation,True,source_abs=0.056685; oracle_abs=0.027482; size_increase=-0.263093; pathological=False
+B_ORACLE_CONFORMAL,D2_ISRUC_TO_SLEEPEDF,C5,APS_alpha_0.05,0.01649483277852193,absolute error improves and no pathological inflation,True,source_abs=0.029728; oracle_abs=0.013233; size_increase=-0.208800; pathological=False
+B_COMPOUND_CELL_RECOVERABLE,D2_ISRUC_TO_SLEEPEDF,C5,joint,True,at least one meaningful NLL/Brier/ECE/conformal recovery,True,Independent cell-level summary; Criterion B requires at least two passing compound cells.
+C_SOURCE_ONLY_PLAUSIBILITY,D2_ISRUC_TO_SLEEPEDF,C5,design_constraint,True,source-only frozen candidate possible,True,Design feasibility only; no efficacy claim.
+D_PREDICTIVE_COMPONENT,D2_ISRUC_TO_SLEEPEDF,C5,macro-F1,-0.12435080659923003,substantial negative predictive transfer,True,macro-F1 delta=-0.124351; calibration cannot change argmax.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C5,NLL,0.0725723303797922,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C5,Brier,0.07844246535185007,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C5,error_AUROC,-0.08616524502146095,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C5,error_AUPRC,-0.01232934504553492,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C5,AURC,0.12771978558214556,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+D_PREDICTIVE_AND_RANKING_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C5,gap,0.050325306738574306,descriptive evidence retained,True,Evidence row; no subjective score or new gate.
+A_COMPOUND_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C5,NLL,0.0725723303797922,descriptive reliability evidence,True,Numeric compound-cell evidence retained for independent review.
+A_COMPOUND_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C5,Brier,0.07844246535185007,descriptive reliability evidence,True,Numeric compound-cell evidence retained for independent review.
+A_COMPOUND_EVIDENCE,D2_ISRUC_TO_SLEEPEDF,C5,ECE,nan,descriptive reliability evidence,True,Numeric compound-cell evidence retained for independent review.
+MODALITY_CONDITIONING,D2_ISRUC_TO_SLEEPEDF,C5,NLL,-0.015269198609813461,material improvement: point delta < 0 or CI entirely below 0,True,"ci95=[-0.0185058267303849,-0.011764122737079937]"
+MODALITY_CONDITIONING,D2_ISRUC_TO_SLEEPEDF,C5,Brier,0.000817955969257933,material improvement: point delta < 0 or CI entirely below 0,False,"ci95=[-0.0008924208178423912,0.0026188800773610304]"
+MODALITY_CONDITIONING,D2_ISRUC_TO_SLEEPEDF,C5,ECE,0.012662166474573675,material improvement: point delta < 0 or CI entirely below 0,False,"ci95=[0.004845307198624388,0.02084081427788328]"
+MODALITY_CONDITIONING_APS,D2_ISRUC_TO_SLEEPEDF,C5,APS_alpha_0.1,-0.0545556067480526,absolute error delta < 0 and no pathological inflation,True,mean_set_size_delta=-0.584288; pathological=False
+MODALITY_CONDITIONING_APS,D2_ISRUC_TO_SLEEPEDF,C5,APS_alpha_0.05,-0.02096485313008223,absolute error delta < 0 and no pathological inflation,True,mean_set_size_delta=-0.349952; pathological=False

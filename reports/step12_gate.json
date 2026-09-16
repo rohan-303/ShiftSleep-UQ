@@ -1,0 +1,11 @@
+{
+  "step": "12",
+  "diagnosis_gate": "BASELINE_DIAGNOSIS_COMPLETE",
+  "authorization_gate": "LIGHTWEIGHT_METHOD_NOT_AUTHORIZED",
+  "modality_conditioning": "MODALITY_CONDITIONING_SUPPORTED",
+  "recoverable_cells": [],
+  "analysis_scope": "ORACLE_TARGET_UPPER_BOUND",
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 2028,
+  "oracle_partition_sha256": "835344bcbd1992b00ec309082317d7f08a0b7f5f6c8d401ee670627d6bd806de"
+}

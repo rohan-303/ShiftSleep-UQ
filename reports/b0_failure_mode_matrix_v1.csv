@@ -1,0 +1,7 @@
+experiment_id,condition,predictive_failure,calibration_transfer_failure,ranking_failure,selective_failure,conformal_failure,montage_sensitivity_applicable,source_temperature_effect,oracle_domain_recoverability,oracle_condition_recoverability,modality_conditioning_value,evidence_summary
+D1_SLEEPEDF_TO_ISRUC,C3,SUPPORTED,NOT_SUPPORTED,MIXED,MIXED,MIXED,SUPPORTED,MIXED,SUPPORTED,SUPPORTED,NOT_IDENTIFIABLE,Frozen-bundle descriptive diagnosis; no causal interpretation.
+D1_SLEEPEDF_TO_ISRUC,C4,SUPPORTED,NOT_SUPPORTED,MIXED,MIXED,MIXED,SUPPORTED,MIXED,SUPPORTED,SUPPORTED,SUPPORTED,Frozen-bundle descriptive diagnosis; no causal interpretation.
+D1_SLEEPEDF_TO_ISRUC,C5,SUPPORTED,NOT_SUPPORTED,MIXED,MIXED,MIXED,SUPPORTED,MIXED,SUPPORTED,SUPPORTED,SUPPORTED,Frozen-bundle descriptive diagnosis; no causal interpretation.
+D2_ISRUC_TO_SLEEPEDF,C3,SUPPORTED,NOT_SUPPORTED,MIXED,MIXED,MIXED,NOT_IDENTIFIABLE,MIXED,SUPPORTED,SUPPORTED,NOT_IDENTIFIABLE,Frozen-bundle descriptive diagnosis; no causal interpretation.
+D2_ISRUC_TO_SLEEPEDF,C4,SUPPORTED,NOT_SUPPORTED,MIXED,MIXED,MIXED,NOT_IDENTIFIABLE,MIXED,SUPPORTED,SUPPORTED,SUPPORTED,Frozen-bundle descriptive diagnosis; no causal interpretation.
+D2_ISRUC_TO_SLEEPEDF,C5,SUPPORTED,NOT_SUPPORTED,MIXED,MIXED,MIXED,NOT_IDENTIFIABLE,MIXED,SUPPORTED,SUPPORTED,SUPPORTED,Frozen-bundle descriptive diagnosis; no causal interpretation.

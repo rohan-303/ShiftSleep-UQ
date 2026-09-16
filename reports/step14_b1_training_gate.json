@@ -1,0 +1,15 @@
+{
+  "step": "14",
+  "training_gate": "B1_SOURCE_TRAINING_COMPLETE",
+  "baseline_id": "B1_B0_ARCH_SOURCE_MODALITY_DROPOUT",
+  "runs": 6,
+  "expected_runs": 6,
+  "forbidden_exposure_count": 0,
+  "source_only_roles": ["TRAIN", "DEV"],
+  "calibration_evaluation": "NOT_EXECUTED",
+  "prediction_bundles": "NOT_CREATED",
+  "lightweight_method_gate": "LIGHTWEIGHT_METHOD_NOT_AUTHORIZED",
+  "target_access": false,
+  "test_access": false,
+  "shhs_access": false
+}

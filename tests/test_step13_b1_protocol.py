@@ -98,6 +98,8 @@ def test_b1_configs_reference_frozen_b0_and_no_training_outputs_exist():
     assert "modality_exposure_seed: 2029" in training
     assert hashlib.sha256((ROOT / "artifacts/normalization/b0/D1_SLEEPEDF_TO_ISRUC.json").read_bytes()).hexdigest() == "be93b208d5cd3bf5b567b55ea76030a132d78108b6c6167dba6bb0d1d0199fb3"
     assert hashlib.sha256((ROOT / "artifacts/normalization/b0/D2_ISRUC_TO_SLEEPEDF.json").read_bytes()).hexdigest() == "3a56d5cbf37bba4a27d55b94251ed1a299b9449eaa31d2aa9d94e56b69aa967e"
-    assert not list((ROOT / "artifacts/models").glob("b1_moddrop/**/*.pt"))
+    # Step 14 may create B1 checkpoints; Step 13 invariants prohibit only
+    # evaluation/calibration/normalization outputs at the protocol stage.
     assert not list((ROOT / "artifacts/predictions").glob("b1_moddrop/**/*"))
+    assert not list((ROOT / "artifacts/calibration").glob("b1_moddrop/**/*"))
     assert not list((ROOT / "artifacts/normalization").glob("b1/**/*"))

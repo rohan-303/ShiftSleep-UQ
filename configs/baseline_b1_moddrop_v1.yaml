@@ -1,0 +1,21 @@
+baseline_id: B1_B0_ARCH_SOURCE_MODALITY_DROPOUT
+version: 1.0.0
+name: B1 Source-Only Modality-Dropout Robustness Baseline
+human_readable_name: B1 Source-Only Modality-Dropout Robustness Baseline
+architecture_reference: B0_DUAL_BRANCH_RAW_CNN
+architecture_change: NONE
+b0_model_config: configs/baseline_b0_v1.yaml
+b0_model_config_sha256: a7546c8635043fc39f0041acd211358f325757039d74163a9a0525aa59d68e17
+parameter_count: 654597
+class_order: [Wake, N1, N2, N3, REM]
+input:
+  EEG: {channels: 1, samples: 3000, sampling_rate_hz: 100}
+  EOG: {channels: 1, samples: 1500, sampling_rate_hz: 50}
+  modality_mask: [EEG_available, EOG_available]
+  allowed_masks: [[1, 1], [1, 0], [0, 1]]
+  forbidden_masks: [[0, 0]]
+  cross_epoch_context: false
+fusion:
+  inherited_from: configs/baseline_b0_v1.yaml
+  modality_gating: deterministic_embedding_zeroing
+scientific_intervention: SOURCE_TRAIN_MODALITY_EXPOSURE_ONLY

@@ -1,0 +1,14 @@
+{
+  "step": "13",
+  "baseline_id": "B1_B0_ARCH_SOURCE_MODALITY_DROPOUT",
+  "protocol_gate": "B1_PROTOCOL_FROZEN",
+  "full_training": "NOT_EXECUTED",
+  "future_checkpoint_count": 6,
+  "lightweight_method_gate": "LIGHTWEIGHT_METHOD_NOT_AUTHORIZED",
+  "modality_conditioning_gate": "MODALITY_CONDITIONING_SUPPORTED",
+  "exposure_seed": 2029,
+  "exposure_probabilities": {"FULL": 0.5, "EEG_ONLY": 0.25, "EOG_ONLY": 0.25},
+  "parameter_count": 654597,
+  "normalization_reuse": true,
+  "target_test_calibration_access": false
+}

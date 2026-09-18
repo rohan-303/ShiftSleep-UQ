@@ -1,0 +1,5 @@
+criterion,status,evidence
+A,PASS,B1 residual reliability taxonomy retained in all four primary cells; residuals are heterogeneous.
+B,PASS,"Frozen oracle split produced diagnostic recoverability signals, but not a universal deployment conclusion."
+C,PASS,Source-only mask-specific fitting used SOURCE CALIBRATION only; no target fitting.
+D,MIXED,"B1 reduced predictive confounding in three cells, but D2 C5 remains inconclusive and residual predictive/representation failure remains."

@@ -1,0 +1,14 @@
+{
+  "b0_gate": "B0_V1_2_AUTHORITATIVE",
+  "b1_gate": "B1_PRIMARY_EVALUATION_COMPLETE",
+  "engine_gate": "WEIGHTED_RANKING_ENGINE_FROZEN",
+  "learned_method_implemented": false,
+  "method_authorization_gate": "RELIABILITY_METHOD_NOT_AUTHORIZED",
+  "oracle_diagnostic_only": true,
+  "shhs_access": false,
+  "source_mask_aps_count": 18,
+  "source_mask_temperature_count": 18,
+  "step": "16",
+  "step16_gate": "STEP16_METHOD_GATE_COMPLETE",
+  "step17": false
+}

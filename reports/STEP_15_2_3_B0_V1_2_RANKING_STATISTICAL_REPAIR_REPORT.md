@@ -178,9 +178,16 @@ Key hashes include:
 
 ## 39. Full Validation
 
-Focused repair/provenance/engine tests: `17 passed`.
+- focused repair/provenance/engine tests: `17 passed`;
+- full repository suite: `142 passed in 17.00s`;
+- `PYTHONPATH=src python -m compileall -q src tests scripts`: passed;
+- `git diff --check`: passed;
+- historical v1.1 bootstrap hash: unchanged (`47c2aadd716b903cb328b257ae7cefcc0a51b508cd1cc78db18a9ab0a1fa802`);
+- all v1.2 arrays: 120/120 valid 2,000-replicate vectors;
+- all transition and regression rows: PASS;
+- no forbidden heavy artifacts tracked.
 
-The full repository suite, compileall, diff check, frozen-input hash verification, and tracked-artifact policy checks are required after the two milestone commits and are recorded in the final commit validation below.
+Validation was rerun after the statistical-repair commit and is rerun after the engine-freeze commit before tagging.
 
 ## 40. Files Created
 
@@ -235,16 +242,17 @@ This is a recommendation only. Step 15.3 was not executed in Step 15.2.3.
 
 ## 45. Git Commit History
 
-Two separate local milestone commits are required: `eval: repair B0 ranking bootstrap statistics v1.2`, followed by `eval: freeze exact weighted ranking bootstrap engine`. Their final SHAs are recorded after commit completion.
+- `5c36db9` — `eval: repair B0 ranking bootstrap statistics v1.2`;
+- final engine-freeze commit — `eval: freeze exact weighted ranking bootstrap engine`, verified through `git log` and clean-tree validation.
 
 ## 46. Milestone Tag
 
-`b0-statistics-v1.2-ranking-repair` is created only after both commits, clean-tree verification, full validation, and tag-target verification.
+`b0-statistics-v1.2-ranking-repair` is created only after the engine-freeze commit, clean-tree verification, full validation, and tag-target verification.
 
 ## 47. GitHub Push Status
 
-Push status is recorded after validated branch-then-tag push. No force push or history rewrite is permitted.
+The branch is pushed first and the annotated tag second only after all scientific gates pass. The final status is recorded here after read-back verification.
 
 ## 48. Git Status / Diff Summary
 
-The final report is complete when the two milestone commits exist, the annotated tag points to the engine-freeze HEAD, the branch and tag push results are verified, and `git status --short` is empty.
+Final acceptance requires two local commits, the annotated tag targeting the engine-freeze HEAD, successful branch/tag push or an explicit `BLOCKED_GITHUB_PUSH`, and an empty `git status --short`.

@@ -198,6 +198,9 @@ These are recorded in `reports/step17_title_candidates.md` without unsupported n
 ## 40. Full Validation
 
 - Step 17 synthesis script executed successfully: `BENCHMARK_SYNTHESIS_FROZEN`.
+- Full repository tests: `155 passed`.
+- Compileall: passed.
+- `git diff --check`: passed.
 - Canonical tables: 4.
 - Supplementary tables: 10.
 - Figures: 8, each with PDF, PNG, and source CSV.
@@ -257,16 +260,16 @@ Step 18 is a recommendation only. It was not executed.
 
 ## 46. Git Commit
 
-The Step 17 scientific synthesis commit is created after final validation with message `paper: freeze benchmark synthesis and evidence package`.
+Scientific synthesis commit: `56d8b69e469e3e7e8331ac104b53b1003f8f96b8` — `paper: freeze benchmark synthesis and evidence package`. The commit contains the validated Step 17 paper evidence package.
 
 ## 47. Milestone Tag
 
-Annotated tag: `step17-benchmark-synthesis-frozen`, with annotation `ShiftSleep-UQ benchmark conclusions, figures, tables, and paper evidence frozen`. The tag targets the validated Step 17 scientific synthesis commit.
+Annotated tag: `step17-benchmark-synthesis-frozen`, targeting scientific commit `56d8b69e469e3e7e8331ac104b53b1003f8f96b8`, with annotation `ShiftSleep-UQ benchmark conclusions, figures, tables, and paper evidence frozen`. The tag was created after validation and was verified remotely.
 
 ## 48. GitHub Push Status
 
-Push is performed only after tests, compileall, diff checks, artifact-policy checks, and secret/data scans pass. `main` and `step17-benchmark-synthesis-frozen` are pushed without force push.
+`PUSH_COMPLETE`. Remote `origin` received `main` and `step17-benchmark-synthesis-frozen` without force push or history rewrite.
 
 ## 49. Git Status / Diff Summary
 
-The final report records the scientific synthesis commit, tag target, remote push state, and clean-worktree verification. Heavy bootstrap shards, checkpoints, prediction bundles, raw data, and secrets remain outside the tracked synthesis package.
+The scientific synthesis commit and annotated tag were pushed successfully. A follow-up documentation-only commit records the final report text without changing the scientific tag target. Remote read-back verified the branch and tag targets. Heavy bootstrap shards, checkpoints, prediction bundles, raw data, and secrets remain outside the tracked synthesis package.

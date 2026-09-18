@@ -234,11 +234,11 @@ This is a recommendation only. Step 17 was not executed.
 
 ## 53. Git Commit
 
-Scientific milestone commit: `2866101` — `research: freeze B1 residual diagnosis and method gate`. The commit contains the validated Step 16 diagnostic package.
+Scientific milestone commit: `e9d4cc8f59d4f791dad45c2fed3df8a5ffb67225` — `research: freeze B1 residual diagnosis and method gate`. The commit contains the validated Step 16 diagnostic package.
 
 ## 54. Milestone Tag
 
-Annotated tag: `step16-method-gate-frozen`, targeting the validated Step 16 scientific commit `2866101`, with annotation `ShiftSleep-UQ residual reliability diagnosis and method authorization gate frozen`. The tag was created only after validation and is not moved.
+Annotated tag: `step16-method-gate-frozen`, targeting validated scientific commit `e9d4cc8f59d4f791dad45c2fed3df8a5ffb67225`, with annotation `ShiftSleep-UQ residual reliability diagnosis and method authorization gate frozen`. The tag was created only after validation and is not moved.
 
 ## 55. GitHub Push Status
 
@@ -246,4 +246,4 @@ Annotated tag: `step16-method-gate-frozen`, targeting the validated Step 16 scie
 
 ## 56. Git Status / Diff Summary
 
-The final status is recorded after commit/tag/push. Step 15.3 remains frozen; Step 16 diagnostics are separate; heavy shards remain ignored; no checkpoints, prediction bundles, raw data, or secrets are included.
+Scientific commit and annotated tag were pushed successfully; the follow-up documentation-only commit records the final report text without changing the scientific tag target. Remote read-back verified the branch and tag targets. Heavy shards remain ignored and untracked; no checkpoints, prediction bundles, raw data, or secrets are included.

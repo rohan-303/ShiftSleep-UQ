@@ -243,16 +243,29 @@ This is a recommendation only. Step 15.3 was not executed in Step 15.2.3.
 ## 45. Git Commit History
 
 - `5c36db9` — `eval: repair B0 ranking bootstrap statistics v1.2`;
-- final engine-freeze commit — `eval: freeze exact weighted ranking bootstrap engine`, verified through `git log` and clean-tree validation.
+- `a86e0ad5620a14c5a1f3701e4605898b368b635b` — `eval: freeze exact weighted ranking bootstrap engine`;
+- the final documentation commit records the externally verified publication state without changing scientific artifacts.
 
 ## 46. Milestone Tag
 
-`b0-statistics-v1.2-ranking-repair` is created only after the engine-freeze commit, clean-tree verification, full validation, and tag-target verification.
+Tag: `b0-statistics-v1.2-ranking-repair`
+
+Annotated tag object: `6bf8d171f1162b06d3244d4b29e9d63a1cd555c9`
+
+Tag target: `a86e0ad5620a14c5a1f3701e4605898b368b635b`, exactly the engine-freeze milestone commit.
 
 ## 47. GitHub Push Status
 
-The branch is pushed first and the annotated tag second only after all scientific gates pass. The final status is recorded here after read-back verification.
+`PUSH_COMPLETE`
+
+Remote: `origin` (`https://github.com/rohan-303/ShiftSleep-UQ.git`)
+
+Branch push: `main` succeeded.
+
+Tag push: `b0-statistics-v1.2-ranking-repair` succeeded.
+
+No force push or history rewrite was used.
 
 ## 48. Git Status / Diff Summary
 
-Final acceptance requires two local commits, the annotated tag targeting the engine-freeze HEAD, successful branch/tag push or an explicit `BLOCKED_GITHUB_PUSH`, and an empty `git status --short`.
+The scientific milestone tree was clean before tagging and pushing. The final documentation-only commit is pushed separately; the tag remains pinned to the validated engine-freeze commit above. Remote read-back verified the branch and tag targets.

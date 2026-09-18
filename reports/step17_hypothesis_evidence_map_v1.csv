@@ -1,0 +1,7 @@
+hypothesis,original_expectation,primary_artifact,supporting_metric,direction_condition,evidence_status,final_interpretation
+F1,Source-only modality dropout improves missing-modality robustness,reports/b1_vs_b0_paired_results_v1.csv,macro-F1,D1 C4; D1 C5; D2 C4,SUPPORTED_WITH_DIRECTIONAL_LIMIT,Supported in three primary cells; D2 C5 inconclusive.
+F2,Robustness gains are direction/modality dependent,reports/b1_vs_b0_compound_failure_matrix_v1.csv,macro-F1,D1/D2 C4/C5,SUPPORTED,Heterogeneity is retained.
+F3,Predictive improvement does not guarantee uniform reliability improvement,reports/step16_residual_failure_matrix_v1.csv,NLL/AURC/conformal gap,four compound cells,SUPPORTED,Reliability families respond differently.
+F4,Residual reliability behavior is heterogeneous,reports/step16_method_authorization_matrix_v1.csv,residual labels,four compound cells,SUPPORTED,No universal reliability conclusion.
+F5,The B1 control does not justify changing protocol or authorizing a method,reports/step16_method_gate.json,method gate,all,SUPPORTED,Final gate is not authorized.
+F6,A new reliability method is efficacious,NOT TESTED — METHOD NOT AUTHORIZED,N/A,N/A,NOT TESTED — METHOD NOT AUTHORIZED,No learned method was implemented.

@@ -1,0 +1,69 @@
+{
+  "package": "ShiftSleep-UQ Step 17 paper evidence",
+  "gate": "BENCHMARK_SYNTHESIS_FROZEN",
+  "scientific_scope": "deterministic transformations of frozen artifacts only",
+  "b0_version": "v1_2",
+  "method_gate": "RELIABILITY_METHOD_NOT_AUTHORIZED",
+  "artifacts": [
+    {
+      "path": "reports\\paper_tables\\table1_benchmark_design.csv",
+      "sha256": "be53d703fec8c5d40392ebc8d043330a004247fd1fce34095c1e77113700866b"
+    },
+    {
+      "path": "reports\\paper_tables\\table2_b0_primary_shift_results.csv",
+      "sha256": "25542783210bd24c218912e9ce22ba96307ee7de0c2ad462432e01c126a6712b"
+    },
+    {
+      "path": "reports\\paper_tables\\table3_b1_vs_b0_compound_effects.csv",
+      "sha256": "940c3e73556d8e42fdc8e4be70cef9df3c0b54551fefe575e3bbbb5e603a7e1d"
+    },
+    {
+      "path": "reports\\paper_tables\\table4_residual_diagnosis.csv",
+      "sha256": "c357ec863a06c2154e151b9028521774c499a4826ed0c1ea33ca7a27ff241d79"
+    },
+    {
+      "path": "reports\\step17_figure_provenance_v1.csv",
+      "sha256": "afa7b73d3de474ef9a2f22d50af935bea2c6649b940d383b19c7e86a47c97f5c"
+    },
+    {
+      "path": "reports\\step17_table_provenance_v1.csv",
+      "sha256": "084c5c69fed0274fbec4af419898e1e5be4b3367ebcf47611c659e8888575472"
+    },
+    {
+      "path": "reports\\step17_claim_evidence_matrix_v1.csv",
+      "sha256": "aaf54563e37ffb0982e5d2e996ef66a7ab159a7562e9466a864af4d813fc051a"
+    },
+    {
+      "path": "reports\\step17_hypothesis_evidence_map_v1.csv",
+      "sha256": "42eb172dbe08c74cf7f07288c006a4532d744b5e8a74b4914d8901f4453eb052"
+    },
+    {
+      "path": "reports\\step17_nonclaims_v1.md",
+      "sha256": "a93ea23f7b0454e2f3dc6a61756a62a5fbfb9121c08ccc0a1370fbff415fdf55"
+    },
+    {
+      "path": "reports\\step17_results_narrative_map.md",
+      "sha256": "522db6a4fc055d3329ebe1ab5cb1cb7dbedae0dfc42e62838b6ab1d492b7dceb"
+    },
+    {
+      "path": "reports\\step17_methods_evidence_map.md",
+      "sha256": "81b1c1b4722dd411d919412947fbc966ba44eb74a0ed40c17accc21426984466"
+    },
+    {
+      "path": "reports\\step17_limitations_v1.md",
+      "sha256": "664c7294d5be72281161a732b24b0c79477607e7a94981cce59097013b4b45dd"
+    },
+    {
+      "path": "reports\\step17_contribution_statement_v1.md",
+      "sha256": "975ee6c6a595dcf8fdab357d7258f57e17cdc0c176a39ae304d41c3a5dd57559"
+    },
+    {
+      "path": "reports\\step17_title_candidates.md",
+      "sha256": "8ae4d6e39ae075e3333dba7307b447d6fbed7f00a4375596fe26ce5b8a3ca1dd"
+    },
+    {
+      "path": "reports\\step17_abstract_evidence_skeleton.md",
+      "sha256": "e7641f60e7271935094c66886392a31c4bac540e0088cf4e7354ce7edebc0130"
+    }
+  ]
+}

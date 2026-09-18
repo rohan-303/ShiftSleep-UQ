@@ -39,6 +39,13 @@ def test_shard_resume_and_reject_missing_range(tmp_path):
  try: merge_shards([read_shard(p1)],4); assert False
  except ValueError: pass
 
-def test_authoritative_auprc_literal_duplicate_semantics():
- x=fixture(); m=np.array([2,0,1]); z=literal(x,m); ones=np.ones(len(z.subject_ids),dtype=np.int64)
- assert abs(ranking(x,m)['ERROR_AUPRC']-ranking(z,ones)['ERROR_AUPRC'])<=1e-12
+from shiftsleep_uq.step11_1_statistics import exact_weighted_metric_replicates
+
+
+def test_versioned_exact_replicates_match_literal_ranking():
+    p=np.array([[.99,.0025,.0025,.0025,.0025],[.0025,.99,.0025,.0025,.0025],[.0025,.0025,.99,.0025,.0025]])
+    b={'subject_id':np.array(['A','B','C']), 'labels':np.array([1,0,2]), 'logits':np.log(p)}
+    x=prepare(b['labels'],p,b['subject_id']); m=np.array([2,0,1]); z=literal(x,m); draws=np.array([[0,0,2]])
+    for metric in ('ERROR_AUROC','ERROR_AUPRC','AURC'):
+        exact=float(exact_weighted_metric_replicates(b,metric,draws)[0])
+        assert np.isclose(exact,ranking(z,np.ones(len(z.subject_ids),dtype=int))[metric],atol=1e-12,equal_nan=True)

@@ -190,3 +190,45 @@ def weighted_metric_replicates(bundle: dict[str, np.ndarray], metric: str, draws
             ww=w[:,desc]; yy=errors[desc]; tp=np.cumsum(ww*yy,axis=1); positives=tp[:,-1]; precision=tp/np.maximum(np.cumsum(ww,axis=1),1); recall=tp/np.maximum(positives[:,None],1); out[start:start+len(d)]=np.sum(np.diff(recall,axis=1)*precision[:,1:],axis=1); out[start:start+len(d)][positives==0]=np.nan; continue
         raise ValueError(metric)
     return out
+
+
+def exact_weighted_metric_replicates(bundle: dict[str, np.ndarray], metric: str, draws: np.ndarray, *, batch_size: int = 32) -> np.ndarray:
+    """Exact duplicate-preserving weighted replicates for versioned repairs."""
+    subject_ids = np.asarray(bundle["subject_id"]); subjects = sorted(set(subject_ids.tolist()))
+    subject_index = np.asarray([subjects.index(x) for x in subject_ids], dtype=np.int64)
+    probs = softmax(bundle["logits"]); labels = np.asarray(bundle["labels"], dtype=np.int64)
+    pred = probs.argmax(1); errors = (pred != labels).astype(float); unc = entropy(probs)
+    draws = np.asarray(draws, dtype=np.int64); n_subjects = len(subjects); out = np.empty(len(draws), dtype=float)
+    asc = np.argsort(unc, kind="stable"); desc = np.argsort(-unc, kind="stable")
+    epoch_counts = np.bincount(subject_index, minlength=n_subjects).astype(float)
+    cm_s = np.zeros((n_subjects, 5, 5), dtype=float)
+    for i in range(5):
+        for j in range(5): cm_s[:, i, j] = np.bincount(subject_index, weights=((labels == i) & (pred == j)).astype(float), minlength=n_subjects)
+    per_nll = -np.log(np.clip(probs[np.arange(len(labels)), labels], 1e-12, 1.0)); per_brier = np.sum((probs - np.eye(5)[labels]) ** 2, axis=1)
+    nll_s = np.bincount(subject_index, weights=per_nll, minlength=n_subjects); brier_s = np.bincount(subject_index, weights=per_brier, minlength=n_subjects)
+    max_total = int(np.max(np.sum(epoch_counts[draws], axis=1)))
+    harmonic = np.concatenate(([0.0], np.cumsum(1.0 / np.arange(1, max_total + 1, dtype=float))))
+    for start in range(0, len(draws), batch_size):
+        d = draws[start:start + batch_size]; weights = np.zeros((len(d), n_subjects), dtype=float); rr = np.arange(len(d))[:, None]
+        np.add.at(weights, (np.broadcast_to(rr, d.shape), d), 1.0); total = weights @ epoch_counts
+        if metric == 'NLL': out[start:start + len(d)] = (weights @ nll_s) / total; continue
+        if metric == 'Brier': out[start:start + len(d)] = (weights @ brier_s) / total; continue
+        if metric == 'macro-F1':
+            cm = np.einsum('rs,sij->rij', weights, cm_s); tp = np.diagonal(cm, axis1=1, axis2=2); den = 2 * tp + cm.sum(1) - tp + cm.sum(2) - tp
+            out[start:start + len(d)] = np.mean(np.divide(2 * tp, den, out=np.zeros_like(tp), where=den > 0), axis=1); continue
+        ww = weights[:, subject_index]
+        if metric == 'ERROR_AUROC':
+            w = ww[:, asc]; y = errors[asc]; pos = np.sum(w * y, axis=1); neg = total - pos; ranks = np.cumsum(w, axis=1) - w / 2.0 + 0.5
+            num = np.sum(w * y * ranks, axis=1) - pos * (pos + 1) / 2.0; out[start:start + len(d)] = np.divide(num, pos * neg, out=np.full(len(d), np.nan), where=(pos > 0) & (neg > 0)); continue
+        if metric == 'AURC':
+            w = ww[:, asc]; y = errors[asc]; c = np.cumsum(w, axis=1) - w; e = np.cumsum(w * y, axis=1) - w * y
+            delta = harmonic[(c + w).astype(np.int64)] - harmonic[c.astype(np.int64)]
+            contribution = np.where(y[None, :] > 0, w + (e - c) * delta, e * delta); out[start:start + len(d)] = np.sum(contribution, axis=1) / total; continue
+        if metric == 'ERROR_AUPRC':
+            w = ww[:, desc]; y = errors[desc]; c = np.cumsum(w, axis=1) - w; t = np.cumsum(w * y, axis=1) - w * y; positives = np.sum(w * y, axis=1)
+            delta = harmonic[(c + w).astype(np.int64)] - harmonic[c.astype(np.int64)]
+            contribution = np.where(y[None, :] > 0, w + (t - c) * delta, 0.0)
+            first_positive = (y[None, :] > 0) & (w > 0) & (c == 0); contribution -= np.where(first_positive, (t + 1.0) / (c + 1.0), 0.0)
+            out[start:start + len(d)] = np.divide(np.sum(contribution, axis=1), positives, out=np.full(len(d), np.nan), where=positives > 0); continue
+        raise ValueError(metric)
+    return out

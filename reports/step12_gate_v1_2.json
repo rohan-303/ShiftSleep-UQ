@@ -1,0 +1,10 @@
+{
+  "step": "12.2",
+  "source_gate": "step12_gate_v1_1.json",
+  "b0_statistical_version": "v1_2",
+  "outcome": "GATE_OUTCOME_UNCHANGED_AFTER_B0_V1_2_REPAIR",
+  "final_lightweight_method_gate": "LIGHTWEIGHT_METHOD_NOT_AUTHORIZED",
+  "final_modality_conditioning_gate": "MODALITY_CONDITIONING_SUPPORTED",
+  "no_refitting": true,
+  "no_inference": true
+}

@@ -1,0 +1,44 @@
+{
+  "version": "v1_2",
+  "reason": "Exact duplicate-preserving AUPRC/AURC subject-bootstrap repair",
+  "replicates": 2000,
+  "seed": 2028,
+  "shard_size": 100,
+  "shards": 1440,
+  "affected_arrays": 24,
+  "unchanged_arrays": 96,
+  "hashes": [
+    {
+      "artifact": "artifacts/statistics/b0/bootstrap_replicates_v1_2.npz",
+      "sha256": "e9395019f0ae1ceae8176c9a6f74ba149dcb16c13885deca1dc1fb8e52e8c6b1"
+    },
+    {
+      "artifact": "reports/b0_primary_results_multiseed_v1_2.csv",
+      "sha256": "617fd699d0a0549abe9a032ff4cd3ae366a3c3863e8f314f17f722878bc9caa9"
+    },
+    {
+      "artifact": "reports/b0_primary_contrasts_v1_2.csv",
+      "sha256": "ac1f8b75fdfacf25509560c258889b1b3653e0c87cb0e2925c43f2503971343a"
+    },
+    {
+      "artifact": "reports/b0_v1_2_unaffected_array_audit.csv",
+      "sha256": "ed5859605c22f030d97ab54c751fe978eb04824ba0f4e88c71f0a0ba902674e7"
+    },
+    {
+      "artifact": "reports/b0_v1_1_to_v1_2_transition_audit.csv",
+      "sha256": "4b90eeb36b0e0c978e3fe3cf7a600f15d57d614c07b05bad3803badd2b070ade"
+    },
+    {
+      "artifact": "reports/b0_v1_1_to_v1_2_contrast_audit.csv",
+      "sha256": "b40f952be8cdc71ceed54acfac3ee206e141ae61c84e8eeaa6fd1fa2448cae0c"
+    },
+    {
+      "artifact": "reports/b0_v1_2_downstream_gate_reaudit.csv",
+      "sha256": "053f3db826b606aa5776ce7c9bc04390f822eb48cb63af29dedc530148e71bc8"
+    },
+    {
+      "artifact": "reports/step12_gate_v1_2.json",
+      "sha256": "90b4ab73e6acff259e887a46a981019a0348a6cefc11af5f1296aa242f4e7e42"
+    }
+  ]
+}

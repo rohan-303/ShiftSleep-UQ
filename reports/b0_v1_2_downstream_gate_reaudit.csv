@@ -1,0 +1,7 @@
+gate,v1_1_status,v1_2_status,ranking_bootstrap_dependency,evidence,changed
+Criterion A,GATE_SPEC_IMPLEMENTATION_MISMATCH,GATE_SPEC_IMPLEMENTATION_MISMATCH,SUPPORTING_ONLY,Four cells retain non-ranking calibration/conformal evidence and substantial macro-F1 degradation; corrected ranking intervals do not remove the written-criteria finding.,NO
+Criterion B,PASS_ORACLE_RECOVERY,PASS_ORACLE_RECOVERY,UNAFFECTED,"Uses oracle NLL/Brier/ECE/conformal artifacts, not B0 AUPRC/AURC bootstrap vectors.",NO
+Criterion C,DESIGN_CONSTRAINT_PASS,DESIGN_CONSTRAINT_PASS,UNAFFECTED,Design-only source-trained/target-label-free constraint.,NO
+Criterion D,FAIL,FAIL,CONTROLLED_BY_MACRO_F1,Substantial macro-F1 degradation is unchanged; ranking repair cannot change argmax predictions.,NO
+LIGHTWEIGHT_METHOD,LIGHTWEIGHT_METHOD_NOT_AUTHORIZED,LIGHTWEIGHT_METHOD_NOT_AUTHORIZED,NO_DECISION_CHANGE,Criterion D remains failed; no method authorization.,NO
+MODALITY_CONDITIONING,MODALITY_CONDITIONING_SUPPORTED,MODALITY_CONDITIONING_SUPPORTED,UNAFFECTED,Primary evidence is oracle condition/domain temperature and APS calibration evidence.,NO

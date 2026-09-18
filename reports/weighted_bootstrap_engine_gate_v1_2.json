@@ -1,0 +1,17 @@
+{
+  "engine_gate": "WEIGHTED_RANKING_ENGINE_FROZEN",
+  "b0_statistical_version": "v1_2",
+  "engine_module_sha256": "72fbb3efcfaaf56c9ac74375dc4bcec6b70d1e230c8622812c57dde19a893baf",
+  "weighted_engine_sha256": "091e07d50536c6057a0e531e08fb6f5bbe4a339ec33d288f1e72a35fb91ca9b7",
+  "config_sha256": "bf3daa0d27cb7190862bb66b0ed220998cddf9e6ea2679cb1e728b64edbe7236",
+  "production_replicates": 2000,
+  "production_shard_size": 100,
+  "synthetic_equivalence": "PASS",
+  "real_b1_equivalence": "PASS",
+  "literal_duplicate_equivalence": "PASS",
+  "b0_v1_2_regression": "PASS",
+  "atomic_write_interruption": "PASS",
+  "metadata_rejection_matrix": "PASS",
+  "resume_merge": "PASS",
+  "worst_case_benchmark": "PASS"
+}

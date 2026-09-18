@@ -137,10 +137,10 @@ Existing Step 19 manuscript derivatives and reviewer reports were preserved. Fro
 Do NOT execute Step 20.
 
 ## 36. Git Commit
-Created primary commit `30114c23a4752909d8312fffc233fd55c524cf31` with message `paper: revise ShiftSleep-UQ after internal scientific review`, followed by documentation-only commit `fc9a1664037288d23a026ea44f1d334810a48a9c` to finalize this report. The commits include the corrected canonical manuscript, supplement, versioned derivatives, reviewer reports, audits, and provenance.
+Created primary commit `30114c23a4752909d8312fffc233fd55c524cf31` with message `paper: revise ShiftSleep-UQ after internal scientific review`, followed by documentation-only commits that finalized this report and recorded the remote state. The commits include the corrected canonical manuscript, supplement, versioned derivatives, reviewer reports, audits, and provenance.
 
 ## 37. GitHub Push Status
-`PUSH_COMPLETE`: local `main` and `origin/main` both resolve to final HEAD `fc9a1664037288d23a026ea44f1d334810a48a9c`.
+`PUSH_COMPLETE`: local `main` and `origin/main` are synchronized at the final verification.
 
 ## 38. Git Status / Diff Summary
 The Step 19/19.1 manuscript, supplement, versioned derivatives, reviewer reports, audits, and provenance files were committed and pushed. Temporary LaTeX build directories and rendered contact sheets were excluded. Historical Step 18 untracked files remain preserved and were not bundled.

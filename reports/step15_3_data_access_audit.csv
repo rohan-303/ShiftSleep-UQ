@@ -1,0 +1,2 @@
+operation,path,raw_signal_access,inference,fitting,oracle,SHHS
+artifact_read,"frozen B1/B0 prediction, calibration, draw, and v1.2 statistical artifacts",NO,NO,NO,NO,NO

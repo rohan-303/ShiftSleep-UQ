@@ -1,0 +1,11 @@
+{
+  "evaluation_gate": "B1_PRIMARY_EVALUATION_COMPLETE",
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 2028,
+  "prediction_bundles": 36,
+  "calibration_frozen": true,
+  "oracle_analysis": false,
+  "inference_rerun": false,
+  "training_rerun": false,
+  "step16": false
+}

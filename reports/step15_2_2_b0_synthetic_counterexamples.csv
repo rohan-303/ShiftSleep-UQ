@@ -1,0 +1,4 @@
+metric,observations,sampled_subjects,multiplicities,H_historical,L_literal,E_exact
+ERROR_AUROC,"A,B,C","A,A,C","[2,0,1]",1.0,1.0,1.0
+ERROR_AUPRC,"A,B,C","A,A,C","[2,0,1]",0.0,0.5,0.5
+AURC,"A,B,C","A,A,C","[2,0,1]",0.4444444444444444,0.38888888888888884,0.3888888888888889

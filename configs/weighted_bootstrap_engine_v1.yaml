@@ -1,0 +1,19 @@
+version: 1.0.0
+bootstrap_unit: SUBJECT
+replicates: 2000
+rng: numpy.random.default_rng
+seed: 2028
+float_precision: float64
+class_order: [Wake, N1, N2, N3, REM]
+macro_f1: fixed_class_zero_division
+ECE: 15_equal_width
+AUROC: exact_subject_weighted_rank_with_half_ties
+AUPRC: frozen_step11_average_precision_convention
+AURC: frozen_step11_sorted_prefix_risk
+undefined_metrics: NaN
+multiplicity: integer_full_cluster_weight
+subject_ordering: sorted_subject_id
+observation_ordering: stable_frozen_bundle_order
+shard_size: 100
+equivalence_tolerance: 1.0e-12
+fallback_tolerance: 1.0e-10

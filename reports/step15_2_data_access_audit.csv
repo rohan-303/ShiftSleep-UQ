@@ -1,0 +1,3 @@
+phase,operation,source_role,purpose,path
+STEP15_2,read,prediction_artifact,statistics_engine_QA,artifacts/predictions
+STEP15_2,read,calibration_artifact,provenance_only,artifacts/calibration

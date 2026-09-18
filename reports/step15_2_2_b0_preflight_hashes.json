@@ -1,0 +1,17 @@
+[
+  {
+    "path": "reports/b0_statistical_hashes_v1_1.txt",
+    "sha256": "b7105917594764fe86e4f8a8a72eefe32e149aac5065431ee5b71e5df01134e6",
+    "exists": true
+  },
+  {
+    "path": "reports/b0_primary_prediction_hashes_v1.txt",
+    "sha256": "77422f9aa4a0d7ba359268a1914e316e567da13fed3ad242c3100cef43408af7",
+    "exists": true
+  },
+  {
+    "path": "artifacts/statistics/b0/bootstrap_replicates_v1_1.npz",
+    "sha256": "47c2aadd716b903cb328b257ae7cefcc0a51b508cd1cc78db18a9ab0a1fa8022",
+    "exists": true
+  }
+]

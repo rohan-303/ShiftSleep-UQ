@@ -1,0 +1,6 @@
+artifact,table_field,metric,uses_point,uses_bootstrap,potentially_affected,downstream_step
+reports/b0_primary_results_multiseed_v1_1.csv,ci95_low/high,ERROR_AUPRC,False,True,True,future B0/B1 comparison
+reports/b0_primary_results_multiseed_v1_1.csv,ci95_low/high,AURC,False,True,True,future B0/B1 comparison
+reports/b0_primary_results_multiseed_v1_1.csv,point_estimate,ERROR_AUPRC,True,False,False,future B0/B1 comparison
+reports/b0_primary_results_multiseed_v1_1.csv,point_estimate,AURC,True,False,False,future B0/B1 comparison
+reports/b0_primary_contrasts_v1_1.csv,contrast CI fields,AUPRC/AURC,False,True,True,Step 12.1 downstream audit

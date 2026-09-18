@@ -1,0 +1,17 @@
+{
+  "evaluation_gate": "B1_PRIMARY_EVALUATION_PARTIAL",
+  "status": "STEP15_PARTIAL_FINALIZATION_BLOCKED",
+  "calibration_gate": "B1_SOURCE_CALIBRATION_FROZEN",
+  "temperature_objects": 6,
+  "aps_objects": 6,
+  "prediction_bundles": 36,
+  "bootstrap_replicates_requested": 2000,
+  "bootstrap_seed": 2028,
+  "paired_statistics_finalized": false,
+  "compound_failure_matrix_finalized": false,
+  "interpretation_case_assigned": false,
+  "retraining": false,
+  "oracle_analysis": false,
+  "step16_executed": false,
+  "blocker": "Corrected subject-bootstrap statistical finalization exceeded the available execution window; no incomplete statistical outputs were accepted."
+}

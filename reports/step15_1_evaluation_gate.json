@@ -1,0 +1,13 @@
+{
+  "status": "STEP15_1_PARTIAL_FINALIZATION_BLOCKED",
+  "evaluation_gate": "B1_PRIMARY_EVALUATION_PARTIAL",
+  "prediction_manifest_rows": 36,
+  "bootstrap_populations": 4,
+  "bootstrap_replicates": 2000,
+  "per_seed_metrics_finalized": true,
+  "paired_statistics_finalized": false,
+  "ranking_statistics_finalized": false,
+  "inference_executed": false,
+  "calibration_refit": false,
+  "blocker": "Exact weighted ranking-statistic bootstrap finalization exceeded the execution window; incomplete CIs and paired tables were not accepted."
+}

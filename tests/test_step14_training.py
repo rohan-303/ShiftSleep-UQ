@@ -63,6 +63,7 @@ def test_step14_reuses_exact_b0_normalization_and_creates_no_forbidden_outputs()
     for experiment, expected in EXPECTED_NORMS.items():
         path = ROOT / f"artifacts/normalization/b0/{experiment}.json"
         assert hashlib.sha256(path.read_bytes()).hexdigest() == expected
-    assert not list((ROOT / "artifacts/predictions").glob("b1_moddrop/**/*"))
-    assert not list((ROOT / "artifacts/calibration").glob("b1_moddrop/**/*"))
+    gate = ROOT / "reports/step15_b1_evaluation_gate.json"
+    assert gate.exists() or not list((ROOT / "artifacts/predictions").glob("b1_moddrop/**/*"))
+    assert gate.exists() or not list((ROOT / "artifacts/calibration").glob("b1_moddrop/**/*"))
     assert not list((ROOT / "artifacts/normalization").glob("b1/**/*"))

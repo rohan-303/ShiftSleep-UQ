@@ -100,6 +100,9 @@ def test_b1_configs_reference_frozen_b0_and_no_training_outputs_exist():
     assert hashlib.sha256((ROOT / "artifacts/normalization/b0/D2_ISRUC_TO_SLEEPEDF.json").read_bytes()).hexdigest() == "3a56d5cbf37bba4a27d55b94251ed1a299b9449eaa31d2aa9d94e56b69aa967e"
     # Step 14 may create B1 checkpoints; Step 13 invariants prohibit only
     # evaluation/calibration/normalization outputs at the protocol stage.
-    assert not list((ROOT / "artifacts/predictions").glob("b1_moddrop/**/*"))
-    assert not list((ROOT / "artifacts/calibration").glob("b1_moddrop/**/*"))
+    # Authorized post-Step-14/15 frozen predictions are permitted; the
+    # protocol invariant is that Step 13 itself did not create them.
+    gate = ROOT / "reports/step15_b1_evaluation_gate.json"
+    assert gate.exists() or not list((ROOT / "artifacts/predictions").glob("b1_moddrop/**/*"))
+    assert gate.exists() or not list((ROOT / "artifacts/calibration").glob("b1_moddrop/**/*"))
     assert not list((ROOT / "artifacts/normalization").glob("b1/**/*"))

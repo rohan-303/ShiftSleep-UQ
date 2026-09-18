@@ -1,0 +1,69 @@
+location,manuscript_value,source_artifact,canonical_value,status
+Table 1 D1,"47,12,8,11,99",reports/subject_partitions_v2.csv,"47,12,8,11,99",PASS
+Table 1 D2,"59,15,10,15,78",reports/subject_partitions_v2.csv,"59,15,10,15,78",PASS
+Table 2 D1 C0 macro_F1,0.7479975565180403,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.7479975565180403,PASS
+Table 2 D1 C0 NLL,0.22027111064291127,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.22027111064291127,PASS
+Table 2 D1 C0 AURC,0.008754427262024453,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.008754427262024453,PASS
+Table 2 D1 C0 abs_gap_alpha_0.10,-0.09957766361195959,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,-0.09957766361195959,PASS
+Table 2 D1 C1 macro_F1,0.6633590456109645,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.6633590456109645,PASS
+Table 2 D1 C1 NLL,0.28017133608030936,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.28017133608030936,PASS
+Table 2 D1 C1 AURC,0.013381227882334494,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.013381227882334494,PASS
+Table 2 D1 C1 abs_gap_alpha_0.10,-0.09854207164676476,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,-0.09854207164676476,PASS
+Table 2 D1 C2 macro_F1,0.4662658916578722,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.4662658916578722,PASS
+Table 2 D1 C2 NLL,0.6795648008328651,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.6795648008328651,PASS
+Table 2 D1 C2 AURC,0.09406260615611405,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.09406260615611405,PASS
+Table 2 D1 C2 abs_gap_alpha_0.10,-0.09341618069054891,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,-0.09341618069054891,PASS
+Table 2 D1 C3 macro_F1,0.5948987191379381,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.5948987191379381,PASS
+Table 2 D1 C3 NLL,1.0942263503766367,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,1.0942263503766367,PASS
+Table 2 D1 C3 AURC,0.1881268837040546,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.1881268837040546,PASS
+Table 2 D1 C3 abs_gap_alpha_0.10,-0.07985339782634655,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,-0.07985339782634655,PASS
+Table 2 D1 C4 macro_F1,0.5063910424775941,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.5063910424775941,PASS
+Table 2 D1 C4 NLL,1.1172660930665559,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,1.1172660930665559,PASS
+Table 2 D1 C4 AURC,0.25705495972924736,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.25705495972924736,PASS
+Table 2 D1 C4 abs_gap_alpha_0.10,-0.07858817030932759,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,-0.07858817030932759,PASS
+Table 2 D1 C5 macro_F1,0.28955462494661527,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.28955462494661527,PASS
+Table 2 D1 C5 NLL,1.726679451639888,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,1.726679451639888,PASS
+Table 2 D1 C5 AURC,0.6026596616865945,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.6026596616865945,PASS
+Table 2 D1 C5 abs_gap_alpha_0.10,-0.03810462199928336,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,-0.03810462199928336,PASS
+Table 2 D2 C0 macro_F1,0.73072363068128,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.73072363068128,PASS
+Table 2 D2 C0 NLL,0.6355828923983516,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.6355828923983516,PASS
+Table 2 D2 C0 AURC,0.0886485880922413,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.0886485880922413,PASS
+Table 2 D2 C0 abs_gap_alpha_0.10,-0.06561449979152867,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,-0.06561449979152867,PASS
+Table 2 D2 C1 macro_F1,0.6462870090953093,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.6462870090953093,PASS
+Table 2 D2 C1 NLL,0.7961944341007207,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.7961944341007207,PASS
+Table 2 D2 C1 AURC,0.13441528842298545,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.13441528842298545,PASS
+Table 2 D2 C1 abs_gap_alpha_0.10,-0.08528437936869988,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,-0.08528437936869988,PASS
+Table 2 D2 C2 macro_F1,0.4847806745234773,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.4847806745234773,PASS
+Table 2 D2 C2 NLL,1.1879795139937463,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,1.1879795139937463,PASS
+Table 2 D2 C2 AURC,0.32971057735423065,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.32971057735423065,PASS
+Table 2 D2 C2 abs_gap_alpha_0.10,-0.06985750374022022,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,-0.06985750374022022,PASS
+Table 2 D2 C3 macro_F1,0.4835434871729308,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.4835434871729308,PASS
+Table 2 D2 C3 NLL,1.1089578677682947,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,1.1089578677682947,PASS
+Table 2 D2 C3 AURC,0.16342615421244097,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.16342615421244097,PASS
+Table 2 D2 C3 abs_gap_alpha_0.10,0.008844766937937195,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.008844766937937195,PASS
+Table 2 D2 C4 macro_F1,0.38231459305527987,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.38231459305527987,PASS
+Table 2 D2 C4 NLL,1.6074360815552524,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,1.6074360815552524,PASS
+Table 2 D2 C4 AURC,0.3236179747490642,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.3236179747490642,PASS
+Table 2 D2 C4 abs_gap_alpha_0.10,0.02424219786116451,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.02424219786116451,PASS
+Table 2 D2 C5 macro_F1,0.3604298679242472,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.3604298679242472,PASS
+Table 2 D2 C5 NLL,1.2605518443735386,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,1.2605518443735386,PASS
+Table 2 D2 C5 AURC,0.4574303629363763,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,0.4574303629363763,PASS
+Table 2 D2 C5 abs_gap_alpha_0.10,-0.019532197001645917,reports/paper_tables/table2_b0_primary_shift_results_v2.csv,-0.019532197001645917,PASS
+Table 3 D1 C4 B0/B1/delta/CI,"0.506284390139537;0.5430113747134614;0.036726984573924426;[0.031410503939488355,0.04214707415828722]",reports/b1_vs_b0_paired_results_v1.csv,"0.506284390139537;0.5430113747134614;0.036726984573924426;[0.031410503939488355,0.04214707415828722]",PASS
+Table 3 D1 C5 B0/B1/delta/CI,"0.2892359840367654;0.4751071661103973;0.1858711820736319;[0.16785946159372084,0.2029565738163169]",reports/b1_vs_b0_paired_results_v1.csv,"0.2892359840367654;0.4751071661103973;0.1858711820736319;[0.16785946159372084,0.2029565738163169]",PASS
+Table 3 D2 C4 B0/B1/delta/CI,"0.38224132135184563;0.4421581698090513;0.059916848457205685;[0.05308358217859475,0.06666889472068013]",reports/b1_vs_b0_paired_results_v1.csv,"0.38224132135184563;0.4421581698090513;0.059916848457205685;[0.05308358217859475,0.06666889472068013]",PASS
+Table 3 D2 C5 B0/B1/delta/CI,"0.3605237823953296;0.36115716176181767;0.0006333793664880516;[-0.012549972509524738,0.014505170511243053]",reports/b1_vs_b0_paired_results_v1.csv,"0.3605237823953296;0.36115716176181767;0.0006333793664880516;[-0.012549972509524738,0.014505170511243053]",PASS
+Abstract,+0.03673,reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,+0.03673,PASS
+Abstract,+0.18587,reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,+0.18587,PASS
+Abstract,+0.05992,reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,+0.05992,PASS
+Abstract,+0.00063,reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,+0.00063,PASS
+Abstract,"[+0.03141,+0.04215]",reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,"[+0.03141,+0.04215]",PASS
+Abstract,"[+0.16786,+0.20296]",reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,"[+0.16786,+0.20296]",PASS
+Abstract,"[+0.05308,+0.06667]",reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,"[+0.05308,+0.06667]",PASS
+Abstract,"[-0.01255,+0.01451]",reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,"[-0.01255,+0.01451]",PASS
+Results reliability examples,-0.02724,reports/b1_vs_b0_paired_results_v1.csv,-0.02724,PASS
+Results reliability examples,-0.02970,reports/b1_vs_b0_paired_results_v1.csv,-0.02970,PASS
+Results reliability examples,+0.00235,reports/b1_vs_b0_paired_results_v1.csv,+0.00235,PASS
+Results reliability examples,+0.16300,reports/b1_vs_b0_paired_results_v1.csv,+0.16300,PASS
+Results reliability examples,-0.05022,reports/b1_vs_b0_paired_results_v1.csv,-0.05022,PASS
+Results reliability examples,+0.00673,reports/b1_vs_b0_paired_results_v1.csv,+0.00673,PASS

@@ -1,0 +1,11 @@
+direction,dataset,role,expected_subject_count,manuscript_previous_value,authoritative_source_artifact,authoritative_value,corrected_value,status
+D1,sleep_edf_sc,TRAIN,47,47,reports/subject_partitions_v2.csv,47,47,PASS
+D1,sleep_edf_sc,DEV,12,12,reports/subject_partitions_v2.csv,12,12,PASS
+D1,sleep_edf_sc,CAL,8,8,reports/subject_partitions_v2.csv,8,8,PASS
+D1,sleep_edf_sc,TEST,11,0,reports/subject_partitions_v2.csv,11,11,PASS
+D1,isruc_s1,target,99,99,frozen cohort accounting in Step 17 evidence,99,99,PASS
+D2,isruc_s1,TRAIN,59,59,reports/subject_partitions_v2.csv,59,59,PASS
+D2,isruc_s1,DEV,15,15,reports/subject_partitions_v2.csv,15,15,PASS
+D2,isruc_s1,CAL,10,10,reports/subject_partitions_v2.csv,10,10,PASS
+D2,isruc_s1,TEST,15,0,reports/subject_partitions_v2.csv,15,15,PASS
+D2,sleep_edf_sc,target,78,78,frozen cohort accounting in Step 17 evidence,78,78,PASS

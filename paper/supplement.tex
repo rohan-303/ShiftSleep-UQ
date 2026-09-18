@@ -1,0 +1,62 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs,longtable,verbatim,hyperref,amsmath}
+\emergencystretch=3em
+\sloppy
+\title{ShiftSleep-UQ Supplementary Material}
+\author{Anonymous Authors}
+\date{}
+\begin{document}
+\maketitle
+\noindent This supplement is a structured reproducibility companion to the first submission candidate. Every numerical table and diagnostic below is reproduced from frozen Step 17 artifacts; no new training, inference, calibration fit, bootstrap, or statistical test is introduced here. Repository-relative paths are included so the rendered supplement remains auditable.
+
+\section*{S1. Dataset and channel details}
+The benchmark uses Sleep-EDF Expanded Sleep Cassette recordings and ISRUC Cohort I. The frozen accounting is 78 Sleep-EDF subjects (153 recordings; 414,961 valid epochs) and 100 ISRUC subjects, of which 99 are included after excluding one unsupported layout (89,312 valid epochs). The input channels are EEG Fpz-Cz and horizontal EOG for Sleep-EDF. ISRUC montage families are ISRUC\_A1A2 and ISRUC\_M1M2. Labels are harmonized to Wake, N1, N2, N3, and REM; R\&K stages 3 and 4 map to N3. Movement, unknown, artifact, and unscored epochs are excluded.
+
+\begin{table}[h]\centering\small
+\caption{Frozen benchmark design; counts are authoritative subject-role allocations.}\begin{tabular}{llllllll}\toprule
+Direction & Source & Target & TRAIN & DEV & CAL & TEST & Target cohort\\\midrule
+D1 & Sleep-EDF & ISRUC & 47 & 12 & 8 & 11 & 99\\
+D2 & ISRUC & Sleep-EDF & 59 & 15 & 10 & 15 & 78\\\bottomrule\end{tabular}\end{table}
+
+\section*{S2. Architecture and training}
+B0 is a dual raw-signal branch convolutional model with independent EEG and EOG branches, GroupNorm, GELU, residual blocks, adaptive pooling, 128-dimensional branch embeddings, modality masking, concatenation, and classification (654,597 parameters). B1 uses the same architecture and training protocol, exposing source TRAIN to full input with probability 0.50, EEG-only input with probability 0.25, and EOG-only input with probability 0.25. The frozen methods map is \texttt{reports/step17\_methods\_evidence\_map.md}; checkpoint and configuration manifests remain in the repository evidence package.
+
+\section*{S3. Full per-seed results}
+The complete frozen per-seed B0 and B1 tables are retained as CSV artifacts and are not recomputed here.\newline
+\texttt{reports/paper\_supplement/all\_b0\_v1\_2\_results.csv}\newline
+\texttt{reports/paper\_supplement/all\_b1\_results.csv}\newline
+\texttt{reports/paper\_supplement/b1\_vs\_b0\_paired\_results.csv}\newline
+The compact canonical B0 primary table is reproduced below.
+\begin{center}\scriptsize\begin{tabular}{llrrrr}\toprule
+Dir. & Cond. & macro-F1 & NLL & AURC & $|\Delta_{cov}|$\\\midrule
+D1&C0&.74800&.22027&.00875&.09958\\D1&C1&.66336&.28017&.01338&.09854\\D1&C2&.46627&.67956&.09406&.09342\\D1&C3&.59490&1.09423&.18813&.07985\\D1&C4&.50639&1.11727&.25705&.07859\\D1&C5&.28955&1.72668&.60266&.03810\\D2&C0&.73072&.63558&.08865&.06561\\D2&C1&.64629&.79619&.13442&.08528\\D2&C2&.48478&1.18798&.32971&.06986\\D2&C3&.48354&1.10896&.16343&.00884\\D2&C4&.38231&1.60744&.32362&.02424\\D2&C5&.36043&1.26055&.45743&.01953\\\bottomrule\end{tabular}\end{center}
+
+\section*{S4. Stage analysis}
+Stage-level B1--B0 recall changes for Wake, N1, N2, N3, and REM across C3--C5 are retained in \texttt{reports/paper\_supplement/stage\_level\_effects.csv}; the complete frozen source is unchanged.
+
+\section*{S5. Confusion matrices}
+Frozen confusion changes are retained in \texttt{reports/paper\_supplement/confusion\_changes.csv}. No confusion matrix was regenerated for Step 19.
+
+\section*{S6. Interaction analysis}
+The frozen interaction contrasts are retained in \texttt{reports/paper\_supplement/interaction\_contrasts.csv}. These are deterministic copies of the Step 17 evidence package, not new contrasts.
+
+\section*{S7. ISRUC montage sensitivity}
+The frozen montage sensitivity analysis is retained in \texttt{reports/paper\_supplement/montage\_sensitivity.csv}. The main text treats A1A2 versus M1M2 as a dataset-specific limitation and does not infer montage causality.
+
+\section*{S8. Source-mask calibration}
+The source-only mask-specific temperature and adaptive prediction-set diagnostics are retained in \texttt{reports/paper\_supplement/source\_mask\_calibration.csv}. They are secondary controls and do not authorize a learned reliability method.
+
+\section*{S9. Oracle diagnostics}
+Target-label oracle diagnostics are retained in \texttt{reports/paper\_supplement/oracle\_diagnostics.csv}. They are post-hoc diagnostic upper bounds and are not deployment evidence.
+
+\section*{S10. B0 v1.2 correction}
+The historical correction audit is retained in \texttt{reports/paper\_supplement/b0\_v1\_1\_to\_v1\_2\_repair\_audit.csv}. B0 v1.2 is authoritative; the earlier artifact remains preserved for auditability.
+
+\section*{S11. Reproducibility and hashes}
+The authoritative evidence manifest is \texttt{reports/paper\_evidence/paper\_evidence\_manifest\_v1.json}. The manuscript-specific figure source audit is \texttt{reports/step19\_figure\_source\_audit.csv}; the Figure 2 binding audit is \texttt{reports/step19\_fig2\_source\_audit.csv}. The repository contains the deterministic synthesis script \texttt{scripts/step17\_paper\_synthesis.py}. Raw datasets, prediction bundles, checkpoints, heavy bootstrap shards, and credentials are not redistributed.
+
+\section*{Frozen non-claims}
+The study does not establish universal uncertainty failure, universal modality-dropout superiority, montage causality, clinical safety, arbitrary-shift conformal validity, target-free recovery from all shifts, a novel calibration method, state-of-the-art sleep staging, SHHS validation, a new architecture, or performance on unevaluated populations.
+\end{document}

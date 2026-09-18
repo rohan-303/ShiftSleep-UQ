@@ -1,0 +1,10 @@
+claim_id,claim,classification,evidence_source
+C1,Compound shift produces direction- and condition-dependent predictive/reliability behavior,SUPPORTED,Step 17 B0 v1.2 Table 2; revised Table 2
+C2,B1 improves compound macro-F1 in three of four cells,SUPPORTED,Step 17 Table 3; revised Table 3
+C3,D2 C5 remains inconclusive,SUPPORTED,Step 17 Table 3
+C4,Predictive gains do not imply uniform reliability gains,SUPPORTED,Step 16 residual matrix; Tables 3-4; revised Results
+C5,Source-only mask calibration does not uniformly resolve residuals,QUALIFIED,Step 16 mask calibration comparison
+C6,Oracle diagnostics are not deployment evidence,QUALIFIED,Step 16 oracle diagnostics and method gate
+C7,No clinical safety/deployment claim,SUPPORTED,Step 17 non-claims; revised limitations
+C8,"Seed 17 curves are representative, three seeds support inference",QUALIFIED,Frozen figure source; B0/B1 paired artifacts
+C9,Dataset scale and provenance,SUPPORTED,Frozen cohort manifests; imtiaz2015sleepedf; khalighi2016isruc

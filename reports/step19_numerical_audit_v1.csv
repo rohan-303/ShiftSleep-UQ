@@ -1,0 +1,9 @@
+location,manuscript_value,source_artifact,status
+Abstract,"D1 C4 delta +0.03673 CI [+0.03141,+0.04215]",reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,exact
+Abstract,"D1 C5 delta +0.18587 CI [+0.16786,+0.20296]",reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,exact
+Abstract,"D2 C4 delta +0.05992 CI [+0.05308,+0.06667]",reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,exact
+Abstract,"D2 C5 delta +0.00063 CI [-0.01255,+0.01451]",reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,exact
+Results/B0,D1 C0/C3/C5 macro-F1 .74800/.59490/.28955,reports/b0_primary_results_multiseed_v1_2.csv,rounded exact
+Results/B0,D2 C0/C3/C5 macro-F1 .73072/.48354/.36043,reports/b0_primary_results_multiseed_v1_2.csv,rounded exact
+Results/reliability,"D1 C4 NLL -0.02724, AURC -0.02970, gap +0.00235",reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,rounded exact
+Results/reliability,"D2 C5 NLL +0.16300, AURC -0.05022, gap +0.00673",reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,rounded exact

@@ -50,7 +50,7 @@ Multimodal models often assume that all channels used during training will remai
 This intervention is not presented as a new missing-modality algorithm. Its value is experimental: it provides a controlled baseline against which residual reliability behavior can be interpreted. If B1 improves macro-F1 under an unseen modality mask, that does not by itself establish calibrated probabilities or valid shifted-distribution coverage.
 
 \subsection{Uncertainty, Calibration, and Selective Prediction}
-Predictive probabilities support several distinct evaluations. Calibration asks whether confidence corresponds to empirical correctness. Error-ranking metrics ask whether a scalar uncertainty score separates incorrect from correct predictions. Selective prediction asks how risk changes when low-confidence examples are withheld. Reject-option models formalize this tradeoff directly, including coverage-constrained selective classifiers such as SelectiveNet \citep{geifman2019selectivenet}. These properties can diverge. A model can improve its argmax predictions without improving the ordering of remaining errors, and a scalar temperature can improve a likelihood-based calibration metric without changing the argmax decision. Modern neural-network calibration work likewise shows that confidence quality is a separate property from classification accuracy \citep{guo2017calibration}.
+Predictive probabilities support several distinct evaluations. Calibration asks whether confidence corresponds to empirical correctness. Error-ranking metrics ask whether a scalar uncertainty score separates incorrect from correct predictions. Selective prediction asks how risk changes when low-confidence examples are withheld. Reject-option models formalize this tradeoff directly, including coverage-constrained selective classifiers such as SelectiveNet \citep{geifman2019selectivenet}. These properties can diverge. A model can improve its argmax predictions without improving the ordering of remaining errors, and a scalar temperature can improve a likelihood-based calibration metric without changing the argmax decision. Modern neural-network calibration work likewise shows that confidence quality is a separate property from classification accuracy \citep{guo2017calibration}. Work auditing predictive uncertainty under real dataset shift further motivates testing whether uncertainty remains useful after transfer rather than assuming that source-domain confidence is portable \citep{thagaard2020uncertaintyshift,prinster2022jaws}.
 
 ShiftSleep-UQ uses source-only scalar temperature scaling for the primary deployment evaluation and predictive entropy as the preregistered uncertainty score. Error detection is defined by incorrect argmax predictions and evaluated with AUROC and AUPRC. Risk-coverage curves and AURC summarize selective behavior. These measurements are reported as separate axes rather than collapsed into one reliability score. The benchmark does not claim that entropy is an optimal uncertainty representation.
 
@@ -64,14 +64,14 @@ The positioning is consequently restrained. Prior work provides architectures, d
 The benchmark was constructed from frozen repository artifacts. The authoritative evidence package has gate \texttt{BENCHMARK\_SYNTHESIS\_FROZEN}; B0 inferential results are version v1.2; the B1 primary evaluation and Step 16 method-gate artifacts are preserved. No Step 18 analysis changes any prediction, calibration object, bootstrap result, partition, or protocol artifact. Tables and figures in this manuscript reference the Step 17 outputs under \texttt{reports/paper\_tables/} and \texttt{reports/paper\_figures/}.
 
 \subsection{Datasets and Cohorts}
-The first core dataset is Sleep-EDF Expanded, restricted to the Sleep Cassette component. The frozen cohort contains 78 subjects, 153 recordings, and 414,961 valid epochs. The input channels are EEG Fpz-Cz and horizontal EOG. Both signals are sampled at 100 Hz before the frozen processing pipeline where applicable.
+The first core dataset is Sleep-EDF Expanded, restricted to the Sleep Cassette component \citep{imtiaz2015sleepedf}. The frozen cohort contains 78 subjects, 153 recordings, and 414,961 valid epochs. The input channels are EEG Fpz-Cz and horizontal EOG. Both signals are sampled at 100 Hz before the frozen processing pipeline where applicable.
 
-The second core dataset is ISRUC Cohort I. The frozen accounting contains 100 subjects, of which 99 are included; one unsupported layout is excluded. The included cohort contributes 89,312 valid epochs. The frozen montage families are ISRUC\_A1A2 and ISRUC\_M1M2. This montage heterogeneity is retained as part of the benchmark rather than hidden by treating the datasets as sensor-identical.
+The second core dataset is ISRUC Cohort I, whose public dataset description is given by Khalighi et al. \citep{khalighi2016isruc}. The frozen accounting contains 100 subjects, of which 99 are included; one unsupported layout is excluded. The included cohort contributes 89,312 valid epochs. The frozen montage families are ISRUC\_A1A2 and ISRUC\_M1M2. This montage heterogeneity is retained as part of the benchmark rather than hidden by treating the datasets as sensor-identical.
 
 Labels are harmonized to Wake, N1, N2, N3, and REM. R\&K stages 3 and 4 are mapped to N3. Movement, unknown, artifact, and unscored epochs are excluded and are not converted to Wake.
 
 \subsection{Partition Design}
-The frozen protocol uses subject-level separation. The source dataset is split into TRAIN, DEV, CAL, and TEST roles with proportions 60\%, 15\%, 10\%, and 15\%. TRAIN is used for weights and normalization, DEV for architecture and hyperparameter decisions and checkpoint selection, CAL for source-only temperature and adaptive prediction-set calibration, and TEST for final known-domain evaluation. The target dataset is held out for evaluation under the transfer conditions. Figure~\ref{fig:design} summarizes the reciprocal design and factorial condition structure.
+The frozen protocol uses subject-level separation. The source dataset is split into TRAIN, DEV, CAL, and TEST roles with proportions 60\%, 15\%, 10\%, and 15\%. TRAIN is used for weights and normalization, DEV for architecture and hyperparameter decisions and checkpoint selection, CAL for source-only temperature and adaptive prediction-set calibration, and TEST for final known-domain evaluation. The percentages define the frozen split policy; integer subject counts are the realized allocations for each cohort and therefore need not equal exact arithmetic percentages after subject-level rounding.
 
 In the two directions, D1 is Sleep-EDF to ISRUC and D2 is ISRUC to Sleep-EDF. Table~\ref{tab:design} summarizes the frozen design. The available target subjects are never used for training, checkpoint selection, normalization fitting, source calibration, conformal calibration, or hyperparameter selection. The target-label oracle in Step 16 uses a separate diagnostic partition and is not part of primary deployment evidence.
 
@@ -79,12 +79,12 @@ In the two directions, D1 is Sleep-EDF to ISRUC and D2 is ISRUC to Sleep-EDF. Ta
 \centering\small
 \caption{Frozen benchmark design. The complete design table is provided in the Step 17 CSV artifact.}
 \label{tab:design}
-\begin{tabular}{lllll}
+\begin{tabular}{llllllll}
 \toprule
-Direction & Source & Target & Source TRAIN/DEV/CAL & Conditions\\
+Dir. & Source & Target & TRAIN & DEV & CAL & TEST & Target cohort\\
 \midrule
-D1 & Sleep-EDF & ISRUC & 47/12/8 & C0--C5\\
-D2 & ISRUC & Sleep-EDF & 59/15/10 & C0--C5\\
+D1 & Sleep-EDF & ISRUC & 47 & 12 & 8 & 11 & 99\\
+D2 & ISRUC & Sleep-EDF & 59 & 15 & 10 & 15 & 78\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -113,19 +113,30 @@ An internal audit identified a historical weighted-prefix implementation error a
 
 \section{Results}
 \subsection{B0 Establishes a Compound-Shift Landscape}
-The B0 results in Table~\ref{tab:b0} and Figure~\ref{fig:b0} show that the benchmark is not characterized by one uniform shift penalty. Predictive performance, calibrated negative log likelihood, entropy-based error ranking, and conformal coverage gap vary with transfer direction and modality condition. Full-modality transfer and single-modality transfer are therefore not interchangeable. The result establishes the need to report C0--C5 separately.
+The B0 results in Table~\ref{tab:b0} and Figure~\ref{fig:b0} show that the benchmark is not characterized by one uniform shift penalty. For example, D1 macro-F1 falls from $0.74800$ in C0 to $0.59490$ in C3 and $0.28955$ in C5, whereas D2 falls from $0.73072$ in C0 to $0.48354$ in C3 and $0.36043$ in C5. The reliability axes vary as well: D1 C5 has NLL $1.72668$ and AURC $0.60266$, while D2 C4 has NLL $1.60744$ and AURC $0.32362$. These values show why the benchmark is not reducible to a single shift penalty. Predictive performance, calibrated negative log likelihood, entropy-based error ranking, and conformal coverage gap vary with transfer direction and modality condition. Full-modality transfer and single-modality transfer are therefore not interchangeable. The result establishes the need to report C0--C5 separately.
 
 The reliability families also move differently. A degradation in macro-F1 does not mechanically determine the direction of the NLL or AURC change, and empirical conformal coverage can move independently of both. These observations are descriptive of the frozen target evaluations. They do not establish a universal law about uncertainty under distribution shift.
 
 \begin{table}[t]
-\centering\small
-\caption{B0 v1.2 shift landscape. The full metric table is the frozen Step 17 Table 2 artifact.}
+\centering\scriptsize
+\caption{B0 v1.2 primary shift landscape. Values are canonical point estimates from the frozen Step 17 result artifact; $\Delta_{\mathrm{cov}}$ is the absolute coverage gap at $\alpha=.10$.}
 \label{tab:b0}
-\begin{tabular}{lll}
+\begin{tabular}{llrrrr}
 \toprule
-Direction & Condition & Evidence\\
+Dir. & Cond. & macro-F1 & NLL & AURC & $|\Delta_{\mathrm{cov}}|$\\
 \midrule
-D1/D2 & C0--C5 & Predictive and reliability metrics are direction- and condition-dependent\\
+D1 & C0 & .74800 & .22027 & .00875 & .09958\\
+D1 & C1 & .66336 & .28017 & .01338 & .09854\\
+D1 & C2 & .46627 & .67956 & .09406 & .09342\\
+D1 & C3 & .59490 & 1.09423 & .18813 & .07985\\
+D1 & C4 & .50639 & 1.11727 & .25705 & .07859\\
+D1 & C5 & .28955 & 1.72668 & .60266 & .03810\\
+D2 & C0 & .73072 & .63558 & .08865 & .06561\\
+D2 & C1 & .64629 & .79619 & .13442 & .08528\\
+D2 & C2 & .48478 & 1.18798 & .32971 & .06986\\
+D2 & C3 & .48354 & 1.10896 & .16343 & .00884\\
+D2 & C4 & .38231 & 1.60744 & .32362 & .02424\\
+D2 & C5 & .36043 & 1.26055 & .45743 & .01953\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -141,25 +152,25 @@ The full-modality guardrail also matters. Neither D1 C3 nor D2 C3 met the prereg
 \centering\small
 \caption{Paired compound-shift effects. Values are frozen and reproduced in full in Step 17 Table 3.}
 \label{tab:b1}
-\begin{tabular}{lrrl}
+\begin{tabular}{lrrrrl}
 \toprule
-Cell & $\Delta$ macro-F1 & 95\% CI & Status\\
+Cell & B0 & B1 & $\Delta$ macro-F1 & 95\% CI & Status\\
 \midrule
-D1 C4 & +0.03673 & [+0.03141,+0.04215] & Supported\\
-D1 C5 & +0.18587 & [+0.16786,+0.20296] & Supported\\
-D2 C4 & +0.05992 & [+0.05308,+0.06667] & Supported\\
-D2 C5 & +0.00063 & [-0.01255,+0.01451] & Inconclusive\\
+D1 C4 & .50628 & .54301 & +0.03673 & [+0.03141,+0.04215] & Supported\\
+D1 C5 & .28924 & .47511 & +0.18587 & [+0.16786,+0.20296] & Supported\\
+D2 C4 & .38224 & .44216 & +0.05992 & [+0.05308,+0.06667] & Supported\\
+D2 C5 & .36052 & .36116 & +0.00063 & [-0.01255,+0.01451] & Inconclusive\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Predictive and Reliability Behavior Decouple}
-Figures~\ref{fig:rel} and~\ref{fig:decouple} show the paired effects across calibrated NLL, entropy AURC, and the alpha-.10 conformal absolute coverage gap. The frozen residual labels are mixed in D1 C4 and D2 C5, while D1 C5 and D2 C4 are classified as reliability improving with prediction. This does not mean that every reliability metric improves in the latter cells. It means that the residual diagnosis is consistent with improvement across the evaluated reliability pattern, subject to the metric-specific caveats in the evidence matrix.
+Figures~\ref{fig:rel} and~\ref{fig:decouple} show the paired effects across calibrated NLL, entropy AURC, and the alpha-.10 conformal absolute coverage gap. For example, D1 C4 changes by $-0.02724$ in NLL and $-0.02970$ in AURC but by only $+0.00235$ in absolute coverage gap; D2 C5 changes by $+0.16300$ in NLL while AURC changes by $-0.05022$ and the conformal absolute-gap delta is $+0.00673$. The frozen residual labels are mixed in D1 C4 and D2 C5, while D1 C5 and D2 C4 are classified as reliability improving with prediction. These examples are not a cherry-picked reliability score: they show that even within a cell, metric directions can differ. It means that the residual diagnosis is consistent with improvement across the evaluated reliability pattern, subject to the metric-specific caveats in the evidence matrix.
 
 The central inference is limited but important: predictive improvement is neither sufficient nor necessary for uniform improvement across every reliability axis in every cell. The benchmark therefore separates the question “does the argmax classifier improve?” from “do probabilities, rankings, selective decisions, and conformal sets transfer appropriately?” The four-cell result is evidence of heterogeneous behavior, not a universal failure of uncertainty estimation.
 
 \subsection{Selective Prediction}
-Figure~\ref{fig:selective} presents representative frozen risk-coverage curves for the primary compound cells. The curves are reconstructed from frozen prediction bundles and are descriptive of the preregistered entropy score. AURC and fixed-coverage diagnostics are evaluated in the canonical result artifacts. The study does not claim that entropy is optimal, that one curve dominates for all coverages, or that selective behavior is clinically safe. The result instead demonstrates why a predictive metric alone is insufficient for evaluating a confidence-based rejection policy.
+Figure~\ref{fig:selective} presents representative frozen risk-coverage curves for the primary compound cells. The displayed curves use seed 17 as a fixed representative qualitative view selected by the frozen figure-generation protocol, not by favorable performance; no seed was selected after inspecting outcomes. Inferential AURC estimates and confidence intervals use the frozen three-seed subject-bootstrap analysis. The curves are reconstructed from frozen prediction bundles and are descriptive of the preregistered entropy score. The study does not claim that entropy is optimal, that one curve dominates for all coverages, or that selective behavior is clinically safe. The result instead demonstrates why a predictive metric alone is insufficient for evaluating a confidence-based rejection policy.
 
 \subsection{Conformal Transfer}
 Figure~\ref{fig:conformal} reports empirical alpha-.10 coverage and mean set size across C0--C5 in both directions. The source-only calibration firewall is preserved. Coverage under the unseen target is an observed transfer quantity, not a formal arbitrary-shift guarantee. Differences in set size and absolute coverage gap are reported together because nominal coverage alone can conceal an uninformative predictor that returns very large sets.
@@ -168,17 +179,17 @@ Figure~\ref{fig:conformal} reports empirical alpha-.10 coverage and mean set siz
 Figure~\ref{fig:stage} and the supplementary stage tables report frozen B1--B0 stage-recall changes for Wake, N1, N2, N3, and REM across C3--C5. The stage analysis is included to prevent a macro average from being treated as a complete description. We do not infer a universal stage-specific narrative from visual differences alone; stage claims are limited to effects supported by the frozen intervals and tables.
 
 \begin{table}[t]
-\centering\small
-\caption{Residual diagnosis across primary compound cells. The complete frozen diagnostic fields are in Step 17 Table 4.}
+\centering\scriptsize
+\caption{Residual diagnosis across primary compound cells. Directions are qualitative summaries of the frozen metric-specific diagnostics; they are not a single reliability score.}
 \label{tab:residual}
-\begin{tabular}{lll}
+\begin{tabular}{lccccc}
 \toprule
-Cell & Predictive status & Residual reliability label\\
+Cell & Predictive & NLL / AURC & Conformal & Simple calibration & Oracle\\
 \midrule
-D1 C4 & Supported & Mixed response\\
-D1 C5 & Supported & Improves with prediction\\
-D2 C4 & Supported & Improves with prediction\\
-D2 C5 & Inconclusive & Mixed response\\
+D1 C4 & Supported & Mixed & Mixed & Persists & Diagnostic\\
+D1 C5 & Supported & Improves & Improves & Persists & Diagnostic\\
+D2 C4 & Supported & Improves & Improves & Persists & Diagnostic\\
+D2 C5 & Inconclusive & Mixed & Mixed & Persists & Diagnostic\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -239,8 +250,8 @@ To be completed after review.
 \section{Supplementary Material Plan}
 The proposed supplement contains: S1 dataset and channel details; S2 full architecture and training protocol; S3 all C0--C5 per-seed results; S4 stage-level analysis; S5 confusion matrices; S6 interaction analysis; S7 ISRUC montage sensitivity; S8 source mask-specific calibration; S9 oracle diagnostics; S10 B0 v1.2 statistical correction; and S11 reproducibility and hashes. These sections point to frozen repository artifacts rather than introducing new analyses.
 
-\begin{figure}[p]\centering\includegraphics[width=0.9\linewidth,height=0.70\textheight,keepaspectratio]{../reports/paper_figures/figures/fig1_shift_design.pdf}\caption{Benchmark design and factorial shift conditions.}\label{fig:design}\end{figure}
-\begin{figure}[p]\centering\includegraphics[width=0.9\linewidth,height=0.70\textheight,keepaspectratio]{../reports/paper_figures/figures/fig2_b0_shift_landscape.pdf}\caption{B0 v1.2 predictive and reliability behavior across C0--C5.}\label{fig:b0}\end{figure}
+\begin{figure}[p]\centering\includegraphics[width=0.9\linewidth,height=0.70\textheight,keepaspectratio]{figures/fig1_shift_design_v2.pdf}\caption{Benchmark design and factorial shift conditions. The schematic shows source roles, reciprocal directions, modality masks, B0/B1 distinction, and the source-only calibration firewall.}\label{fig:design}\end{figure}
+\begin{figure}[p]\centering\includegraphics[width=0.9\linewidth,height=0.70\textheight,keepaspectratio]{figures/fig2_b0_shift_landscape_v2.pdf}\caption{Canonical B0 v1.2 primary results across C0--C5. This manuscript-specific rendering replaces the earlier frozen presentation because its source-data audit found the original macro-F1 panel unavailable in the figure source.}\label{fig:b0}\end{figure}
 \begin{figure}[p]\centering\includegraphics[width=0.9\linewidth,height=0.70\textheight,keepaspectratio]{../reports/paper_figures/figures/fig3_b1_compound_macro_f1.pdf}\caption{Paired B1--B0 macro-F1 effects in the four primary compound cells.}\label{fig:b1}\end{figure}
 \begin{figure}[p]\centering\includegraphics[width=0.9\linewidth,height=0.70\textheight,keepaspectratio]{../reports/paper_figures/figures/fig4_compound_reliability_axes.pdf}\caption{Paired effects across reliability axes.}\label{fig:rel}\end{figure}
 \begin{figure}[p]\centering\includegraphics[width=0.9\linewidth,height=0.70\textheight,keepaspectratio]{../reports/paper_figures/figures/fig5_prediction_reliability_decoupling.pdf}\caption{Descriptive relationship between predictive and reliability changes.}\label{fig:decouple}\end{figure}

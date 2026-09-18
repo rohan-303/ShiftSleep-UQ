@@ -1,0 +1,3 @@
+document,pages,scope,checks,status,evidence
+main,18,all pages,figures/tables/captions/references,PASS,Rendered build_main/main.pdf; page contact sheet inspected
+supplement,2,all pages,section flow/table/text,PASS,Rendered supplement.pdf; page contact sheet inspected

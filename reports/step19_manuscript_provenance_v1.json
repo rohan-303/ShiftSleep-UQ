@@ -1,0 +1,18 @@
+{
+  "step": "19.1",
+  "status": "INTERNAL_REVIEW_COMPLETE",
+  "main_tex_sha256": "133f4a76974175487f8b0d06289a099ac2cd2a0e14dd5cec0eb77e1d7fcaf1d8",
+  "main_pdf_sha256": "54139b8b076fa887dc7ed09a8345fbc4cf86af94873439db38f9dfaf3c3d0250",
+  "supplement_tex_sha256": "507ab7ee2fa4afaf73c17ffde6595967f8a6782a98ced79023c903fdce039205",
+  "supplement_pdf_sha256": "2e6f8b7905b11e0979ea49ef160ea335820794efaed3e1dad919b72c0d422839",
+  "references_bib_sha256": "50da2210f9158c5f4a68091e60fffb7b85cd7ccd37eb92a7f25054dbf2c98f55",
+  "frozen_evidence_manifest_sha256": "6260740a0c0273905d3fbf0adbc5d9d66d5d46b5bb712f3dbdfa5c3a42c8e33a",
+  "cohort_audit_sha256": "210ad16a10289249f5a5c4b948579713345102f7e853752140d2e6bcea5376fc",
+  "table3_provenance_audit_sha256": "47678bbd4998fdbb0dec55bfe488c947514ff75218a0435815340c84aa7b0e13",
+  "b0_version": "v1_2",
+  "b1_gate": "B1_PRIMARY_EVALUATION_COMPLETE",
+  "step16_gate": "STEP16_METHOD_GATE_COMPLETE",
+  "method_gate": "RELIABILITY_METHOD_NOT_AUTHORIZED",
+  "evidence_gate": "BENCHMARK_SYNTHESIS_FROZEN",
+  "canonical_candidate_equal": true
+}

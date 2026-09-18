@@ -1,0 +1,3 @@
+figure,source,check,status
+fig1_shift_design_v2,paper/figures/fig1_shift_design_v2.pdf,versioned_derivative_exists_and_source_roles_include_TEST,PASS
+fig2_b0_shift_landscape_v2,paper/figures/fig2_b0_shift_landscape_v2.pdf,versioned_derivative_preserved_and_canonical_values_used,PASS

@@ -232,7 +232,10 @@ The frozen engine hashes are recorded in `reports/weighted_bootstrap_engine_gate
 - compound matrix: `4` primary cells;
 - data-access audit: artifact reads only;
 - no raw PSG, oracle, SHHS, training, or inference access;
-- full repository tests, compileall, diff check, and forbidden-artifact checks are required after the milestone commit and recorded in the final report state.
+- full repository tests: `146 passed`;
+- compileall: passed;
+- `git diff --check`: passed;
+- frozen-input and tracked-artifact checks: passed.
 
 ## 48. Files Created
 
@@ -292,18 +295,28 @@ This is a recommendation only. Step 16 was not executed.
 
 ## 54. Git Commit
 
-The validated milestone commit is `eval: freeze B1 primary robustness results`, created only after final tests, compileall, diff checks, frozen-input checks, and tracked-artifact checks pass.
+Milestone commit: `16a7cfc21bf2e5c8a8d057073fd357f2791818c5` — `eval: freeze B1 primary robustness results`.
+
+A final documentation-only commit records the externally verified push state without changing scientific artifacts.
 
 ## 55. Milestone Tag
 
-`step15-b1-evaluation-frozen` is created only if the final validation passes and targets the validated B1 primary-result milestone commit.
+Tag: `step15-b1-evaluation-frozen`
+
+Tag target: `16a7cfc21bf2e5c8a8d057073fd357f2791818c5`, exactly the validated B1 primary-result milestone commit.
 
 ## 56. GitHub Push Status
 
-`PENDING_FINAL_VALIDATION_AND_MILESTONE_PUBLICATION`
+`PUSH_COMPLETE`
 
-No Step 15.3 milestone tag or push was performed before this report was generated.
+Remote: `origin` (`https://github.com/rohan-303/ShiftSleep-UQ.git`).
+
+Branch push: `main` succeeded.
+
+Tag push: `step15-b1-evaluation-frozen` succeeded.
+
+No force push or history rewrite was used.
 
 ## 57. Git Status / Diff Summary
 
-The tree contains only lightweight code, tests, reports, manifests, and gate metadata for the Step 15.3 milestone. Heavy B1 bootstrap/shard artifacts remain Git-ignored and are not eligible for commit.
+The scientific milestone tree was clean before tagging and pushing. The final documentation-only commit is pushed separately; the tag remains pinned to the validated B1 milestone commit above. Remote read-back verified the branch and tag targets. Heavy shards remain ignored and untracked.

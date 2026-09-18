@@ -1,0 +1,9 @@
+figure_id,figure_name,compiled_page,legibility,axes_or_labels,legend_or_markers,caption_consistency,clipping,status
+1,shift design,13,adequate,labels readable,not applicable,consistent,no clipping,ACCEPTED
+2,B0 shift landscape,13,adequate,axes and panels readable,legend readable,consistent,no clipping,ACCEPTED
+3,B1 compound macro-F1 forest,14,adequate,delta/CI axes readable,markers and intervals readable,consistent,no clipping,ACCEPTED
+4,compound reliability axes,14,adequate,native metric axes readable,color groups distinguishable,consistent,no clipping,ACCEPTED
+5,prediction/reliability decoupling,15,adequate,three panel axes readable,cell markers distinguishable,consistent,no clipping,ACCEPTED
+6,selective risk-coverage,15,adequate,coverage/risk axes readable,curves and legend readable,consistent,no clipping,ACCEPTED
+7,conformal transfer,16,adequate,coverage/set-size axes readable,direction panels distinguishable,consistent,no clipping,ACCEPTED
+8,stage recall changes,17,adequate,stage/cell labels readable,color scale readable,consistent,no clipping,ACCEPTED

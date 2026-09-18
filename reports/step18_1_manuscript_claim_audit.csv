@@ -1,0 +1,18 @@
+section,claim,evidence_artifact,citation,status
+Introduction,"Deep learning is an established approach to automatic sleep staging",reports/step17_contribution_statement_v1.md,supratak2017deepsleepnet;phan2019seqsleepnet;perslev2021usleep,SUPPORTED_BOTH
+Introduction,"Dataset shift and missing modalities motivate separate reliability evaluation",reports/step17_claim_evidence_matrix_v1.csv,zhou2022dgsurvey;thagaard2020uncertaintyshift,SUPPORTED_BOTH
+Related Work,"Prior sleep-staging work includes sequence and efficient architectures",reports/step17_methods_evidence_map.md,phan2019seqsleepnet;supratak2020tinysleepnet;perslev2021usleep,SUPPORTED_BOTH
+Related Work,"Sleep staging has prior domain-adaptation work",reports/step17_methods_evidence_map.md,zhao2021unsupervisedsleepdomain;zhou2025sourcefree;zhu2023multisource,SUPPORTED_BOTH
+Related Work,"Calibration is distinct from classification accuracy",reports/step17_claim_evidence_matrix_v1.csv,guo2017calibration,SUPPORTED_BOTH
+Related Work,"Selective prediction formalizes coverage-risk tradeoffs",reports/step17_methods_evidence_map.md,geifman2019selectivenet,SUPPORTED_BOTH
+Related Work,"Uncertainty can require auditing under shift",reports/step17_claim_evidence_matrix_v1.csv,thagaard2020uncertaintyshift;prinster2022jaws,SUPPORTED_BOTH
+Related Work,"Conformal coverage depends on assumptions about the evaluation distribution",reports/step17_nonclaims_v1.md,angelopoulos2023conformal;dey2023conformalordinal,SUPPORTED_BOTH
+Methods,"ShiftSleep-UQ uses frozen B0 v1.2 and B1 Step 15.3 artifacts",reports/paper_evidence/paper_evidence_manifest_v1.json,,SUPPORTED_REPOSITORY
+Results,"B1 improves compound macro-F1 in three primary cells",reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,,SUPPORTED_REPOSITORY
+Results,"D2 C5 remains inconclusive",reports/paper_tables/table3_b1_vs_b0_compound_effects.csv,,SUPPORTED_REPOSITORY
+Results,"Reliability behavior is heterogeneous",reports/paper_tables/table4_residual_diagnosis.csv,,SUPPORTED_REPOSITORY
+Discussion,"Predictive improvement does not imply uniform reliability improvement",reports/step17_claim_evidence_matrix_v1.csv,,SUPPORTED_REPOSITORY
+Discussion,"Oracle diagnostics are not source-only deployment evidence",reports/step16_b1_oracle_diagnostics_v1.csv,,QUALIFIED
+Discussion,"A learned reliability method was not authorized",reports/step16_method_gate.json,,SUPPORTED_REPOSITORY
+Limitations,"No SHHS validation and no arbitrary-shift conformal guarantee are claimed",reports/step17_limitations_v1.md,,SUPPORTED_REPOSITORY
+Conclusion,"Reliability should be evaluated explicitly rather than inferred from accuracy",reports/step17_contribution_statement_v1.md,guo2017calibration;angelopoulos2023conformal,SUPPORTED_BOTH

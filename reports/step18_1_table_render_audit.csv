@@ -1,0 +1,5 @@
+table_id,table_name,compiled_page,column_layout,precision,caption_label,overflow,status
+1,benchmark design,5,adequate,counts and split proportions readable,correct,no overflow,ACCEPTED
+2,B0 primary shift landscape,6,adequate,values and condition labels readable,correct,no overflow,ACCEPTED
+3,B1-vs-B0 compound effects,7,adequate,delta and CI formatting readable,correct,no overflow,ACCEPTED
+4,residual diagnosis,8,adequate,cell/status labels readable,correct,no overflow,ACCEPTED

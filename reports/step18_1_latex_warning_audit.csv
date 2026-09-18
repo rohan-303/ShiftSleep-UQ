@@ -1,0 +1,10 @@
+warning_type,location,observed_status,classification,resolution
+undefined citation,final pdflatex pass,none,ACCEPTED_BENIGN,all 17 bibliography citations resolved
+undefined reference,final pdflatex pass,none,ACCEPTED_BENIGN,all table and figure references resolved
+missing figure,final pdflatex pass,none,ACCEPTED_BENIGN,all eight frozen PDFs resolved
+missing bibliography entry,final pdflatex pass,none,ACCEPTED_BENIGN,all cited keys present
+overfull hbox,final pdflatex pass,none,ACCEPTED_BENIGN,emergency stretch removed warning
+underfull hbox,final pdflatex pass,none,ACCEPTED_BENIGN,none observed
+float too large,final pdflatex pass,none,ACCEPTED_BENIGN,figure height constrained with keepaspectratio
+duplicate label,final pdflatex pass,none,ACCEPTED_BENIGN,no duplicate labels
+fatal package error,final pdflatex pass,none,ACCEPTED_BENIGN,no fatal package errors

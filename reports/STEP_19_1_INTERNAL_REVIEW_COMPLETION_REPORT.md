@@ -137,10 +137,10 @@ Existing Step 19 manuscript derivatives and reviewer reports were preserved. Fro
 Do NOT execute Step 20.
 
 ## 36. Git Commit
-Pending final staging and verification. Required commit message: `paper: revise ShiftSleep-UQ after internal scientific review`.
+Created commit `30114c23a4752909d8312fffc233fd55c524cf31` with message `paper: revise ShiftSleep-UQ after internal scientific review`. The commit includes the corrected canonical manuscript, supplement, versioned derivatives, reviewer reports, audits, and provenance.
 
 ## 37. GitHub Push Status
-Pending final commit and normal push after report finalization.
+`PUSH_COMPLETE`: local `main` and `origin/main` both resolve to `30114c23a4752909d8312fffc233fd55c524cf31`.
 
 ## 38. Git Status / Diff Summary
-The intended Step 19/19.1 manuscript, supplement, versioned derivatives, reviewer reports, audits, and provenance files are ready for explicit staging. Temporary LaTeX build directories and rendered contact sheets are excluded from the intended commit. Historical Step 18 untracked files remain preserved and will not be bundled.
+The Step 19/19.1 manuscript, supplement, versioned derivatives, reviewer reports, audits, and provenance files were committed and pushed. Temporary LaTeX build directories and rendered contact sheets were excluded. Historical Step 18 untracked files remain preserved and were not bundled.

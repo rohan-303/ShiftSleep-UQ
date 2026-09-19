@@ -1,0 +1,14 @@
+claim_or_field,canonical_evidence,venue_evidence,status
+title,ShiftSleep-UQ: Calibration and Selective Reliability,present,PASS
+D1 C4 effect,+0.03673,present,PASS
+D1 C5 effect,+0.18587,present,PASS
+D2 C4 effect,+0.05992,present,PASS
+D2 C5 effect,+0.00063,present,PASS
+D2 C5 CI low,-0.01255,present,PASS
+D2 C5 CI high,+0.01451,present,PASS
+D1 C4 NLL,-0.02724,present,PASS
+D2 C5 NLL,+0.16300,present,PASS
+target-free firewall,target-free,present,PASS
+oracle status,diagnostic rather than deployable,present,PASS
+no SHHS,no SHHS,present,PASS
+method gate,reliability-method gate remains not authorized,present,PASS

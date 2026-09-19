@@ -1,0 +1,22 @@
+{
+  "selected_venue": "IEEE Journal of Biomedical and Health Informatics",
+  "venue_slug": "ieee_jbhi",
+  "canonical_main_sha256": "54139b8b076fa887dc7ed09a8345fbc4cf86af94873439db38f9dfaf3c3d0250",
+  "venue_main_sha256": "e23c8190975d4f7bc577866efc517e84be5a5c46cdde80f6e03a1ad8c299caab",
+  "venue_supplement_sha256": "2e6f8b7905b11e0979ea49ef160ea335820794efaed3e1dad919b72c0d422839",
+  "canonical_supplement_sha256": "2e6f8b7905b11e0979ea49ef160ea335820794efaed3e1dad919b72c0d422839",
+  "references_sha256": "50da2210f9158c5f4a68091e60fffb7b85cd7ccd37eb92a7f25054dbf2c98f55",
+  "evidence_manifest_sha256": "6260740a0c0273905d3fbf0adbc5d9d66d5d46b5bb712f3dbdfa5c3a42c8e33a",
+  "venue_source_sha256": "0513c648c93a258dbc28d5ebf1fbbf3a839fb8cb3d3d6c37fdf82b72433b489c",
+  "official_guideline_urls": [
+    "https://www.embs.org/jbhi/for-authors/",
+    "https://www.embs.org/jbhi/prepare-and-submit-your-manuscript/",
+    "https://template-selector.ieee.org/secure/templateSelector/publicationType"
+  ],
+  "guideline_access_date": "2026-09-19",
+  "venue_gate": "TARGET_VENUE_SELECTED",
+  "package_gate": "VENUE_PACKAGE_READY",
+  "submission_portal_action": false,
+  "git_head": "3e50144dafe4fe921a4f58968cfd70181cf36294",
+  "package_files_render_audit": "reports/step20_render_audit.csv"
+}

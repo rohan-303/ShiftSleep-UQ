@@ -17,6 +17,7 @@
   "venue_gate": "TARGET_VENUE_SELECTED",
   "package_gate": "VENUE_PACKAGE_READY",
   "submission_portal_action": false,
-  "git_head": "3e50144dafe4fe921a4f58968cfd70181cf36294",
-  "package_files_render_audit": "reports/step20_render_audit.csv"
+  "git_head": "40ada5c92c5bf1499bedd601c1dff1ad4ff363c4",
+  "package_files_render_audit": "reports/step20_render_audit.csv",
+  "git_head_role": "primary Step 20 package commit"
 }

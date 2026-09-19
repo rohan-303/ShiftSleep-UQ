@@ -1,0 +1,15 @@
+manuscript_location,current_wording,category,reader_need,proposed_replacement
+paper/main.tex:64,gate BENCHMARK_SYNTHESIS_FROZEN,workflow identifier,no,The prespecified evidence package
+paper/main.tex:64,Step 16 method-gate artifacts,workflow identifier,no,the prespecified diagnostic analysis and retained calibration artifacts
+paper/main.tex:64,Step 18 analysis changes...,workflow identifier,no,The subsequent analysis did not change...
+paper/main.tex:67,frozen cohort,workflow shorthand,limited,The prespecified cohort
+paper/main.tex:69,frozen accounting,workflow shorthand,limited,the prespecified cohort accounting
+paper/main.tex:74,frozen protocol,workflow shorthand,limited,the prespecified protocol
+paper/main.tex:76,Step 16 target-label oracle,workflow identifier,no,the separate target-label diagnostic
+paper/main.tex:80,Step 17 CSV artifact,workflow identifier,no,the versioned evidence table
+paper/main.tex:96,controlled baseline,scientific description,yes,retain
+paper/main.tex:102,Step 16 mask-specific temperatures,workflow identifier,no,mask-specific diagnostic temperatures
+paper/main.tex:110,frozen protocol,workflow shorthand,limited,the prespecified protocol
+paper/main.tex:112,Step 17 evidence package,workflow identifier,no,the primary evidence package
+paper/main.tex:112,historical v1.1 artifact,provenance wording,yes,retain in supplement/provenance and shorten in main text
+paper/main.tex:128,gate,workflow identifier,no,the prespecified decision rule

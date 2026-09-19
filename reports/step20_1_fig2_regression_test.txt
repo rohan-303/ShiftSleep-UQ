@@ -1,0 +1,2 @@
+PASS
+D1 macro-F1 preserves non-monotonic C0-C5 ordering; D2 and all y coordinates are numeric floats.

@@ -1,0 +1,50 @@
+version: postreview_remediation_protocol_v1
+status: SCIENTIFIC_REMEDIATION_PROTOCOL_FROZEN
+historical_results: PRIMARY_HISTORICAL
+experiments:
+  R1_conformal: SECONDARY_METHOD_SENSITIVITY
+  R2_sleep_window: CONFIRMATORY_SENSITIVITY
+  R3_strong_backbone: CONFIRMATORY_GENERALIZATION
+r1:
+  required: true
+  algorithm: randomized_APS_if_compatible_else_RAPS
+  calibration: source_CAL_only
+  target_labels_for_tuning: false
+  hyperparameters: frozen_before_execution
+r2:
+  name: SLEEP_WINDOW_HARMONIZED_SENSITIVITY_V1
+  onset: first_scored_non_Wake_epoch
+  termination: last_scored_non_Wake_epoch
+  context: 30_minutes_before_and_after
+  interval: retain_all_scored_epochs_between_bounds
+  invalid_epochs: exclude_using_original_label_rules
+  no_sleep_recordings: retain_as_excluded_and_report
+  partitions: reuse_frozen_subject_partitions
+  normalization: refit_on_source_train_only
+  directions: [D1, D2]
+  conditions: [C0, C1, C2, C3, C4, C5]
+  model_variants: [B0, B1]
+  model_seeds: [17, 42, 2026]
+r3:
+  backbone: SeqSleepNet_class
+  variants: [S0_full_modality, S1_source_modality_exposure]
+  source_exposure_S1: {FULL: 0.50, EEG_only: 0.25, EOG_only: 0.25}
+  directions: [D1, D2]
+  conditions: [C0, C1, C2, C3, C4, C5]
+  model_seeds: [17, 42, 2026]
+statistics:
+  bootstrap_unit: subject
+  replicates: 2000
+  bootstrap_seed: 2028
+  ranking_engine: exact_duplicate_preserving
+  primary_cells: [D1_C4, D1_C5, D2_C4, D2_C5]
+  primary_metric: macro-F1
+  multiplicity: Holm_FWER_0.05_sensitivity_for_four_primary_contrasts
+  calibration: source_CAL_only
+  target_adaptation: false
+  target_hyperparameter_selection: false
+stop_rules:
+  - no reproducible strong backbone under 6GB VRAM without protocol change
+  - any implementation defect blocks interpretation until versioned correction
+  - no target labels, target calibration, or SHHS
+artifact_namespaces: [step20_1, remediation_r1, remediation_r2, remediation_r3]

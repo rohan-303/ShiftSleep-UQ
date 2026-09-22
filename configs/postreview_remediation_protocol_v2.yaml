@@ -1,0 +1,220 @@
+version: postreview_remediation_protocol_v2
+amendment_of: configs/postreview_remediation_protocol_v1.yaml
+status: EXECUTABLE_REMEDIATION_PROTOCOL_V2_FROZEN
+historical_v1_sha256: 9c63e078aadea8f16052b707d2987de921ae577bf2d501272cd881457b2c83fc
+scientific_questions_unchanged: true
+submission_state: SUBMISSION_SUSPENDED_FOR_SCIENTIFIC_REMEDIATION
+execution_boundary: synthetic_scaffolding_only_in_step20_1_2
+r1:
+  id: RANDOMIZED_APS
+  role: SECONDARY_METHOD_SENSITIVITY
+  required: true
+  alphas: [0.10, 0.05]
+  probability_stream:
+    name: UNCALIBRATED_SOFTMAX
+    module: src/shiftsleep_uq/evaluation_step11.py
+    functions: [softmax, aps_scores, aps_quantile]
+    source_hash: a531942efe60d1ba3208b88d8ba164f87274992d0f60b07d08e39921d9c41a99
+    calibration_artifact: artifacts/calibration/{model_family}/{direction}/seed_{seed}/aps.json
+    binding: same_unscaled_softmax_stream_as_historical_APS
+  score: sum_probability_before_true_rank_plus_U_times_true_rank_probability
+  randomization:
+    namespace: SHIFT_SLEEP_UQ_RAPSENS_V1
+    global_seed: 2031
+    key_fields: [namespace, global_seed, direction, model_family, model_seed, split, subject_id, recording_id, epoch_index, purpose]
+    purposes: [CAL_SCORE, PRED_SET]
+    alpha_excluded_from_key: true
+    hash: SHA256_UTF8_UNIT_SEPARATOR
+    float_conversion: first_53_bits_of_first_8_big_endian_bytes_divided_by_2^53
+  calibration_quantile:
+    k: ceil((n+1)*(1-alpha))
+    clamp: [1,n]
+    order_statistic: sorted_scores[k-1]
+    interpolation: NONE
+  prediction_set:
+    boundary: first_cumulative_probability_ge_q_alpha
+    inclusion_probability: clip((q_alpha-cumulative_before_boundary)/boundary_probability,0,1)
+    include_boundary_if: U_pred_leq_inclusion_probability
+    q_ge_1: ALL_CLASSES
+    empty_sets_allowed: true
+  directions: [D1_SLEEPEDF_TO_ISRUC, D2_ISRUC_TO_SLEEPEDF]
+  model_families: [B0, B1]
+  seeds: [17, 42, 2026]
+  conditions: [C0, C1, C2, C3, C4, C5]
+  output_metrics: [coverage, signed_coverage_error, absolute_coverage_error, mean_set_size, median_set_size, empty_fraction, size_1_fraction, size_2_fraction, size_3_fraction, size_4_fraction, size_5_fraction, q_alpha]
+  implementation_module: src/shiftsleep_uq/randomized_aps.py
+  implementation_hash: ab02e702a2f19ac5a10d134fa2ff2b7bc8a6b7294e63a5d203fdad4c5b967392
+r2:
+  id: SLEEP_WINDOW_HARMONIZED_SENSITIVITY_V1
+  role: CONFIRMATORY_SENSITIVITY
+  window:
+    epoch_seconds: 30
+    first_valid_nonwake: true
+    last_valid_nonwake: true
+    left_context_epoch_positions: 60
+    right_context_epoch_positions: 60
+    interval_inclusive: true
+    select_physical_indices_before_validity_filter: true
+    validity_exclusions: [movement, artifact, unknown, unscored, other_historical_exclusions]
+    no_nonwake_recording: exclude_recording
+    if_entire_subject_removed: STOP_R2_SUBJECT_SET_CHANGED_BY_NO_SLEEP_RECORDING
+    implementation_module: src/shiftsleep_uq/windowing.py
+    implementation_hash: 3fb8ef4e29f5dc1d8b19370c6c254d3505086d3fc1b4c201da11b68172d755bd
+  historical_model_binding:
+    architecture_module: src/shiftsleep_uq/models/baseline_b0.py
+    architecture_hash: fce3e0dbef2e818d2c408ba5aecfd2eddeaa31a169c4ace99ce7badf5d7e5109
+    b0_config: configs/baseline_b0_v1.yaml
+    b0_config_hash: a7546c8635043fc39f0041acd211358f325757039d74163a9a0525aa59d68e17
+    b1_config: configs/baseline_b1_moddrop_v1.yaml
+    b1_config_hash: b9c40bad93c181fb10534cb5c1a945d4de66dd2c1ace41cef1f85a7646aaeff6
+    b0_training_config: configs/training_b0_v1.yaml
+    b0_training_config_hash: 2f8e5d8216a06fabfca29e0c807583087a8b5e767ba64a7f72eb1dd186dfc2b7
+    b1_training_config: configs/training_b1_moddrop_v1.yaml
+    b1_training_config_hash: 467ed74d465a65990388f4ac4f271311ccb156605cc1cfef1d4339057298bbc7
+  variants: [B0_W, B1_W]
+  directions: [D1_SLEEPEDF_TO_ISRUC, D2_ISRUC_TO_SLEEPEDF]
+  conditions: [C0, C1, C2, C3, C4, C5]
+  seeds: [17, 42, 2026]
+  training:
+    loss: CrossEntropyLoss
+    optimizer: AdamW
+    learning_rate: 0.0003
+    weight_decay: 0.0001
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    batch_size_physical: 128
+    batch_size_effective: 128
+    precision: FP32
+    gradient_clip_global_norm: 1.0
+    max_epochs: 30
+    minimum_epochs: 5
+    patience: 6
+    scheduler: NONE
+    augmentation: NONE
+    sampling: natural_epoch_level_deterministic_per_epoch
+  checkpoint_selection:
+    population: SOURCE_DEV
+    mask: FULL
+    hierarchy: [highest_macro_f1, lowest_nll_on_numeric_tie, earliest_epoch]
+    missing_modality_dev_selection: FORBIDDEN
+    target_selection: FORBIDDEN
+  normalization:
+    method: global_mean_std_per_modality
+    fit_scope: WINDOWED_SOURCE_TRAIN_ONLY
+    std_epsilon: 1.0e-8
+    implementation_module: src/shiftsleep_uq/training/normalization.py
+    implementation_hash: 1406d760f7f1728efcf5ba34a2c2b38e42e287fcd136b43fc020594c572e4ff5
+  modality_exposure:
+    b0_w: {FULL: 1.0, EEG_ONLY: 0.0, EOG_ONLY: 0.0}
+    b1_w: {FULL: 0.50, EEG_ONLY: 0.25, EOG_ONLY: 0.25}
+    exposure_seed: 2029
+    implementation_module: src/shiftsleep_uq/training/modality_exposure.py
+    implementation_hash: 5c3b2924267de6b8052187c003eb41d9a8a4ade6e49d15839368998c6f0b59bf
+    inherited_b1_canonical_serialization: '{exposure_seed}\\x1f{epoch}\\x1f{dataset|subject_id|recording_id|epoch_index}'
+  calibration:
+    temperature: SOURCE_CAL_ONLY_HISTORICAL_ROUTINE
+    conformal: R1_RANDOMIZED_APS_SECONDARY
+    ranking: uncalibrated_entropy
+  primary_cells: [D1_C4, D1_C5, D2_C4, D2_C5]
+r3:
+  id: SEQSLEEPNET_CLASS_L20_V1
+  role: CONFIRMATORY_GENERALIZATION
+  paper: Phan et al. 2019 SeqSleepNet
+  paper_doi: 10.1109/TNSRE.2019.2896659
+  source_repository: https://github.com/pquochuy/SeqSleepNet
+  source_commit_observed: f8a5fd039e9511bfd5573e6cc684d8e9bfd2fab9
+  source_access_date: 2026-09-22
+  source_runtime_dependency: false
+  local_module: src/shiftsleep_uq/models/seqsleepnet_class.py
+  local_module_hash: f1e6b3f0f105ec2b002d6d80f3d8eafc0f665ebae12635f66b41c90b3aee7894
+  variants: [S0, S1]
+  directions: [D1_SLEEPEDF_TO_ISRUC, D2_ISRUC_TO_SLEEPEDF]
+  conditions: [C0, C1, C2, C3, C4, C5]
+  seeds: [17, 42, 2026]
+  input: {channels: [EEG, EOG], eeg_hz: 100, eog_input_hz: 50, eog_aligned_hz: 100, eog_resample: scipy.signal.resample_poly, eog_up: 2, eog_down: 1, epochs_seconds: 30}
+  spectrogram:
+    stft_window_samples: 200
+    overlap: 0.5
+    hop_samples: 100
+    window: Hamming
+    nfft: 256
+    one_sided_bins: 129
+    frames: 29
+    power: abs_stft_squared
+    log: ln_power_plus_1e-8
+  normalization: {fit_scope: SOURCE_TRAIN_ONLY, unit: modality_x_frequency_bin, aggregate: retained_epochs_x_29_frames, epsilon: 1.0e-6}
+  filterbank:
+    support: linear_frequency_triangular
+    reference_file: tensorflow_net/SeqSleepNet/filterbank_shape.py@f8a5fd039e9511bfd5573e6cc684d8e9bfd2fab9
+    support_function: lin_tri_filter_shape
+    support_dimensions: {F: 129, M: 32, nfft: 256, samplerate: 100, lowfreq: 0, highfreq: 50}
+    local_unit_tolerance: 1.0e-7
+    trainable_transform: sigmoid(W_c)*T
+    W_shape: [129, 32]
+  gating: after_filterbank_before_channel_concatenation
+  epoch_encoder: {type: bidirectional_GRU, input: 64, hidden_per_direction: 64, output: 128, projection: [128, 64], attention: 64, attention_axis: 29}
+  sequence_encoder: {length: 20, type: bidirectional_GRU, input: 64, hidden_per_direction: 64, output: 128, classifier: [128, 5]}
+  regularization: {dropout: 0.25, weight_decay: 0.001, recurrent_batch_norm: false}
+  sequences:
+    train: {length: 20, stride: 10, complete_only: true, no_padding: true}
+    evaluation: {length: 20, stride: 1, complete_only: true, no_padding: true, aggregate: mean_raw_logits_per_epoch}
+    boundary: recording_subject_contiguous_original_epoch_indices
+    excluded_gap_terminates_segment: true
+    short_segment_policy: exclude_and_report_warning_if_over_1_percent
+  exposure:
+    S0: {FULL: 1.0, EEG_ONLY: 0.0, EOG_ONLY: 0.0}
+    S1: {FULL: 0.50, EEG_ONLY: 0.25, EOG_ONLY: 0.25}
+    seed: 2029
+    key_fields: [direction, model_seed, training_epoch, subject_id, recording_id, sequence_start_index]
+    order_independent: true
+  training: {loss: mean_cross_entropy_over_20_labels, optimizer: Adam, learning_rate: 0.0001, weight_decay: 0.001, batch_size: 32, epochs: 10, precision: FP32, scheduler: NONE, gradient_clip_global_norm: 1.0}
+  checkpoint_selection: {population: SOURCE_DEV, mask: FULL, hierarchy: [highest_macro_f1, lowest_nll_on_tie, earliest_epoch], evaluate_every_epoch: true, all_epochs_required: true}
+  fallback: {primary_batch_size: 32, fallback_batch_size: 16, fallback_accumulation: 2, second_fallback_batch_size: 8, second_fallback_accumulation: 4, precision_change: FORBIDDEN, sequence_change: FORBIDDEN, hidden_size_change: FORBIDDEN, if_batch8_oom: R3_HARDWARE_BLOCKED}
+  determinism: {python: true, numpy: true, torch_cpu: true, torch_cuda: true, deterministic_algorithms: true, cudnn_benchmark: false}
+  calibration: {temperature: SOURCE_CAL_ONLY_HISTORICAL_ROUTINE, conformal: R1_RANDOMIZED_APS, ranking: uncalibrated_entropy}
+  primary_cells: [D1_C4, D1_C5, D2_C4, D2_C5]
+statistics:
+  bootstrap_unit: subject
+  replicates: 2000
+  bootstrap_seed: 2028
+  model_seed_aggregation: mean_of_seed_specific_metrics_per_replicate
+  ranking_engine: exact_duplicate_preserving
+  primary_metric: macro-F1
+  primary_cells: [D1_C4, D1_C5, D2_C4, D2_C5]
+  primary_reliability: [calibrated_NLL, entropy_AURC]
+  secondary_reliability: [error_AUROC, error_AUPRC, randomized_APS_coverage, randomized_APS_set_size]
+  ci: percentile_95_paired_effects
+  effect_r2: B1_W_minus_B0_W
+  effect_r3: S1_minus_S0
+  holm:
+    family_r2: four_R2_primary_macroF1_effects
+    family_r3: four_R3_primary_macroF1_effects
+    alpha: 0.05
+    p_value: (1+count(abs(delta_b-delta_hat)>=abs(delta_hat)))/(2000+1)
+    adjusted: standard_step_down_Holm
+  target_adaptation: false
+  target_hyperparameter_selection: false
+  shhs: false
+artifact_contract:
+  attempt_ids: {r1: R1_ATTEMPT_001, r2: 'R2_<direction>_<variant>_SEED_<seed>_ATTEMPT_001', r3: 'R3_<direction>_<variant>_SEED_<seed>_ATTEMPT_001'}
+  namespaces: {r1: artifacts/remediation/r1, r2: artifacts/remediation/r2, r3: artifacts/remediation/r3}
+  required_attempt_files: [config_snapshot, protocol_hash, environment_manifest, stdout_log, stderr_log, run_metadata, completion_marker]
+  final_paths_immutable: true
+  existing_promoted_path: fail
+  promotion_requires: [successful_completion, protocol_hash_match, expected_files, schema_pass, finite_required_outputs, checkpoint_hash, target_firewall_pass]
+  partial_failure: retry_same_config_new_attempt; family_incomplete_if_blocked
+firewall:
+  source_cal_only: true
+  target_labels_forbidden: true
+  target_normalization_forbidden: true
+  target_checkpoint_selection_forbidden: true
+  target_hyperparameter_selection_forbidden: true
+  shhs_forbidden: true
+execution_plan:
+  step20_1_2_scientific_execution: false
+  r1_jobs: 36
+  r2_jobs: 12
+  r3_jobs: 12
+  r1_job_axes: [direction, model_family, seed, condition, alpha]
+  r2_job_axes: [direction, variant, seed]
+  r3_job_axes: [direction, variant, seed]

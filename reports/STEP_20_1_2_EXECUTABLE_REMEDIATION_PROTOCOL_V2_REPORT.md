@@ -250,18 +250,29 @@ Do NOT execute Step 20.2.1 in this step.
 
 ## 51. Git Commit
 
-Pending milestone commit: `research: freeze executable post-review remediation protocol v2`. No scientific outputs are included.
+Milestone commit: `3601b05082d780b9c149fcc3f74ecdaccf54ebce`.
+
+Message: `research: freeze executable post-review remediation protocol v2`.
+
+No scientific outputs were included.
 
 ## 52. Git Tag
 
-Pending annotated tag: `step20-1-remediation-protocol-v2-frozen`.
+Annotated tag: `step20-1-remediation-protocol-v2-frozen`.
 
-Annotation: `ShiftSleep-UQ executable post-review remediation protocol v2 frozen before R1/R2/R3 execution`.
+Tag annotation: `ShiftSleep-UQ executable post-review remediation protocol v2 frozen before R1/R2/R3 execution`.
+
+The tag points to the milestone commit.
 
 ## 53. GitHub Push Status
 
-Pending. No push has occurred in the report-generation phase.
+Pushed successfully without force:
+
+- `origin/main` verified at `3601b05082d780b9c149fcc3f74ecdaccf54ebce`;
+- `origin/step20-1-remediation-protocol-v2-frozen` created and verified.
+
+A documentation-only follow-up updates this report's final status fields; it does not alter the frozen YAML or move the tag.
 
 ## 54. Git Status / Diff Summary
 
-New v2 protocol, scaffolding, validator, tests, dry-run plan, hash manifest, and this report are intended for the milestone. The four intentional historical Step 18 files and the blocked Step 20.2 report remain preserved and must not be deleted or rewritten. No scientific output namespace was created.
+The milestone contains the v2 protocol, blocked Step 20.2 report, scaffolding, validator, tests, dry-run plan, hash manifest, and v2 report. The four intentional historical Step 18 files remain preserved, untracked, and unstaged. No scientific output namespace was created.

@@ -1,0 +1,7 @@
+item,required_action,status,source_note
+Guo metadata/DOI correction,verify author/year/DOI against primary publisher record,REVIEW_REQUIRED,No manuscript edit performed in Step 20.2.2
+Sleep-EDF canonical citation,replace noncanonical dataset citation with Sleep-EDF Expanded/PhysioNet canonical source,REVIEW_REQUIRED,Use official PhysioNet metadata
+Ovadia 2019,verify citation metadata and uncertainty benchmark scope,REVIEW_REQUIRED,Primary paper verification required before manuscript rebuild
+Tibshirani 2019,verify conformal inference citation metadata,REVIEW_REQUIRED,Primary paper verification required before manuscript rebuild
+Randomized APS reference,add verified randomized-APS source and distinguish from APS/RAPS,REVIEW_REQUIRED,Do not cite unverified metadata
+RAPS related-work reference,retain only if related-work discussion remains,REVIEW_REQUIRED,Not executed in remediation

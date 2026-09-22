@@ -1,0 +1,6 @@
+{
+  "gate": "SLEEPEDF_EPOCH_LEDGER_RECONSTRUCTED",
+  "recordings": 153,
+  "source": "PhysioNet sleep-edfx official hypnogram EDF+ annotations",
+  "derivative_dir": "artifacts\\remediation\\ledger_repair\\sleepedf_epoch_ledger_v2"
+}

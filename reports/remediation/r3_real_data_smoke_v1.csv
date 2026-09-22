@@ -1,0 +1,3 @@
+dataset,subject,recording,path,eeg_input_shape,eog_input_shape,eog_resampled_shape,spectrogram_shape,finite,sequence_available
+isruc_s1,I001,I001,data/processed/isruc_original_v2/isruc_s1__I001__original_v2.npz,"(20, 3000)","(20, 1500)","(20, 3000)","(20, 2, 129, 29)",True,True
+sleep_edf_sc,SC_03,SC4031E0,data/processed/core_v1_1/sleep_edf_sc__SC4031E0__core_v1.npz,"(20, 3000)","(20, 1500)","(20, 3000)","(20, 2, 129, 29)",True,True

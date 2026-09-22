@@ -1,0 +1,49 @@
+direction,condition,metric,numeric_value,source_artifact,source_column,source_row_key
+D1_SLEEPEDF_TO_ISRUC,C0,macro-F1,0.7479975565180403,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C0|macro-F1|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C0,calibrated NLL,0.21868536955836235,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C0|NLL|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C0,entropy AURC,0.008767597743387166,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C0|AURC|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C0,ABSOLUTE alpha-.10 coverage gap,0.09957766361195956,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C0|APS_coverage_gap_alpha_0.10|seed_mean|absolute value of mean frozen signed gap
+D1_SLEEPEDF_TO_ISRUC,C1,macro-F1,0.6633590456109645,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C1|macro-F1|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C1,calibrated NLL,0.2829223591037204,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C1|NLL|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C1,entropy AURC,0.013381188373157006,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C1|AURC|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C1,ABSOLUTE alpha-.10 coverage gap,0.09854207164676469,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C1|APS_coverage_gap_alpha_0.10|seed_mean|absolute value of mean frozen signed gap
+D1_SLEEPEDF_TO_ISRUC,C2,macro-F1,0.46626589165787213,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C2|macro-F1|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C2,calibrated NLL,0.6750363887401978,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C2|NLL|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C2,entropy AURC,0.09324004694352639,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C2|AURC|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C2,ABSOLUTE alpha-.10 coverage gap,0.09341618069054887,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C2|APS_coverage_gap_alpha_0.10|seed_mean|absolute value of mean frozen signed gap
+D1_SLEEPEDF_TO_ISRUC,C3,macro-F1,0.5948987191379381,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C3|macro-F1|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C3,calibrated NLL,1.0481111835510568,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C3|NLL|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C3,entropy AURC,0.18785042517487607,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C3|AURC|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C3,ABSOLUTE alpha-.10 coverage gap,0.0798533978263465,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C3|APS_coverage_gap_alpha_0.10|seed_mean|absolute value of mean frozen signed gap
+D1_SLEEPEDF_TO_ISRUC,C4,macro-F1,0.5063910424775941,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C4|macro-F1|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C4,calibrated NLL,1.086559121040582,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C4|NLL|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C4,entropy AURC,0.25711378920633243,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C4|AURC|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C4,ABSOLUTE alpha-.10 coverage gap,0.07858817030932756,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C4|APS_coverage_gap_alpha_0.10|seed_mean|absolute value of mean frozen signed gap
+D1_SLEEPEDF_TO_ISRUC,C5,macro-F1,0.28955462494661527,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C5|macro-F1|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C5,calibrated NLL,1.6569865320881199,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C5|NLL|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C5,entropy AURC,0.60306351057501,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C5|AURC|seed_mean|mean across frozen B0 seeds
+D1_SLEEPEDF_TO_ISRUC,C5,ABSOLUTE alpha-.10 coverage gap,0.03810462199928333,reports/b0_primary_metrics_per_seed_v1.csv,value,D1_SLEEPEDF_TO_ISRUC|C5|APS_coverage_gap_alpha_0.10|seed_mean|absolute value of mean frozen signed gap
+D2_ISRUC_TO_SLEEPEDF,C0,macro-F1,0.73072363068128,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C0|macro-F1|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C0,calibrated NLL,0.6296960899487242,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C0|NLL|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C0,entropy AURC,0.08802424096597805,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C0|AURC|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C0,ABSOLUTE alpha-.10 coverage gap,0.06561449979152863,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C0|APS_coverage_gap_alpha_0.10|seed_mean|absolute value of mean frozen signed gap
+D2_ISRUC_TO_SLEEPEDF,C1,macro-F1,0.6462870090953093,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C1|macro-F1|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C1,calibrated NLL,0.7972848422911416,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C1|NLL|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C1,entropy AURC,0.13382544443502808,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C1|AURC|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C1,ABSOLUTE alpha-.10 coverage gap,0.08528437936869987,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C1|APS_coverage_gap_alpha_0.10|seed_mean|absolute value of mean frozen signed gap
+D2_ISRUC_TO_SLEEPEDF,C2,macro-F1,0.48478067452347723,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C2|macro-F1|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C2,calibrated NLL,1.1795733056726458,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C2|NLL|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C2,entropy AURC,0.327285469783488,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C2|AURC|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C2,ABSOLUTE alpha-.10 coverage gap,0.06985750374022016,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C2|APS_coverage_gap_alpha_0.10|seed_mean|absolute value of mean frozen signed gap
+D2_ISRUC_TO_SLEEPEDF,C3,macro-F1,0.4835434871729308,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C3|macro-F1|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C3,calibrated NLL,1.0583636099928257,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C3|NLL|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C3,entropy AURC,0.1623841067325258,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C3|AURC|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C3,ABSOLUTE alpha-.10 coverage gap,0.008844766937937168,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C3|APS_coverage_gap_alpha_0.10|seed_mean|absolute value of mean frozen signed gap
+D2_ISRUC_TO_SLEEPEDF,C4,macro-F1,0.38231459305527987,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C4|macro-F1|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C4,calibrated NLL,1.55182832687947,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C4|NLL|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C4,entropy AURC,0.3213445157827282,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C4|AURC|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C4,ABSOLUTE alpha-.10 coverage gap,0.024242197861164504,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C4|APS_coverage_gap_alpha_0.10|seed_mean|absolute value of mean frozen signed gap
+D2_ISRUC_TO_SLEEPEDF,C5,macro-F1,0.3604298679242472,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C5|macro-F1|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C5,calibrated NLL,1.2232295893053795,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C5|NLL|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C5,entropy AURC,0.45511834784508726,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C5|AURC|seed_mean|mean across frozen B0 seeds
+D2_ISRUC_TO_SLEEPEDF,C5,ABSOLUTE alpha-.10 coverage gap,0.0195321970016459,reports/b0_primary_metrics_per_seed_v1.csv,value,D2_ISRUC_TO_SLEEPEDF|C5|APS_coverage_gap_alpha_0.10|seed_mean|absolute value of mean frozen signed gap

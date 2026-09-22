@@ -1,0 +1,11 @@
+direction,scope,operation,target_access,allowed,observed,status
+D1_SLEEPEDF_TO_ISRUC,R1,SOURCE_CAL_q_fit,source CAL labels/probabilities,TRUE,source CAL probability bundles missing,NOT_EXECUTED_BLOCKED
+D2_ISRUC_TO_SLEEPEDF,R1,SOURCE_CAL_q_fit,source CAL labels/probabilities,TRUE,source CAL probability bundles missing,NOT_EXECUTED_BLOCKED
+D1_SLEEPEDF_TO_ISRUC,R1,TARGET_evaluation,target labels allowed only for frozen evaluation,TRUE,no target evaluation performed,NOT_EXECUTED
+D2_ISRUC_TO_SLEEPEDF,R1,TARGET_evaluation,target labels allowed only for frozen evaluation,TRUE,no target evaluation performed,NOT_EXECUTED
+ALL,R2,normalization_fit,target labels or signal,FALSE,no fitting performed,PASS_FIREWALL
+ALL,R2,checkpoint_selection,target labels or metrics,FALSE,no training or selection performed,PASS_FIREWALL
+ALL,R2,temperature_or_APS_fit,target labels,FALSE,no fitting performed,PASS_FIREWALL
+ALL,R3,normalization_model_calibration_fit,target labels or signal,FALSE,no fitting performed,PASS_FIREWALL
+ALL,R3,hyperparameter_selection,target labels or metrics,FALSE,no selection performed,PASS_FIREWALL
+ALL,R2_R3,SHHS,SHHS,FALSE,no SHHS access,PASS_FIREWALL

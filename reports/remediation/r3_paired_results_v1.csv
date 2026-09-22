@@ -1,0 +1,2 @@
+status,direction,condition,primary_cell,effect_s1_minus_s0,ci95_low,ci95_high,reason
+NOT_COMPUTED,,,,,,,R2/R3 training and statistical evaluation were not executed; no scientific effect is claimed.

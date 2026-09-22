@@ -1,0 +1,8 @@
+artifact,pre_step_count,post_step_count,new_scientific_artifacts,status
+R2 checkpoints,0,0,0,PASS
+R3 checkpoints,0,0,0,PASS
+trained state dicts,0,0,0,PASS
+optimizer states,0,0,0,PASS
+R2 prediction bundles,0,0,0,PASS
+R3 prediction bundles,0,0,0,PASS
+technical seed-99991 model state,ephemeral,ephemeral,0,PASS_NOT_PROMOTED

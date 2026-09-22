@@ -190,10 +190,10 @@ The APS alternative still requires future implementation and execution. The publ
 Do NOT execute Step 20.2 in this step.
 
 ## 52. Git Commit
-No commit was made before final verification. The requested milestone commit, if the worktree passes final checks, is `research: freeze post-review scientific remediation protocol`.
+Created commit `e1ae2798c14a6863bfc9e6a0578823d58593bd8d` with message `research: freeze post-review scientific remediation protocol`.
 
 ## 53. GitHub Push Status
-No push has been performed by Step 20.1 yet. Push is permitted only after completing the two required named audit files, verifying the protocol hash, checking the corrected preview, and confirming no historical artifact was modified.
+The commit was pushed successfully to `origin/main`; local `main` and `origin/main` resolve to the same commit.
 
 ## 54. Git Status / Diff Summary
-At report-generation time the Step 20.1 outputs are uncommitted additions. Final status must be checked immediately before any milestone commit. Temporary LaTeX/build/contact-sheet material must remain excluded. The Step 20 package remains historical and submission-suspended.
+The Step 20.1 package is committed and synchronized. Canonical PDF hashes remain unchanged. Four unrelated historical Step 18 report files remain untracked and were deliberately not bundled: `reports/STEP_18_MANUSCRIPT_DRAFT_REPORT.md`, `reports/step18_citation_audit.csv`, `reports/step18_manuscript_claim_audit.csv`, and `reports/step18_section_evidence_map.md`. They are outside this step's scope.

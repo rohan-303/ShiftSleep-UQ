@@ -1,0 +1,9 @@
+experiment,condition,family,NLL_effect,AURC_effect,conformal_coverage,conformal_set_size,interpretation
+D1_SLEEPEDF_TO_ISRUC,C4,R2,AVAILABLE_IN_r2_primary_results_v1.csv,NOT_COMPUTED,NOT_COMPUTED,NOT_COMPUTED,R2 primary macro-F1 effect available; reliability extensions incomplete
+D1_SLEEPEDF_TO_ISRUC,C5,R2,AVAILABLE_IN_r2_primary_results_v1.csv,NOT_COMPUTED,NOT_COMPUTED,NOT_COMPUTED,R2 primary macro-F1 effect available; reliability extensions incomplete
+D2_ISRUC_TO_SLEEPEDF,C4,R2,AVAILABLE_IN_r2_primary_results_v1.csv,NOT_COMPUTED,NOT_COMPUTED,NOT_COMPUTED,R2 primary macro-F1 effect available; reliability extensions incomplete
+D2_ISRUC_TO_SLEEPEDF,C5,R2,AVAILABLE_IN_r2_primary_results_v1.csv,NOT_COMPUTED,NOT_COMPUTED,NOT_COMPUTED,R2 primary macro-F1 effect available; reliability extensions incomplete
+D1_SLEEPEDF_TO_ISRUC,C4,R3,NOT_COMPUTED,NOT_COMPUTED,NOT_COMPUTED,NOT_COMPUTED,R3 scientific execution blocked
+D1_SLEEPEDF_TO_ISRUC,C5,R3,NOT_COMPUTED,NOT_COMPUTED,NOT_COMPUTED,NOT_COMPUTED,R3 scientific execution blocked
+D2_ISRUC_TO_SLEEPEDF,C4,R3,NOT_COMPUTED,NOT_COMPUTED,NOT_COMPUTED,NOT_COMPUTED,R3 scientific execution blocked
+D2_ISRUC_TO_SLEEPEDF,C5,R3,NOT_COMPUTED,NOT_COMPUTED,NOT_COMPUTED,NOT_COMPUTED,R3 scientific execution blocked

@@ -1,0 +1,7 @@
+question,status,evidence
+modality-dropout predictive effect,SUPPORTED,R2: 3/4 Holm-adjusted primary cells positive; one inconclusive
+recording-window robustness,PARTIALLY_SUPPORTED,R2 completed; D2 C5 CI crosses zero
+backbone generalization,INCONCLUSIVE,R3 scientific jobs not executed
+calibration,INCONCLUSIVE,SOURCE CAL temperature/APS ledger generated; full reliability matrix incomplete
+selective prediction,INCONCLUSIVE,not computed in this partial integration
+conformal transfer,NOT_SUPPORTED,R1 materially changes historical conformal finding

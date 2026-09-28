@@ -282,15 +282,17 @@ Local execution remains resource-blocked by host memory pressure and poor GPU ut
 
 ## 42. Recommended Next Step
 
-Authorize an explicitly bounded external CUDA execution path, or otherwise provide a verified local CUDA environment with sufficient host memory. Continue from the immutable accepted-attempt manifest, never reuse the invalidated D1/S0/2026 ATTEMPT_003, then complete R3 evaluation and the missing R2/R3 reliability inference. Do not execute Step 20.3.
+The user authorized continuation on the temporary external CUDA server. The current session could not establish a noninteractive authenticated SSH path: `10.80.34.245` timed out, while `10.80.10.96:2023` rejected the available public keys and password authentication cannot be entered or retained by this agent. No remote workspace, transfer, or scientific execution was performed.
+
+Provide an already-authenticated interactive terminal session or install/use an authorized noninteractive SSH key, then continue from the immutable accepted-attempt manifest. Do not execute Step 20.3.
 
 ## 43. Git Commit
 
-Latest pushed engineering commit: `d4a5fb6` (`research: reconcile resumable R3 attempts`).
+Latest pushed partial-state commit: `c5ca25d` (`research: record R3 resource-bounded partial state`).
 
-Earlier pushed memory-engineering commit: `f4f1957` (`research: bound R3 spectrogram memory`).
+Earlier pushed engineering commits: `f4f1957` (`research: bound R3 spectrogram memory`) and `d4a5fb6` (`research: reconcile resumable R3 attempts`).
 
-The current invalidation/audit/reporting additions are not yet included in a final remediation commit.
+No final remediation commit was created.
 
 ## 44. Git Tag
 

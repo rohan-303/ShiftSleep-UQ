@@ -109,6 +109,19 @@ def eval_model(model,ds,device,exp,var,seed,epoch,condition=None):
  d={};
  for z,y,k in zip(logits,labels,keys):d.setdefault(k,[[],y])[0].append(z)
  L=np.asarray([np.mean(v[0],axis=0) for v in d.values()],np.float32);Y=np.asarray([v[1] for v in d.values()]);S=np.asarray([k[0] for k in d]);R=np.asarray([k[1] for k in d]);E=np.asarray([k[2] for k in d]);return {'logits':L,'labels':Y,'subject_id':S,'recording_id':R,'epoch_index':E}
+def existing_complete(jid):
+ base=ROOT/'artifacts/remediation/r3'/jid
+ for d in sorted(base.glob('ATTEMPT_*'),reverse=True):
+  p=d/'run_manifest.json';cp=d/'best.pt';cm=d/'completion_marker.json';h=d/'training_history.json';n=d/'normalization.json'
+  if not all(x.exists() for x in [p,cp,cm,h,n]):continue
+  try:
+   x=json.loads(p.read_text());z=json.loads(cm.read_text())
+   if x.get('job_id')!=jid or x.get('status')!='COMPLETE' or z.get('status')!='COMPLETE' or len(json.loads(h.read_text()))!=10:continue
+   if x.get('protocol_sha256')!=PHASH or sha(cp)!=x.get('checkpoint_sha256') or sha(n)!=x.get('normalization_sha256'):continue
+   x['attempt']=int(d.name.split('_')[-1]);return x
+  except (OSError,ValueError,KeyError):continue
+ return None
+
 def init_models(seed):
  seed_everything(seed);base=SeqSleepNetClass();state={k:v.detach().clone() for k,v in base.state_dict().items()};a=SeqSleepNetClass();b=SeqSleepNetClass();a.load_state_dict(state);b.load_state_dict(state);h=hashlib.sha256(b''.join(v.cpu().numpy().tobytes() for v in state.values())).hexdigest();return a,b,h
 def train_job(exp,var,seed,train,dev,norm):
@@ -141,8 +154,9 @@ def main():
   norm=fit_norm(train);nd=ROOT/'artifacts/remediation/normalization/r3';nd.mkdir(parents=True,exist_ok=True);(nd/f'{exp}.json').write_text(json.dumps(norm,sort_keys=True)+'\n')
   for var in VARS:
    for seed in SEEDS:
-    if exp=='D1_SLEEPEDF_TO_ISRUC' and var=='S0' and seed==17:
-     p=ROOT/'artifacts/remediation/r3/R3_D1_SLEEPEDF_TO_ISRUC_S0_SEED_17/ATTEMPT_003/run_manifest.json';existing=json.loads(p.read_text());existing['attempt']=3;rows.append(existing);print(json.dumps({'reuse':existing}),flush=True);continue
+    jid=f'R3_{exp}_{var}_SEED_{seed}';existing=existing_complete(jid)
+    if existing is not None:
+     rows.append(existing);print(json.dumps({'reuse':existing}),flush=True);continue
     print(json.dumps({'start':exp,var:var,'seed':seed}),flush=True);rows.append(train_job(exp,var,seed,train,dev,norm));print(json.dumps(rows[-1]),flush=True)
  with (ROOT/'reports/remediation/r3_checkpoint_manifest_v1.csv').open('w',newline='') as f:w=csv.DictWriter(f,fieldnames=list(dict.fromkeys(k for r in rows for k in r)));w.writeheader();w.writerows(rows)
  print(json.dumps({'jobs':len(rows),'complete':sum(r.get('status')=='COMPLETE' for r in rows),'failed':sum(r.get('status')=='FAILED' for r in rows)}))

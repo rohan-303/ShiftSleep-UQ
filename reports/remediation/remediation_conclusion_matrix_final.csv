@@ -1,0 +1,8 @@
+question,status,evidence
+modality-exposure predictive effect,SUPPORTED,R2 three of four cells Holm-supported
+sleep-window robustness,PARTIALLY_SUPPORTED,R2 D2/C5 crosses zero
+strong-backbone generalization,INCONCLUSIVE,R3 scientific run did not complete
+probability calibration,PARTIALLY_SUPPORTED,R2 source-CAL temperature groups complete; full paired reliability bootstrap incomplete
+error ranking,PARTIALLY_SUPPORTED,R2 metrics generated; complete inferential reliability package incomplete
+selective prediction,PARTIALLY_SUPPORTED,R2 AURC/risk-coverage generated descriptively; paired bootstrap incomplete
+conformal transfer,NOT_SUPPORTED,R1 materially changes historical finding

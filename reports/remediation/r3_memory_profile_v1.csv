@@ -1,0 +1,2 @@
+experiment,recording_path,cache_shape,cache_dtype,cache_sha256,stft_config_sha256,elapsed_seconds,rss_before_bytes,rss_after_bytes,host_utilization_percent,gpu_allocated_bytes,gpu_reserved_bytes,gpu_name
+D1_SLEEPEDF_TO_ISRUC,C:\Users\rohan\ShiftSleep-UQ\data\processed\core_v1_1\sleep_edf_sc__SC4031E0__core_v1.npz,"[2820, 2, 129, 29]",float32,45f51165bb59150b2ecaca18bbafbf38f4063508b6d4934b1f93f0e5fbe60b7d,63e844a6d2b5f8560c42785d5044bbac1c297c6fd9a469aaa4c33b0cfc9ffc2d,0.042752742767333984,296300544,296353792,89,0,0,CPU

@@ -300,8 +300,8 @@ No final remediation commit was created.
 
 ## 45. Push Status
 
-`origin/main` was updated through `d4a5fb6`. No final remediation-results tag or final freeze push was made.
+`origin/main` was updated through `0e1c802`. No final remediation-results tag or final freeze push was made.
 
 ## 46. Git Status
 
-The worktree contains uncommitted R3 audit/invalidation artifacts and the R2 bootstrap script, plus unrelated untracked Step 18 files and `uv.lock`. No historical artifact or manuscript mutation was performed.
+The worktree contains only unrelated untracked Step 18 files and `uv.lock`; the Step 20.2.5 audit, invalidation, manifest, and report artifacts are committed. No historical artifact or manuscript mutation was performed.

@@ -2,7 +2,7 @@
 
 ## 1. Status
 
-Step 20.2.5 remains partial. R3 execution mechanics were repaired with disk-backed spectrogram caches and bounded in-process cache retention. Existing R3 attempts were reconciled. Two latest R3 jobs are accepted, but the remaining matrix could not continue safely on the local host because host memory remained above the hard engineering-abort threshold while GPU utilization was near zero. R2 paired reliability bootstrap inference also remains incomplete.
+Step 20.2.5 remains partial. R3 execution mechanics were repaired with disk-backed spectrogram caches and bounded in-process cache retention. Existing R3 attempts were reconciled. Two latest R3 jobs are accepted, but the remaining matrix could not continue safely on the local host because host memory remained above the hard engineering-abort threshold while GPU utilization was near zero. The requested R2 paired reliability bootstrap was completed locally after two narrow statistical-engineering repairs: exact NLL sufficient-statistic resampling and explicit finite/undefined replicate handling.
 
 ## 2. Final Gate
 
@@ -43,6 +43,8 @@ R1 and R2 preservation checks passed for the available artifacts:
 - R2 Holm rows: 4.
 - R2 reliability rows: 7,488.
 - R2 temperature groups: 12.
+- R2 paired reliability bootstrap rows: 16 (4 cells × 4 metrics).
+- R2 paired reliability bootstrap requested replicates: 2,000 per row.
 
 ## 6. R3 Existing Attempt Reconciliation
 
@@ -158,9 +160,17 @@ This is an execution-resource outcome, not a negative strong-backbone scientific
 
 ## 24. R2 Reliability Bootstrap Completion
 
-The requested R2 paired reliability bootstrap output `r2_reliability_paired_v2.csv` was not completed. A background run was stopped when host memory pressure reached the engineering safety threshold while R3 was also active. The existing 32-row descriptive paired table remains distinct from the missing bootstrap inference.
+The requested R2 paired reliability bootstrap output `reports/remediation/r2_reliability_paired_v2.csv` was completed and independently verified.
 
-R2 reliability bootstrap status: `NOT COMPLETE`.
+- Rows: 16 (4 cells × 4 metrics: NLL, ERROR_AUROC, ERROR_AUPRC, AURC).
+- Requested replicates: 2,000 per row.
+- All point estimates, confidence limits, and null-centered p-values are finite.
+- Undefined replicate counts are retained explicitly rather than converted to values: finite replicate counts are 1,266–2,000; undefined counts are 0–734 depending on metric/cell.
+- NLL uses exact duplicate-preserving subject-level sufficient statistics.
+- Error-ranking AUROC/AUPRC undefined draws are excluded from percentile and null-centered calculations with their counts recorded.
+- Output SHA-256: `0abd3047c86938cfaaee4f5b4a850b7af6d6c4b6972c77e30f3bfe6d98509733`.
+
+R2 reliability bootstrap status: `COMPLETE_WITH_EXPLICIT_UNDEFINED_REPLICATES`.
 
 ## 25. Class-Prior Result
 
@@ -179,7 +189,7 @@ R1 materially changes the historical conformal interpretation. R2 remains partia
 
 ## 27. Integrated Reliability Matrix
 
-R2 descriptive reliability metrics are available for 72 bundles and 12 calibration groups. R2 paired bootstrap intervals for NLL, error ranking, and AURC are missing. R3 reliability is unavailable. No composite reliability score is created.
+R2 descriptive reliability metrics are available for 72 bundles and 12 calibration groups. R2 paired bootstrap intervals for NLL, error ranking, error AUPRC, and AURC are available in the versioned paired table, with undefined resamples explicitly counted. R3 reliability is unavailable. No composite reliability score is created.
 
 ## 28. Conformal Final Position
 
@@ -190,9 +200,9 @@ The historical non-randomized APS headline is superseded for interpretation by t
 - Modality-exposure predictive effect: `SUPPORTED` by R2.
 - Sleep-window robustness: `PARTIALLY_SUPPORTED`.
 - Strong-backbone generalization: `INCONCLUSIVE`.
-- Calibration robustness: `PARTIALLY_SUPPORTED` for descriptive R2 metrics; inferential completion missing.
-- Ranking robustness: `PARTIALLY_SUPPORTED` descriptively; paired inference incomplete.
-- Selective robustness: `PARTIALLY_SUPPORTED` descriptively; paired inference incomplete.
+- Calibration robustness: `PARTIALLY_SUPPORTED` for R2; paired inferential intervals are complete, while R3 remains unavailable.
+- Ranking robustness: `PARTIALLY_SUPPORTED`; R2 paired inference is complete with explicit undefined-replicate accounting, while R3 remains unavailable.
+- Selective robustness: `PARTIALLY_SUPPORTED`; R2 paired inference is complete with explicit undefined-replicate accounting, while R3 remains unavailable.
 - Conformal transfer: `NOT_SUPPORTED` under the R1 reinterpretation.
 
 ## 30. Manuscript Impact
@@ -229,11 +239,14 @@ Verified:
 - cache numerical equivalence: maximum absolute difference `0.0` on the technical sample;
 - `git diff --check` at the preservation checkpoint.
 
-A fresh full repository test suite after the latest R3 edits remains pending.
+- Fresh full repository test suite after the local reliability-bootstrap repair: `165 passed`.
+- Fresh Ruff check for `scripts/bootstrap_r2_reliability_v2.py`: passed.
+- Fresh protocol validation: `valid: true`.
+- Fresh R3 checkpoint audit: `accepted_rows: 2`, `required_rows: 12`.
 
 ## 36. Full Validation
 
-Not satisfied. Missing gates include 12 accepted R3 jobs, 72 R3 bundles, R3 calibration, R3 bootstrap, R3 Holm, R3 reliability, and R2 paired reliability bootstrap inference.
+Not satisfied. Missing gates include 12 accepted R3 jobs, 72 R3 bundles, R3 calibration, R3 bootstrap, R3 Holm, and R3 reliability. R2 paired reliability bootstrap inference is complete, subject to the explicit undefined-replicate accounting described above.
 
 ## 37. Runtime/Memory Summary
 
@@ -257,6 +270,7 @@ Not satisfied. Missing gates include 12 accepted R3 jobs, 72 R3 bundles, R3 cali
 - `scripts/profile_r3_memory.py`
 - `scripts/audit_r3_checkpoint_manifest.py`
 - `scripts/bootstrap_r2_reliability_v2.py`
+- `reports/remediation/r2_reliability_paired_v2.csv` (16-row paired bootstrap table).
 - invalidation metadata for D1/S0/2026 ATTEMPT_003.
 
 ## 39. Files Modified
@@ -271,7 +285,7 @@ Not satisfied. Missing gates include 12 accepted R3 jobs, 72 R3 bundles, R3 cali
 - R3 72 prediction bundles.
 - R3 calibration and reliability.
 - R3 bootstrap and Holm analysis.
-- R2 paired reliability bootstrap v2.
+- Final R3 matrix and all R3 downstream analyses.
 - Final integrated effect matrix with R3 values.
 - Final remediation tag.
 - Step 20.3 and Step 21.
@@ -288,7 +302,7 @@ Provide an already-authenticated interactive terminal session or install/use an 
 
 ## 43. Git Commit
 
-Latest pushed partial-state commit: `c5ca25d` (`research: record R3 resource-bounded partial state`).
+Prior latest pushed partial-state commit: `d130d20` (`docs: reconcile Step 20.2.5 git status`).
 
 Earlier pushed engineering commits: `f4f1957` (`research: bound R3 spectrogram memory`) and `d4a5fb6` (`research: reconcile resumable R3 attempts`).
 
